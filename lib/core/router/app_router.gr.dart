@@ -14,8 +14,8 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i4;
 
+import '../../feature/login/prenestation/login_screen.dart' as _i1;
 import '../../feature/main/presentation/screens/home_screen.dart' as _i2;
-import '../../feature/main/presentation/screens/login/login_screen.dart' as _i1;
 
 class AppRouter extends _i3.RootStackRouter {
   AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
