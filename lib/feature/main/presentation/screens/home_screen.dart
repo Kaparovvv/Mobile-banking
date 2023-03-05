@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
         title: const Text("Home Screen"),
       ),
       body: const Center(
-        child: Text("Screen"),
+        child: Text("Home Screen"),
       ),
     );
   }
