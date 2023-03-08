@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ThemeHelper {
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff000000);
+  static Color grey = Colors.grey[200]!;
   static const Color colorFCFCFC = Color(0xffFCFCFC);
   static const Color colorF8F8F8 = Color(0xffF8F8F8);
   static const Color colorF1F6FF = Color(0xffF1F6FF);

@@ -53,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextFieldWidget(
                       label: TextHelper.phone,
                       controller: phoneController,
+                      keyboardType: TextInputType.phone,
                       inputFormatters: [Masks.phoneNumber],
                       validate: (value) => validatesHelper.titleValidate(
                           value!, TextHelper.yourPhone),

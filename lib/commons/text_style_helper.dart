@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/core/constants/theme_helper.dart';
+import 'package:my_family_flutter/commons/theme_helper.dart';
 
 class TextStyleHelper {
   static const TextStyle f25w700 = TextStyle(
