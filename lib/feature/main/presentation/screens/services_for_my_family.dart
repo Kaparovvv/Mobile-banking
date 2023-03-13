@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/core/router/app_router.gr.dart';
 
 import '../../../../core/exports/exports.dart';
+import '../../../../core/router/app_router.gr.dart';
 import '../../../../core/widgets/custom_elevated_button_widget.dart';
 
-class PublicServicesScreen extends StatelessWidget {
-  const PublicServicesScreen({super.key});
+class ServicesForMyFamilyScreen extends StatelessWidget {
+  const ServicesForMyFamilyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          TextHelper.publicServices,
+          TextHelper.myFamily,
           style: TextStyleHelper.f20w600.copyWith(letterSpacing: 3),
         ),
       ),
@@ -22,17 +22,19 @@ class PublicServicesScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomElevatedButtonWidget(
-              textButton: TextHelper.myFamily,
-              iconUrl: IconHelper.myFamily,
+              textButton: TextHelper.marriageRegis,
+              iconUrl: IconHelper.marriage,
               onPressed: () => context.router.push(
-                const ServicesForMyFamilyScreenRoute(),
+                const MarriageRegistrationScreenRoute(),
               ),
             ),
             const SizedBox(height: 20),
             CustomElevatedButtonWidget(
-              textButton: TextHelper.myDocuments,
-              iconUrl: IconHelper.myDocument,
-              onPressed: () {},
+              textButton: TextHelper.regisChild,
+              iconUrl: IconHelper.child,
+              onPressed: () => context.router.push(
+                const RegistrationChildBirthScreenRoute(),
+              ),
             ),
           ],
         ),

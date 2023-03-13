@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
-import 'package:my_family_flutter/core/extentions/sized_context.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
-import 'package:my_family_flutter/core/widgets/icon_background_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

@@ -7,4 +7,6 @@ class TextHelper {
   static const String publicServices = 'Гос Услуги';
   static const String myFamily = 'Моя Семья';
   static const String myDocuments = 'Мои документы';
+  static const String marriageRegis = 'Регистрация брака';
+  static const String regisChild = 'Регистрация рождении ребенка';
 }
