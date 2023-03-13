@@ -32,11 +32,15 @@ class CustomElevatedButtonWidget extends StatelessWidget {
             height: context.height * 0.08,
             iconUrl: iconUrl,
           ),
-          const SizedBox(width: 20),
-          Text(
-            textButton,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyleHelper.f18w500,
+          const SizedBox(width: 15),
+          SizedBox(
+            width: context.width * 0.55,
+            child: Text(
+              textButton,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyleHelper.f18w500,
+            ),
           )
         ],
       ),
