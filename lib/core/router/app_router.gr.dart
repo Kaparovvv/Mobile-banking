@@ -14,7 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 
-import '../../feature/auth/presentation/screens/login_screen.dart' as _i1;
+import '../../feature/auth/presentation/screens/auth_screen.dart' as _i1;
 import '../../feature/main/presentation/screens/main_screen.dart' as _i2;
 import '../../feature/main/presentation/screens/marriage_registration.dart'
     as _i6;
@@ -24,17 +24,28 @@ import '../../feature/main/presentation/screens/registration_child_birth.dart'
     as _i5;
 import '../../feature/main/presentation/screens/services_for_my_family.dart'
     as _i4;
+import 'auth_guard.dart' as _i9;
 
 class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  AppRouter({
+    _i8.GlobalKey<_i8.NavigatorState>? navigatorKey,
+    required this.authGuard,
+  }) : super(navigatorKey);
+
+  final _i9.AuthGuard authGuard;
 
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
-    LoginScreenRoute.name: (routeData) {
+    AuthScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<AuthScreenRouteArgs>(
+          orElse: () => const AuthScreenRouteArgs());
       return _i7.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i1.LoginScreen(),
+        child: _i1.AuthScreen(
+          key: args.key,
+          onLoginResult: args.onLoginResult,
+          isBackButton: args.isBackButton,
+        ),
       );
     },
     MainScreenRoute.name: (routeData) {
@@ -74,16 +85,17 @@ class AppRouter extends _i7.RootStackRouter {
         _i7.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: 'loginScreen',
+          redirectTo: 'mainScreen',
           fullMatch: true,
         ),
         _i7.RouteConfig(
-          LoginScreenRoute.name,
+          AuthScreenRoute.name,
           path: 'loginScreen',
         ),
         _i7.RouteConfig(
           MainScreenRoute.name,
           path: 'mainScreen',
+          guards: [authGuard],
         ),
         _i7.RouteConfig(
           PublicServicesScreenRoute.name,
@@ -105,15 +117,42 @@ class AppRouter extends _i7.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.LoginScreen]
-class LoginScreenRoute extends _i7.PageRouteInfo<void> {
-  const LoginScreenRoute()
-      : super(
-          LoginScreenRoute.name,
+/// [_i1.AuthScreen]
+class AuthScreenRoute extends _i7.PageRouteInfo<AuthScreenRouteArgs> {
+  AuthScreenRoute({
+    _i8.Key? key,
+    void Function(bool)? onLoginResult,
+    bool isBackButton = false,
+  }) : super(
+          AuthScreenRoute.name,
           path: 'loginScreen',
+          args: AuthScreenRouteArgs(
+            key: key,
+            onLoginResult: onLoginResult,
+            isBackButton: isBackButton,
+          ),
         );
 
-  static const String name = 'LoginScreenRoute';
+  static const String name = 'AuthScreenRoute';
+}
+
+class AuthScreenRouteArgs {
+  const AuthScreenRouteArgs({
+    this.key,
+    this.onLoginResult,
+    this.isBackButton = false,
+  });
+
+  final _i8.Key? key;
+
+  final void Function(bool)? onLoginResult;
+
+  final bool isBackButton;
+
+  @override
+  String toString() {
+    return 'AuthScreenRouteArgs{key: $key, onLoginResult: $onLoginResult, isBackButton: $isBackButton}';
+  }
 }
 
 /// generated route for

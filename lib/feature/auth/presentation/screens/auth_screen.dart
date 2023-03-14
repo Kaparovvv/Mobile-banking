@@ -1,28 +1,33 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
-
 import '../../../../core/exports/exports.dart';
+import '../bloc/auth_bloc.dart';
 import '../widgets/password_textfield_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  final bool isBackButton;
+  final void Function(bool isLoggedIn)? onLoginResult;
+  const AuthScreen({super.key, this.onLoginResult, this.isBackButton = false});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _AuthScreenState extends State<AuthScreen> {
   ValidatesHelper validatesHelper = ValidatesHelper();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController phoneController;
   late TextEditingController passwordController;
 
+  late AuthBloc _authBloc;
+
   @override
   void initState() {
+    _authBloc = BlocProvider.of(context, listen: false);
     phoneController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
@@ -68,14 +73,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    CustomOutlinedButtonWidget(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.router.replace(const MainScreenRoute());
+                    BlocConsumer(
+                      bloc: _authBloc,
+                      builder: (context, state) {
+                        if (state is AuthLoadingState) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return CustomOutlinedButtonWidget(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _authBloc.add(
+                                AuthLogInEvent(
+                                  phoneNumber: phoneController.text
+                                      .replaceAll(RegExp(r'\D'), "")
+                                      .replaceFirst(r'7', '8'),
+                                  password: passwordController.text,
+                                ),
+                              );
+                            }
+                          },
+                          textButton: TextHelper.login.toUpperCase(),
+                        );
+                      },
+                      listener: (context, state) {
+                        if (state is AuthLoadedState) {
+                          widget.onLoginResult?.call(true);
+                        }
+                        if (state is AuthErrorState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.message)),
+                          );
                         }
                       },
-                      textButton: TextHelper.login.toUpperCase(),
-                    ),
+                    )
                   ],
                 ),
               ),
