@@ -6,32 +6,35 @@ import '../../../../core/exceptions/failure.dart';
 import '../../../../core/utils/dependencies_injection.dart';
 import '../model/user_auth_model.dart';
 
-abstract class UserTokenRemoteDataSource {
-  Future<UserAuthModel> authUser(
+abstract class UserDataRemoteDataSource {
+  Future<UserDataModel> authUser(
     String phoneNumber,
     String password,
   );
 }
 
-class UserTokenRemoteDataSourceImpl implements UserTokenRemoteDataSource {
+class UserDataRemoteDataSourceImpl implements UserDataRemoteDataSource {
   @override
-  Future<UserAuthModel> authUser(
+  Future<UserDataModel> authUser(
     String phoneNumber,
     String password,
   ) async {
     APIClient client = di<APIClient>();
 
     final response = await client.get(
-      '/api/auth/signin',
-      params: {"phoneNumber": phoneNumber, "password": password},
+      userLogin(),
+      params: {
+        "phoneNumber": phoneNumber,
+        "password": password,
+      },
     );
 
     if (response.statusCode == 200) {
       log('Auth response ===== ${response.statusCode}');
-      UserAuthModel tokenModel = UserAuthModel.fromJson(response.data);
+      UserDataModel userAuthModel = UserDataModel.fromJson(response.data);
       log('Auth response ======= ${response.data}');
 
-      return tokenModel;
+      return userAuthModel;
     } else {
       throw ServerException();
     }

@@ -3,28 +3,27 @@ import 'dart:developer';
 import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/exceptions/exceptions.dart';
-import '../../../../core/utils/dependencies_injection.dart';
 import '../model/user_auth_model.dart';
 
-abstract class UserTokenLocalDataSource {
-  Future<UserAuthModel> getUserTokenFromCache();
-  Future<void> userTokenToCache(UserAuthModel userTokenModel);
+abstract class UserDataLocalDataSource {
+  Future<UserDataModel> getUserDataFromCache();
+  Future<void> userDataToCache(UserDataModel userTokenModel);
 }
 
-class UserTokenLocalDataSourceImpl implements UserTokenLocalDataSource {
+class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  UserTokenLocalDataSourceImpl({required this.sharedPreferences});
+  UserDataLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<UserAuthModel> getUserTokenFromCache() {
-    final jsonUserToken = sharedPreferences.getString(
-      CachedNames.cacheUserToken,
+  Future<UserDataModel> getUserDataFromCache() {
+    final userData = sharedPreferences.getString(
+      CachedNames.cacheUserData,
     );
-    if (jsonUserToken != null && jsonUserToken.isNotEmpty) {
-      log(jsonUserToken.toString());
+    if (userData != null && userData.isNotEmpty) {
+      log(userData.toString());
       return Future.value(
-        UserAuthModel.fromJson(json.decode(jsonUserToken)),
+        UserDataModel.fromJson(json.decode(userData)),
       );
     } else {
       throw CacheException();
@@ -32,10 +31,10 @@ class UserTokenLocalDataSourceImpl implements UserTokenLocalDataSource {
   }
 
   @override
-  Future<void> userTokenToCache(UserAuthModel userTokenModel) {
+  Future<void> userDataToCache(UserDataModel userDataModel) {
     return sharedPreferences.setString(
-      CachedNames.cacheUserToken,
-      userTokenModel.token,
+      CachedNames.cacheUserData,
+      userDataModel.token,
     );
   }
 }

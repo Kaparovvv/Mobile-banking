@@ -7,6 +7,7 @@ import '../constants/cached_names.dart';
 
 class APIClient {
   late Dio _client;
+  final String baseURL = 'http://176.9.24.125:12403';
 
   APIClient() {
     _client = Dio(
@@ -16,7 +17,7 @@ class APIClient {
         receiveTimeout: 30000,
         headers: {
           "Authorization":
-              'Bearer ${di.get<SharedPreferences>().getString(CachedNames.cacheUserToken)}'
+              'Bearer ${di.get<SharedPreferences>().getString(CachedNames.cacheUserData)}'
         },
         connectTimeout: 30000,
       ),
@@ -33,10 +34,12 @@ class APIClient {
         .forEach((match) => print(match.group(0)));
   }
 
-  Future<Response> get(String url,
-          {Map<String, dynamic>? params,
-          CancelToken? cancelToken,
-          Options? options}) =>
+  Future<Response> get(
+    String url, {
+    Map<String, dynamic>? params,
+    CancelToken? cancelToken,
+    Options? options,
+  }) =>
       _client.get(
         url,
         queryParameters: params,
@@ -44,8 +47,12 @@ class APIClient {
         options: options,
       );
 
-  Future<Response> post(String url,
-          {dynamic body, dynamic parametres, Options? options}) =>
+  Future<Response> post(
+    String url, {
+    dynamic body,
+    dynamic parametres,
+    Options? options,
+  }) =>
       _client.post(
         url,
         data: body,
@@ -53,15 +60,23 @@ class APIClient {
         options: options,
       );
 
-  Future<Response> put(String url, {dynamic body, Options? options}) =>
+  Future<Response> put(
+    String url, {
+    dynamic body,
+    Options? options,
+  }) =>
       _client.put(
         url,
         data: body,
         options: options,
       );
 
-  Future<Response> delete(String url,
-          {dynamic body, Options? options, Map<String, dynamic>? params}) =>
+  Future<Response> delete(
+    String url, {
+    dynamic body,
+    Options? options,
+    Map<String, dynamic>? params,
+  }) =>
       _client.delete(
         url,
         data: body,
