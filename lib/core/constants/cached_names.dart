@@ -1,3 +1,3 @@
 class CachedNames {
-  static const String cacheUserToken = 'CACHER_USER_TOKEN';
+  static const String cacheUserData = 'CACHER_USER_DATA';
 }

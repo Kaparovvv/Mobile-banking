@@ -27,11 +27,11 @@ Future<void> init() async {
   di.registerLazySingleton(() => sharedPreferences);
 
   //UserToken
-  di.registerFactory<UserTokenRemoteDataSource>(
-    () => UserTokenRemoteDataSourceImpl(),
+  di.registerFactory<UserDataRemoteDataSource>(
+    () => UserDataRemoteDataSourceImpl(),
   );
-  di.registerFactory<UserTokenLocalDataSource>(
-    () => UserTokenLocalDataSourceImpl(sharedPreferences: di()),
+  di.registerFactory<UserDataLocalDataSource>(
+    () => UserDataLocalDataSourceImpl(sharedPreferences: di()),
   );
 
   /// Blocs
