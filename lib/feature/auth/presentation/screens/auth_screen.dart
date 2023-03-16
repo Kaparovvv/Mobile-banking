@@ -45,10 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               const Text(
                 TextHelper.login,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: TextStyleHelper.f25w700,
               ),
               const SizedBox(height: 40),
               Form(
@@ -61,7 +58,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       keyboardType: TextInputType.phone,
                       inputFormatters: [Masks.phoneNumber],
                       validate: (value) => validatesHelper.titleValidate(
-                          value!, TextHelper.yourPhone),
+                        value!,
+                        TextHelper.yourPhone,
+                      ),
                     ),
                     const SizedBox(height: 40),
                     PasswordTextFieldWidget(
@@ -82,6 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           );
                         }
                         return CustomOutlinedButtonWidget(
+                          textButton: TextHelper.login.toUpperCase(),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _authBloc.add(
@@ -94,7 +94,6 @@ class _AuthScreenState extends State<AuthScreen> {
                               );
                             }
                           },
-                          textButton: TextHelper.login.toUpperCase(),
                         );
                       },
                       listener: (context, state) {

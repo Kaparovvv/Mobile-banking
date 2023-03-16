@@ -35,6 +35,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icons/
+    - assets/icons/error.png
     - assets/icons/child.png
     - assets/icons/marriage.png
     - assets/icons/my_document.png
