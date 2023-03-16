@@ -15,6 +15,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.validate,
     this.constraints,
     this.inputFormatters = const [],
+    this.isReadOnly = false,
   }) : super(key: key);
 
   final FormFieldValidator<String>? validate;
@@ -26,6 +27,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final BoxConstraints? constraints;
   final List<TextInputFormatter>? inputFormatters;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       maxLines: maxLines ?? 1,
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.next,
+      readOnly: isReadOnly,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
       inputFormatters: inputFormatters,
       decoration: InputDecoration(

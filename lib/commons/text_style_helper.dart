@@ -5,7 +5,7 @@ class TextStyleHelper {
   static const TextStyle f25w700 = TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w700,
-    color: ThemeHelper.colorFCFCFC,
+    color: ThemeHelper.color414141,
   );
 
   static const TextStyle f14w600 = TextStyle(
