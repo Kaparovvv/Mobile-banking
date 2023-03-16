@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
           TextHelper.mobileBanking,
           style: TextStyleHelper.f20w600.copyWith(letterSpacing: 3),
         ),
+        leading: const SizedBox(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
