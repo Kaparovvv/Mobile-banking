@@ -16,7 +16,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: event.phoneNumber,
         password: event.password,
       ));
-
       result.fold(
         (l) => emit(AuthErrorState(message: l.exception.message)),
         (r) => emit(AuthLoadedState()),

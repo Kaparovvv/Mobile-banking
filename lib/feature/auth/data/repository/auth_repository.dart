@@ -30,15 +30,17 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   Future<Either<Failure, UserAuthEntity>> _authUser(
-      Future<UserDataModel> Function() auth) async {
+    Future<Either<Failure, UserDataModel>> Function() auth,
+  ) async {
     if (await networkInfo.isConnected) {
-      try {
-        final remoteToken = await auth();
-        localDataSource.userDataToCache(remoteToken);
-        return Right(remoteToken);
-      } on ServerFailure {
-        return Left(ServerFailure());
-      }
+      final remoteToken = await auth();
+      return remoteToken.fold(
+        (l) => Left(l),
+        (r) {
+          localDataSource.userDataToCache(r);
+          return Right(r);
+        },
+      );
     } else {
       try {
         final localToken = await localDataSource.getUserDataFromCache();

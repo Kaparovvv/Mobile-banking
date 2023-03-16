@@ -21,7 +21,7 @@ abstract class BaseRepository {
   }) async {
     if (await networkInfo.isConnected) {
       try {
-        dynamic response;
+        Response response;
         switch (method) {
           case RestMethod.get:
             response = await restClientService.get(
@@ -42,8 +42,11 @@ abstract class BaseRepository {
             break;
 
           case RestMethod.put:
-            response =
-                await restClientService.put(url, body: body, options: options);
+            response = await restClientService.put(
+              url,
+              body: body,
+              options: options,
+            );
             break;
 
           case RestMethod.delete:

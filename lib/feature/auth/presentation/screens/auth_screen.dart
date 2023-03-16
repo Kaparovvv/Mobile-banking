@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
+import 'package:my_family_flutter/feature/auth/presentation/widgets/dialog_application_widget.dart';
 import '../../../../core/exports/exports.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/password_textfield_widget.dart';
