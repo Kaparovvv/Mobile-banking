@@ -72,6 +72,12 @@ class TextStyleHelper {
     color: ThemeHelper.colorF1F6FF,
   );
 
+  static const TextStyle f10w400 = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: ThemeHelper.color414141,
+  );
+
   static const TextStyle f13w400 = TextStyle(
     fontSize: 13,
     fontWeight: FontWeight.w400,

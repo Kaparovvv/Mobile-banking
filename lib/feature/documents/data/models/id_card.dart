@@ -2,7 +2,8 @@
 import 'dart:convert';
 
 class IDCard {
-  String id;
+  String title;
+  String numberID;
   String firstName;
   String secondName;
   String lastName;
@@ -10,8 +11,12 @@ class IDCard {
   String IIN;
   String issueDate;
   String validDate;
+  String frontImageURL;
+  String backImageURL;
+
   IDCard({
-    required this.id,
+    required this.title,
+    required this.numberID,
     required this.firstName,
     required this.secondName,
     required this.lastName,
@@ -19,10 +24,13 @@ class IDCard {
     required this.IIN,
     required this.issueDate,
     required this.validDate,
+    required this.frontImageURL,
+    required this.backImageURL,
   });
 
   IDCard copyWith({
-    String? id,
+    String? title,
+    String? numberID,
     String? firstName,
     String? secondName,
     String? lastName,
@@ -30,9 +38,12 @@ class IDCard {
     String? IIN,
     String? issueDate,
     String? validDate,
+    String? frontImageURL,
+    String? backImageURL,
   }) {
     return IDCard(
-      id: id ?? this.id,
+      title: title ?? this.title,
+      numberID: numberID ?? this.numberID,
       firstName: firstName ?? this.firstName,
       secondName: secondName ?? this.secondName,
       lastName: lastName ?? this.lastName,
@@ -40,12 +51,15 @@ class IDCard {
       IIN: IIN ?? this.IIN,
       issueDate: issueDate ?? this.issueDate,
       validDate: validDate ?? this.validDate,
+      frontImageURL: frontImageURL ?? this.frontImageURL,
+      backImageURL: backImageURL ?? this.backImageURL,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'title': title,
+      'numberID': numberID,
       'firstName': firstName,
       'secondName': secondName,
       'lastName': lastName,
@@ -53,19 +67,24 @@ class IDCard {
       'IIN': IIN,
       'issueDate': issueDate,
       'validDate': validDate,
+      'frontImageURL': frontImageURL,
+      'backImageURL': backImageURL,
     };
   }
 
   factory IDCard.fromMap(Map<String, dynamic> map) {
     return IDCard(
-      id: map['id'] as String,
-      firstName: map['first_name'] as String,
-      secondName: map['second_name'] as String,
-      lastName: map['last_name'] as String,
-      birthDate: map['birth_date'] as String,
+      title: map['title'] as String,
+      numberID: map['numberID'] as String,
+      firstName: map['firstName'] as String,
+      secondName: map['secondName'] as String,
+      lastName: map['lastName'] as String,
+      birthDate: map['birthDate'] as String,
       IIN: map['IIN'] as String,
-      issueDate: map['issue_date'] as String,
-      validDate: map['valid_date'] as String,
+      issueDate: map['issueDate'] as String,
+      validDate: map['validDate'] as String,
+      frontImageURL: map['frontImageURL'] as String,
+      backImageURL: map['backImageURL'] as String,
     );
   }
 
@@ -76,32 +95,38 @@ class IDCard {
 
   @override
   String toString() {
-    return 'IDCard(id: $id, firstName: $firstName, secondName: $secondName, lastName: $lastName, birthDate: $birthDate, IIN: $IIN, issueDate: $issueDate, validDate: $validDate)';
+    return 'IDCard(title: $title, numberID: $numberID, firstName: $firstName, secondName: $secondName, lastName: $lastName, birthDate: $birthDate, IIN: $IIN, issueDate: $issueDate, validDate: $validDate, frontImageURL: $frontImageURL, backImageURL: $backImageURL)';
   }
 
   @override
   bool operator ==(covariant IDCard other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
+    return other.title == title &&
+        other.numberID == numberID &&
         other.firstName == firstName &&
         other.secondName == secondName &&
         other.lastName == lastName &&
         other.birthDate == birthDate &&
         other.IIN == IIN &&
         other.issueDate == issueDate &&
-        other.validDate == validDate;
+        other.validDate == validDate &&
+        other.frontImageURL == frontImageURL &&
+        other.backImageURL == backImageURL;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
+    return title.hashCode ^
+        numberID.hashCode ^
         firstName.hashCode ^
         secondName.hashCode ^
         lastName.hashCode ^
         birthDate.hashCode ^
         IIN.hashCode ^
         issueDate.hashCode ^
-        validDate.hashCode;
+        validDate.hashCode ^
+        frontImageURL.hashCode ^
+        backImageURL.hashCode;
   }
 }

@@ -15,7 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:flutter/material.dart' as _i10;
 
 import '../../feature/auth/presentation/screens/auth_screen.dart' as _i1;
-import '../../feature/documents/presentation/screens/document_details.screen.dart'
+import '../../feature/documents/presentation/screens/document_details_screen.dart'
     as _i8;
 import '../../feature/documents/presentation/screens/documents_screen.dart'
     as _i7;
