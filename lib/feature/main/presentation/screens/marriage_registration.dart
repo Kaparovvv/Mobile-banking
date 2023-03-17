@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/cached_names.dart';
 import '../../../../core/exports/exports.dart';
 import '../../../../core/utils/dependencies_injection.dart';
+import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/custom_outlined_button_widget.dart';
 import '../../../../core/widgets/custom_textfield_widget.dart';
 import '../widgets/who_pay_thefee_widget.dart';
@@ -56,9 +57,8 @@ class _MarriageRegistrationScreenState
     return Scaffold(
       backgroundColor: ThemeHelper.white,
       appBar: AppBar(
-        title: Text(
-          TextHelper.marriageRegis,
-          style: TextStyleHelper.f20w600.copyWith(letterSpacing: 3),
+        title: const AppBarTitle(
+          title: TextHelper.marriageRegis,
         ),
       ),
       body: SingleChildScrollView(

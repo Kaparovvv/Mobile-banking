@@ -21,4 +21,6 @@ class TextHelper {
   static const String whoPaysTheFee = 'Кто оплачивает пошлину: 3 063 тенге';
   static const String applicationSuccess = 'Ваша заявка успешно отправлено';
   static const String applicationUnsuccess = 'Не удалось отправить заявку';
+  static const String idCard = 'Удостоверение личности';
+  static const String driverCard = 'Водительские права';
 }

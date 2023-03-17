@@ -1,39 +1,43 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
-
-import '../../../../core/exports/exports.dart';
+import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
+import '../../../../commons/text_helper.dart';
 import '../../../../core/widgets/app_bar_title.dart';
-import '../../../../core/widgets/custom_elevated_button_widget.dart';
 
-class PublicServicesScreen extends StatelessWidget {
-  const PublicServicesScreen({super.key});
+class DocumentsScreen extends StatefulWidget {
+  const DocumentsScreen({super.key});
 
+  @override
+  State<DocumentsScreen> createState() => _DocumentsScreenState();
+}
+
+class _DocumentsScreenState extends State<DocumentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(
-          title: TextHelper.publicServices,
+          title: TextHelper.myDocuments,
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             CustomElevatedButtonWidget(
-              textButton: TextHelper.myFamily,
-              iconUrl: IconHelper.myFamily,
+              textButton: TextHelper.idCard,
+              iconUrl: "",
               onPressed: () => context.router.push(
-                const ServicesForMyFamilyScreenRoute(),
+                DocumentDetailsScreenRoute(title: TextHelper.idCard),
               ),
             ),
             const SizedBox(height: 20),
             CustomElevatedButtonWidget(
-              textButton: TextHelper.myDocuments,
-              iconUrl: IconHelper.myDocument,
+              textButton: TextHelper.driverCard,
+              iconUrl: "",
               onPressed: () => context.router.push(
-                const DocumentsScreenRoute(),
+                DocumentDetailsScreenRoute(title: TextHelper.driverCard),
               ),
             ),
           ],

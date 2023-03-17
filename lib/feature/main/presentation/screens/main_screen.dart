@@ -4,6 +4,8 @@ import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 
+import '../../../../core/widgets/app_bar_title.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -16,9 +18,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          TextHelper.mobileBanking,
-          style: TextStyleHelper.f20w600.copyWith(letterSpacing: 3),
+        title: const AppBarTitle(
+          title: TextHelper.mobileBanking,
         ),
         leading: const SizedBox(),
       ),
