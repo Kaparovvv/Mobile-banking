@@ -23,7 +23,7 @@ class IconBackgroundWidget extends StatelessWidget {
         color: ThemeHelper.colorF8F8F8,
         shape: BoxShape.circle,
       ),
-      child: Image.asset(iconUrl),
+      child: iconUrl.isNotEmpty ? Image.asset(iconUrl) : const Placeholder(),
     );
   }
 }

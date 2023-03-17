@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/exports/exports.dart';
+import '../../../../core/widgets/app_bar_title.dart';
 
 class RegistrationChildBirthScreen extends StatelessWidget {
   const RegistrationChildBirthScreen({super.key});
@@ -9,10 +10,8 @@ class RegistrationChildBirthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          TextHelper.regisChild,
-          maxLines: 3,
-          style: TextStyleHelper.f20w600.copyWith(letterSpacing: 3),
+        title: const AppBarTitle(
+          title: TextHelper.regisChild,
         ),
       ),
     );

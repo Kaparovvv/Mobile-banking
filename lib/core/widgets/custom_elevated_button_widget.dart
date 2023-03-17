@@ -14,37 +14,37 @@ class CustomElevatedButtonWidget extends StatelessWidget {
 
   final String textButton;
   final String iconUrl;
-  final Function() onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         backgroundColor: ThemeHelper.white,
         elevation: 0,
       ),
+      onPressed: onPressed,
       child: Row(
         children: [
           IconBackgroundWidget(
-            width: context.width * 0.2,
-            height: context.height * 0.08,
+            width: context.width * 0.15,
+            height: context.height * 0.065,
             iconUrl: iconUrl,
           ),
-          const SizedBox(width: 15),
+          const SizedBox(width: 10),
           SizedBox(
             width: context.width * 0.55,
             child: Text(
               textButton,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyleHelper.f18w500,
+              style: TextStyleHelper.f16w500,
             ),
           )
         ],
       ),
-      onPressed: () => onPressed(),
     );
   }
 }
