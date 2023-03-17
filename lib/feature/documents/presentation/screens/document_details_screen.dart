@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/widgets/app_bar_title.dart';
+import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
+import 'package:my_family_flutter/feature/documents/data/models/id_card.dart';
+import 'package:my_family_flutter/feature/documents/presentation/widgets/details_content.dart';
+import 'package:my_family_flutter/feature/documents/presentation/widgets/image_content.dart';
 
 import '../widgets/tab_bar_button.dart';
 
@@ -14,8 +18,8 @@ class DocumentDetailsScreen extends StatefulWidget {
 class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
     with TickerProviderStateMixin {
   int selectedTab = 0;
-
   late TabController tabController;
+  late IDCard idCard;
 
   @override
   void initState() {
@@ -23,6 +27,20 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
     tabController = TabController(
       length: 2,
       vsync: this,
+    );
+
+    idCard = IDCard(
+      title: "Удостоверение личности",
+      numberID: "3464535",
+      firstName: "РАЙЫМБЕК",
+      secondName: "САРТАЙҰЛЫ",
+      lastName: "ДУЛДИЕВ",
+      birthDate: "09.12.2002",
+      IIN: "021209652389",
+      issueDate: "12.12.2018",
+      validDate: "12.12.2028",
+      frontImageURL: "assets/images/front.jpg",
+      backImageURL: "assets/images/back.jpg",
     );
   }
 
@@ -70,16 +88,22 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
             ),
             const Divider(height: 0.5),
             Flexible(
+              flex: 3,
               child: DefaultTabController(
                 length: 2,
                 child: TabBarView(
                   controller: tabController,
                   children: [
-                    Text("Left"),
-                    Text("Right"),
+                    ImageContent(idCard: idCard),
+                    DetailsContent(idCard: idCard)
                   ],
                 ),
               ),
+            ),
+            CustomOutlinedButtonWidget(
+              onPressed: () {},
+              textButton: "Отправить документ",
+              icon: Icons.ios_share,
             ),
           ],
         ),

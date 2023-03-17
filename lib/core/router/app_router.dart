@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
-import 'package:my_family_flutter/feature/documents/presentation/screens/document_details.screen.dart';
+import 'package:my_family_flutter/feature/documents/presentation/screens/document_details_screen.dart';
 import 'package:my_family_flutter/feature/documents/presentation/screens/documents_screen.dart';
 import 'package:my_family_flutter/feature/main/presentation/screens/main_screen.dart';
 import 'package:my_family_flutter/feature/auth/presentation/screens/auth_screen.dart';
