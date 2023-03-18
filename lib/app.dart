@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
-import 'package:my_family_flutter/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';

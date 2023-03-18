@@ -11,39 +11,43 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 
-import '../../feature/auth/presentation/screens/auth_screen.dart' as _i1;
-import '../../feature/documents/presentation/screens/document_details_screen.dart'
+import '../../features/auth/presentation/screens/auth_screen.dart' as _i1;
+import '../../features/documents/presentation/screens/document_details_screen.dart'
+    as _i9;
+import '../../features/documents/presentation/screens/documents_screen.dart'
     as _i8;
-import '../../feature/documents/presentation/screens/documents_screen.dart'
+import '../../features/history/presentation/screens/history_screen.dart'
+    as _i11;
+import '../../features/main/presentation/screens/main_screen.dart' as _i10;
+import '../../features/main/presentation/screens/marriage_registration.dart'
     as _i7;
-import '../../feature/main/presentation/screens/main_screen.dart' as _i2;
-import '../../feature/main/presentation/screens/marriage_registration.dart'
-    as _i6;
-import '../../feature/main/presentation/screens/public_services_screen.dart'
-    as _i3;
-import '../../feature/main/presentation/screens/registration_child_birth.dart'
-    as _i5;
-import '../../feature/main/presentation/screens/services_for_my_family.dart'
+import '../../features/main/presentation/screens/public_services_screen.dart'
     as _i4;
-import 'auth_guard.dart' as _i11;
+import '../../features/main/presentation/screens/registration_child_birth.dart'
+    as _i6;
+import '../../features/main/presentation/screens/services_for_my_family.dart'
+    as _i5;
+import '../../features/profile/presentation/screens/profile_screen.dart' as _i3;
+import 'auth_guard.dart' as _i14;
+import 'nav_bar_router.dart' deferred as _i2;
 
-class AppRouter extends _i9.RootStackRouter {
+class AppRouter extends _i12.RootStackRouter {
   AppRouter({
-    _i10.GlobalKey<_i10.NavigatorState>? navigatorKey,
+    _i13.GlobalKey<_i13.NavigatorState>? navigatorKey,
     required this.authGuard,
   }) : super(navigatorKey);
 
-  final _i11.AuthGuard authGuard;
+  final _i14.AuthGuard authGuard;
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
+  final Map<String, _i12.PageFactory> pagesMap = {
     AuthScreenRoute.name: (routeData) {
       final args = routeData.argsAs<AuthScreenRouteArgs>(
           orElse: () => const AuthScreenRouteArgs());
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i1.AuthScreen(
           key: args.key,
@@ -52,92 +56,130 @@ class AppRouter extends _i9.RootStackRouter {
         ),
       );
     },
-    MainScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+    NavBarRouterRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i2.MainScreen(),
+        child: _i12.DeferredWidget(
+          _i2.loadLibrary,
+          () => _i2.NavBarRouter(),
+        ),
+      );
+    },
+    ProfileScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i3.ProfileScreen(),
       );
     },
     PublicServicesScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.PublicServicesScreen(),
+        child: const _i4.PublicServicesScreen(),
       );
     },
     ServicesForMyFamilyScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.ServicesForMyFamilyScreen(),
+        child: const _i5.ServicesForMyFamilyScreen(),
       );
     },
     RegistrationChildBirthScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.RegistrationChildBirthScreen(),
+        child: const _i6.RegistrationChildBirthScreen(),
       );
     },
     MarriageRegistrationScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.MarriageRegistrationScreen(),
+        child: const _i7.MarriageRegistrationScreen(),
       );
     },
     DocumentsScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i7.DocumentsScreen(),
+        child: const _i8.DocumentsScreen(),
       );
     },
     DocumentDetailsScreenRoute.name: (routeData) {
       final args = routeData.argsAs<DocumentDetailsScreenRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i8.DocumentDetailsScreen(
+        child: _i9.DocumentDetailsScreen(
           key: args.key,
           title: args.title,
         ),
       );
     },
+    MainScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i10.MainScreen(),
+      );
+    },
+    HistoryScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i11.HistoryScreen(),
+      );
+    },
   };
 
   @override
-  List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(
+  List<_i12.RouteConfig> get routes => [
+        _i12.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: 'mainScreen',
+          redirectTo: 'navbar',
           fullMatch: true,
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           AuthScreenRoute.name,
           path: 'loginScreen',
         ),
-        _i9.RouteConfig(
-          MainScreenRoute.name,
-          path: 'mainScreen',
-          guards: [authGuard],
+        _i12.RouteConfig(
+          NavBarRouterRoute.name,
+          path: 'navbar',
+          deferredLoading: true,
+          children: [
+            _i12.RouteConfig(
+              MainScreenRoute.name,
+              path: 'mainScreen',
+              parent: NavBarRouterRoute.name,
+              guards: [authGuard],
+            ),
+            _i12.RouteConfig(
+              HistoryScreenRoute.name,
+              path: 'history',
+              parent: NavBarRouterRoute.name,
+            ),
+          ],
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
+          ProfileScreenRoute.name,
+          path: 'profile',
+        ),
+        _i12.RouteConfig(
           PublicServicesScreenRoute.name,
           path: 'publicServices',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           ServicesForMyFamilyScreenRoute.name,
           path: 'servicesForMyFamily',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           RegistrationChildBirthScreenRoute.name,
           path: 'regisChild',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           MarriageRegistrationScreenRoute.name,
           path: 'marriageRegis',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           DocumentsScreenRoute.name,
           path: 'documents',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           DocumentDetailsScreenRoute.name,
           path: 'documentDetails',
         ),
@@ -146,9 +188,9 @@ class AppRouter extends _i9.RootStackRouter {
 
 /// generated route for
 /// [_i1.AuthScreen]
-class AuthScreenRoute extends _i9.PageRouteInfo<AuthScreenRouteArgs> {
+class AuthScreenRoute extends _i12.PageRouteInfo<AuthScreenRouteArgs> {
   AuthScreenRoute({
-    _i10.Key? key,
+    _i13.Key? key,
     void Function(bool)? onLoginResult,
     bool isBackButton = false,
   }) : super(
@@ -171,7 +213,7 @@ class AuthScreenRouteArgs {
     this.isBackButton = false,
   });
 
-  final _i10.Key? key;
+  final _i13.Key? key;
 
   final void Function(bool)? onLoginResult;
 
@@ -184,20 +226,33 @@ class AuthScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i2.MainScreen]
-class MainScreenRoute extends _i9.PageRouteInfo<void> {
-  const MainScreenRoute()
+/// [_i2.NavBarRouter]
+class NavBarRouterRoute extends _i12.PageRouteInfo<void> {
+  const NavBarRouterRoute({List<_i12.PageRouteInfo>? children})
       : super(
-          MainScreenRoute.name,
-          path: 'mainScreen',
+          NavBarRouterRoute.name,
+          path: 'navbar',
+          initialChildren: children,
         );
 
-  static const String name = 'MainScreenRoute';
+  static const String name = 'NavBarRouterRoute';
 }
 
 /// generated route for
-/// [_i3.PublicServicesScreen]
-class PublicServicesScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i3.ProfileScreen]
+class ProfileScreenRoute extends _i12.PageRouteInfo<void> {
+  const ProfileScreenRoute()
+      : super(
+          ProfileScreenRoute.name,
+          path: 'profile',
+        );
+
+  static const String name = 'ProfileScreenRoute';
+}
+
+/// generated route for
+/// [_i4.PublicServicesScreen]
+class PublicServicesScreenRoute extends _i12.PageRouteInfo<void> {
   const PublicServicesScreenRoute()
       : super(
           PublicServicesScreenRoute.name,
@@ -208,8 +263,8 @@ class PublicServicesScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.ServicesForMyFamilyScreen]
-class ServicesForMyFamilyScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i5.ServicesForMyFamilyScreen]
+class ServicesForMyFamilyScreenRoute extends _i12.PageRouteInfo<void> {
   const ServicesForMyFamilyScreenRoute()
       : super(
           ServicesForMyFamilyScreenRoute.name,
@@ -220,8 +275,8 @@ class ServicesForMyFamilyScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.RegistrationChildBirthScreen]
-class RegistrationChildBirthScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i6.RegistrationChildBirthScreen]
+class RegistrationChildBirthScreenRoute extends _i12.PageRouteInfo<void> {
   const RegistrationChildBirthScreenRoute()
       : super(
           RegistrationChildBirthScreenRoute.name,
@@ -232,8 +287,8 @@ class RegistrationChildBirthScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.MarriageRegistrationScreen]
-class MarriageRegistrationScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i7.MarriageRegistrationScreen]
+class MarriageRegistrationScreenRoute extends _i12.PageRouteInfo<void> {
   const MarriageRegistrationScreenRoute()
       : super(
           MarriageRegistrationScreenRoute.name,
@@ -244,8 +299,8 @@ class MarriageRegistrationScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.DocumentsScreen]
-class DocumentsScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i8.DocumentsScreen]
+class DocumentsScreenRoute extends _i12.PageRouteInfo<void> {
   const DocumentsScreenRoute()
       : super(
           DocumentsScreenRoute.name,
@@ -256,11 +311,11 @@ class DocumentsScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.DocumentDetailsScreen]
+/// [_i9.DocumentDetailsScreen]
 class DocumentDetailsScreenRoute
-    extends _i9.PageRouteInfo<DocumentDetailsScreenRouteArgs> {
+    extends _i12.PageRouteInfo<DocumentDetailsScreenRouteArgs> {
   DocumentDetailsScreenRoute({
-    _i10.Key? key,
+    _i13.Key? key,
     required String title,
   }) : super(
           DocumentDetailsScreenRoute.name,
@@ -280,7 +335,7 @@ class DocumentDetailsScreenRouteArgs {
     required this.title,
   });
 
-  final _i10.Key? key;
+  final _i13.Key? key;
 
   final String title;
 
@@ -288,4 +343,28 @@ class DocumentDetailsScreenRouteArgs {
   String toString() {
     return 'DocumentDetailsScreenRouteArgs{key: $key, title: $title}';
   }
+}
+
+/// generated route for
+/// [_i10.MainScreen]
+class MainScreenRoute extends _i12.PageRouteInfo<void> {
+  const MainScreenRoute()
+      : super(
+          MainScreenRoute.name,
+          path: 'mainScreen',
+        );
+
+  static const String name = 'MainScreenRoute';
+}
+
+/// generated route for
+/// [_i11.HistoryScreen]
+class HistoryScreenRoute extends _i12.PageRouteInfo<void> {
+  const HistoryScreenRoute()
+      : super(
+          HistoryScreenRoute.name,
+          path: 'history',
+        );
+
+  static const String name = 'HistoryScreenRoute';
 }

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:my_family_flutter/core/constants/urls.dart';
 import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
