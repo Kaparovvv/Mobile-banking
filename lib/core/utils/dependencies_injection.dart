@@ -4,12 +4,12 @@ import 'package:get_it/get_it.dart';
 import 'package:my_family_flutter/core/services/api_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../feature/auth/data/data_sources/user_token_local_data_source.dart';
-import '../../feature/auth/data/data_sources/user_token_remote_data_source.dart';
-import '../../feature/auth/data/repository/auth_repository.dart';
-import '../../feature/auth/domain/repository/auth_repository.dart';
-import '../../feature/auth/domain/usecase/auth_user.dart';
-import '../../feature/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/auth/data/data_sources/user_token_local_data_source.dart';
+import '../../features/auth/data/data_sources/user_token_remote_data_source.dart';
+import '../../features/auth/data/repository/auth_repository.dart';
+import '../../features/auth/domain/repository/auth_repository.dart';
+import '../../features/auth/domain/usecase/auth_user.dart';
+import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../services/network_info.dart';
 
 final GetIt di = GetIt.instance;

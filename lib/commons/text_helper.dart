@@ -1,6 +1,8 @@
 class TextHelper {
   static const String you = 'вы';
   static const String well = 'хорошо';
+  static const String profile = 'Профиль';
+  static const String history = 'История';
   static const String partner = 'партнёр';
   static const String login = 'Вход';
   static const String phone = 'Телефон';
