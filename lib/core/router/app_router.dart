@@ -21,12 +21,9 @@ import 'package:my_family_flutter/features/profile/presentation/screens/profile_
       page: NavBarRouter,
       deferredLoading: true,
       initial: true,
+      guards: [AuthGuard],
       children: [
-        AutoRoute(
-          path: 'mainScreen',
-          page: MainScreen,
-          guards: [AuthGuard],
-        ),
+        AutoRoute(path: 'mainScreen', page: MainScreen),
         AutoRoute(path: 'history', page: HistoryScreen),
       ],
     ),

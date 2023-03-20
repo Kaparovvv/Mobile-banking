@@ -12,4 +12,7 @@ class IconHelper {
   static const String home = 'assets/icons/home.png';
   static const String history = 'assets/icons/history.png';
   static const String profile = 'assets/icons/profile.png';
+  static const String exit = 'assets/icons/exit.png';
+  static const String creditCard = 'assets/icons/credit_card.png';
+  static const String call = 'assets/icons/call.png';
 }

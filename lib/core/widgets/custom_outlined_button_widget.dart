@@ -7,17 +7,22 @@ class CustomOutlinedButtonWidget extends StatelessWidget {
     required this.onPressed,
     required this.textButton,
     this.icon,
+    this.theme,
   });
 
   final Function() onPressed;
   final String textButton;
   final IconData? icon;
+  final Color? theme;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () => onPressed(),
       style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: theme ?? ThemeHelper.color414141),
+          borderRadius: BorderRadius.circular(15),
+        ),
         padding: EdgeInsets.only(
           right: 30,
           left: icon != null ? 20 : 30,
@@ -40,12 +45,12 @@ class CustomOutlinedButtonWidget extends StatelessWidget {
           SizedBox(width: icon != null ? 8 : 0),
           Text(
             textButton,
-            style: const TextStyle(
-              color: Colors.black,
-            ),
+            style: TextStyleHelper.f14w600
+                .copyWith(color: theme ?? ThemeHelper.color414141),
           ),
         ],
       ),
+      onPressed: () => onPressed(),
     );
   }
 }

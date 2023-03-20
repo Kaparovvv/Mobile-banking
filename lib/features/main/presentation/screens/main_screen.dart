@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 const SizedBox(width: 5),
                 const AppBarTitle(
-                  title: 'Thor Son of Odin',
+                  title: 'Thor',
                 ),
               ],
             ),

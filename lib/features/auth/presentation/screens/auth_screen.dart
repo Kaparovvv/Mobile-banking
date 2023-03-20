@@ -9,7 +9,11 @@ import '../widgets/password_textfield_widget.dart';
 class AuthScreen extends StatefulWidget {
   final bool isBackButton;
   final void Function(bool isLoggedIn)? onLoginResult;
-  const AuthScreen({super.key, this.onLoginResult, this.isBackButton = false});
+  const AuthScreen({
+    super.key,
+    this.onLoginResult,
+    this.isBackButton = false,
+  });
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();

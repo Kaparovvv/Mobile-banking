@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:my_family_flutter/features/auth/presentation/widgets/dialog_application_widget.dart';
+import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../core/constants/cached_names.dart';
 import '../../../../core/exports/exports.dart';
-import '../../../../core/utils/dependencies_injection.dart';
 import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/custom_outlined_button_widget.dart';
 import '../../../../core/widgets/custom_textfield_widget.dart';
@@ -136,24 +132,13 @@ class _MarriageRegistrationScreenState
                   child: CustomOutlinedButtonWidget(
                     textButton: TextHelper.submitAnApplication.toUpperCase(),
                     onPressed: () {
-                      print(di
-                          .get<SharedPreferences>()
-                          .getString(CachedNames.cacheUserData)
-                          .toString());
-                      di
-                          .get<SharedPreferences>()
-                          .remove(CachedNames.cacheUserData);
-                      print(di
-                          .get<SharedPreferences>()
-                          .getString(CachedNames.cacheUserData)
-                          .toString());
-
                       if (_formKey.currentState!.validate()) {
                         showDialog(
                           context: context,
                           builder: (context) => const DialogApplicationWidget(
                             statusIcon: IconHelper.error,
                             content: TextHelper.applicationUnsuccess,
+                            buttonTitle: TextHelper.well,
                           ),
                         );
                       }

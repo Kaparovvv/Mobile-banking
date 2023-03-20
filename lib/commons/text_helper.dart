@@ -25,4 +25,7 @@ class TextHelper {
   static const String applicationUnsuccess = 'Не удалось отправить заявку';
   static const String idCard = 'Удостоверение личности';
   static const String driverCard = 'Водительские права';
+  static const String back = 'назад';
+  static const String exit = 'выйти';
+  static const String logoutQuetions = 'Вы уверены что хотите выйти?';
 }

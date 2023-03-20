@@ -141,12 +141,12 @@ class AppRouter extends _i12.RootStackRouter {
           NavBarRouterRoute.name,
           path: 'navbar',
           deferredLoading: true,
+          guards: [authGuard],
           children: [
             _i12.RouteConfig(
               MainScreenRoute.name,
               path: 'mainScreen',
               parent: NavBarRouterRoute.name,
-              guards: [authGuard],
             ),
             _i12.RouteConfig(
               HistoryScreenRoute.name,
