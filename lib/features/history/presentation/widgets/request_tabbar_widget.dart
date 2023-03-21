@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/features/history/presentation/widgets/history_tabbar_widget.dart';
-import 'package:my_family_flutter/features/history/presentation/widgets/list_of_request_widget.dart';
+import 'package:my_family_flutter/features/history/presentation/widgets/list_of_active_request_widget.dart';
+import 'package:my_family_flutter/features/history/presentation/widgets/list_of_archive_request_widget.dart';
 
 import '../../../../core/exports/exports.dart';
 
@@ -23,8 +24,8 @@ class RequestTabBarWidget extends StatelessWidget {
   }
 
   static const List<Widget> requestViews = [
-    ListOfRequestWidget(),
-    ListOfRequestWidget(),
+    ListOfArchiveRequestWidget(),
+    ListOfActiveRequestWidget(),
   ];
 
   static List<Widget> requestTabs = [
