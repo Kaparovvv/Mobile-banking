@@ -27,5 +27,9 @@ class TextHelper {
   static const String driverCard = 'Водительские права';
   static const String back = 'назад';
   static const String exit = 'выйти';
+  static const String payments = 'Платежи';
+  static const String request = 'Заявки';
+  static const String active = 'Активные';
+  static const String archive = 'Архивные';
   static const String logoutQuetions = 'Вы уверены что хотите выйти?';
 }

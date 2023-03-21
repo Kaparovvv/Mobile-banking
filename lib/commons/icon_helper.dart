@@ -15,4 +15,5 @@ class IconHelper {
   static const String exit = 'assets/icons/exit.png';
   static const String creditCard = 'assets/icons/credit_card.png';
   static const String call = 'assets/icons/call.png';
+  static const String tenge = 'assets/icons/tenge.png';
 }

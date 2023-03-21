@@ -51,13 +51,24 @@ class BankCardWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              '$balance  тенге',
-              style: TextStyleHelper.f15w900.copyWith(
-                color: ThemeHelper.white,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  balance.toString(),
+                  style: TextStyleHelper.f15w900.copyWith(
+                    color: ThemeHelper.white,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Image.asset(
+                  IconHelper.tenge,
+                  width: context.width * 0.0556,
+                  height: context.height * 0.0246,
+                ),
+              ],
             ),
           )
         ],
@@ -66,7 +77,9 @@ class BankCardWidget extends StatelessWidget {
   }
 
   String _bankAccount(String account) {
-    String formattedAccount = account.replaceAllMapped(
+    String replaceAccount =
+        account.replaceFirst(RegExp(r".{12}"), '************');
+    String formattedAccount = replaceAccount.replaceAllMapped(
         RegExp(r".{4}"), (match) => "${match.group(0)} ");
     return formattedAccount;
   }

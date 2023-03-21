@@ -13,7 +13,7 @@ class AuthGuard extends AutoRouteGuard {
     if (token != null) {
       resolver.next(true);
     } else {
-      router.replace(
+      router.push(
         AuthScreenRoute(
           onLoginResult: (success) {
             resolver.next(success);
