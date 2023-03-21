@@ -27,7 +27,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
       height: height,
       child: CachedNetworkImage(
         imageUrl: imageUrl ??
-            'https://ami.by/thumbs/getthumb.php?w%5Cu003d190%5Cu0026h%5Cu003d142%5Cu0026src%5Cu003dimages/catalogue/items/dprima_mod1_014.jpg',
+            'https://городокмастеров.рф/wa-data/public/shop/products/85/16/151685/images/439635/439635.750x0.jpg',
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             borderRadius: isRadius ? radius : null,

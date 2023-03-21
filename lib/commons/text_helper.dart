@@ -32,4 +32,5 @@ class TextHelper {
   static const String active = 'Активные';
   static const String archive = 'Архивные';
   static const String logoutQuetions = 'Вы уверены что хотите выйти?';
+  static const String nothingHereYet = 'Здесь пока ничего нет';
 }
