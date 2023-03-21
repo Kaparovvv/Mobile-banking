@@ -21,8 +21,13 @@ class APIClient {
         connectTimeout: 30000,
       ),
     );
-    _client.interceptors.add(LogInterceptor(
-        responseBody: true, requestBody: true, logPrint: _logEvent));
+    _client.interceptors.add(
+      LogInterceptor(
+        responseBody: true,
+        requestBody: true,
+        logPrint: _logEvent,
+      ),
+    );
   }
 
   _logEvent(Object? object) {

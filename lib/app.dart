@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         title: 'My Family',
         theme: ThemeData(
           fontFamily: 'Montserrat',
-          scaffoldBackgroundColor: ThemeHelper.grey,
+          scaffoldBackgroundColor: ThemeHelper.grey200,
           appBarTheme: const AppBarTheme(backgroundColor: ThemeHelper.white),
           useMaterial3: true,
         ),
