@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 
@@ -9,20 +8,18 @@ class DialogApplicationWidget extends StatelessWidget {
     super.key,
     required this.statusIcon,
     required this.content,
-    this.buttonTitle,
-    this.isLogout = false,
-    this.logout,
+    required this.buttonTitle,
+    required this.onPressed,
   });
 
   final String statusIcon;
   final String content;
-  final String? buttonTitle;
-  final bool isLogout;
-  final void Function()? logout;
+  final String buttonTitle;
+  final Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(15),
+      contentPadding: const EdgeInsets.all(20),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,26 +36,10 @@ class DialogApplicationWidget extends StatelessWidget {
             style: TextStyleHelper.f16w700,
           ),
           const SizedBox(height: 20),
-          isLogout
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomOutlinedButtonWidget(
-                      textButton: TextHelper.back.toUpperCase(),
-                      onPressed: () => context.router.pop(),
-                    ),
-                    const SizedBox(width: 10),
-                    CustomOutlinedButtonWidget(
-                      theme: ThemeHelper.red,
-                      textButton: TextHelper.exit.toUpperCase(),
-                      onPressed: () => isLogout ? logout!() : {},
-                    ),
-                  ],
-                )
-              : CustomOutlinedButtonWidget(
-                  textButton: (buttonTitle ?? '').toUpperCase(),
-                  onPressed: () => context.router.pop(),
-                ),
+          CustomOutlinedButtonWidget(
+            textButton: buttonTitle.toUpperCase(),
+            onPressed: () => onPressed(),
+          ),
         ],
       ),
     );

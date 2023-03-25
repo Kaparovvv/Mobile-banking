@@ -10,6 +10,7 @@ import 'package:my_family_flutter/features/main/presentation/screens/marriage_re
 import 'package:my_family_flutter/features/main/presentation/screens/public_services_screen.dart';
 import 'package:my_family_flutter/features/main/presentation/screens/registration_child_birth.dart';
 import 'package:my_family_flutter/features/main/presentation/screens/services_for_my_family.dart';
+import 'package:my_family_flutter/features/notification/presentation/pages/notification_screen.dart';
 import 'package:my_family_flutter/features/profile/presentation/screens/profile_screen.dart';
 
 @MaterialAutoRouter(
@@ -19,7 +20,6 @@ import 'package:my_family_flutter/features/profile/presentation/screens/profile_
     AutoRoute(
       path: 'navbar',
       page: NavBarRouter,
-      deferredLoading: true,
       initial: true,
       guards: [AuthGuard],
       children: [
@@ -34,6 +34,7 @@ import 'package:my_family_flutter/features/profile/presentation/screens/profile_
     AutoRoute(path: 'marriageRegis', page: MarriageRegistrationScreen),
     AutoRoute(path: 'documents', page: DocumentsScreen),
     AutoRoute(path: 'documentDetails', page: DocumentDetailsScreen),
+    AutoRoute(path: 'notification', page: NotificationScreen),
   ],
 )
 class $AppRouter {}

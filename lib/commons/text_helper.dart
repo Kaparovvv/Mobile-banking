@@ -1,5 +1,6 @@
 class TextHelper {
   static const String you = 'вы';
+  static const String ok = 'ок';
   static const String well = 'хорошо';
   static const String profile = 'Профиль';
   static const String history = 'История';
@@ -33,4 +34,12 @@ class TextHelper {
   static const String archive = 'Архивные';
   static const String logoutQuetions = 'Вы уверены что хотите выйти?';
   static const String nothingHereYet = 'Здесь пока ничего нет';
+  static const String recipient = 'Получатель';
+  static const String enterThePaymentSum = 'Введите сумму платежа';
+  static const String sum = 'сумма';
+  static const String toPay = 'Оплатить';
+  static const String paidFor = 'Оплачено';
+  static const String userBalance = 'Ваш баланс:';
+  static const String dontEnoughFundsance = 'У вас недостаточно средств';
+  static const String notification = 'Уведомления';
 }

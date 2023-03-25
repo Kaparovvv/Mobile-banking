@@ -19,12 +19,16 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
       await Future.delayed(const Duration(seconds: 2), () async {
         token =
             await di.get<SharedPreferences>().remove(CachedNames.cacheUserData);
-        log('2 ====== $token');
+        var token2 =
+            di.get<SharedPreferences>().getString(CachedNames.cacheUserData);
+        log('2 ====== $token2');
       });
       log('2 ===== $token');
       token == true
-          ? emit(LoadedLogoutState(isLogout: token ?? false))
-          : emit(ErroLogoutState());
+          ? emit(LoadedLogoutState())
+          : emit(
+              const ErrorLogoutState(message: 'Не удалось выйти из аккаунта'),
+            );
     });
   }
 }

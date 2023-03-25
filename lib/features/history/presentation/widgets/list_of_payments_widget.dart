@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/widgets/cached_network_image_widget.dart';
-import 'package:my_family_flutter/core/widgets/icon_background_widget.dart';
 import 'package:my_family_flutter/core/widgets/loading_overlay_widget.dart';
 
 import '../blocs/payments/payments_bloc.dart';
