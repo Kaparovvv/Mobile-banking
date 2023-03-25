@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_family_flutter/commons/text_formatted.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 
 class BankCardWidget extends StatelessWidget {
@@ -42,7 +43,7 @@ class BankCardWidget extends StatelessWidget {
             ),
           ),
           Text(
-            _bankAccount(bankAccount),
+            TextFormated().bankAccount(bankAccount),
             style: TextStyleHelper.f18w500.copyWith(
               color: ThemeHelper.white,
               fontWeight: FontWeight.w900,
@@ -74,13 +75,5 @@ class BankCardWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _bankAccount(String account) {
-    String replaceAccount =
-        account.replaceFirst(RegExp(r".{12}"), '************');
-    String formattedAccount = replaceAccount.replaceAllMapped(
-        RegExp(r".{4}"), (match) => "${match.group(0)} ");
-    return formattedAccount;
   }
 }

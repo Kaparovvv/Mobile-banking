@@ -11,10 +11,10 @@ class LogoutInitial extends LogoutState {}
 
 class LoadingLogoutState extends LogoutState {}
 
-class LoadedLogoutState extends LogoutState {
-  final bool isLogout;
+class LoadedLogoutState extends LogoutState {}
 
-  const LoadedLogoutState({required this.isLogout});
+class ErrorLogoutState extends LogoutState {
+  final String message;
+
+  const ErrorLogoutState({required this.message});
 }
-
-class ErroLogoutState extends LogoutState {}

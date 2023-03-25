@@ -42,6 +42,19 @@ class _MainScreenState extends State<MainScreen> {
             onTap: () => context.router.push(const ProfileScreenRoute()),
           ),
         ),
+        actions: [
+          Material(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              child: Image.asset(
+                width: context.width * 0.08,
+                height: context.height * 0.036,
+                IconHelper.bell,
+              ),
+              onTap: () => context.router.push(const NotificationScreenRoute()),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
