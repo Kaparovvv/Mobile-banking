@@ -32,10 +32,10 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
     idCard = IDCard(
       title: "Удостоверение личности",
       numberID: "3464535",
-      firstName: "РАЙЫМБЕК",
-      secondName: "САРТАЙҰЛЫ",
-      lastName: "ДУЛДИЕВ",
-      birthDate: "09.12.2002",
+      firstName: "Имя",
+      secondName: "Отчество",
+      lastName: "Фамилия",
+      birthDate: "01.01.2000",
       identityNumber: "021209652389",
       issueDate: "12.12.2018",
       validDate: "12.12.2028",
@@ -57,11 +57,12 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
         title: AppBarTitle(title: widget.title),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
             Flexible(
-              child: SizedBox(
+              child: Container(
+                padding: const EdgeInsets.all(20),
                 height: 80,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,9 +94,16 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
                 length: 2,
                 child: TabBarView(
                   controller: tabController,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    ImageContent(idCard: idCard),
-                    DetailsContent(idCard: idCard)
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ImageContent(idCard: idCard),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: DetailsContent(idCard: idCard),
+                    )
                   ],
                 ),
               ),
