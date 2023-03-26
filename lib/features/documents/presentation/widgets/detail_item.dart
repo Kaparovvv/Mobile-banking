@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import '../../../../commons/text_style_helper.dart';
 import '../../../../commons/theme_helper.dart';
 
@@ -8,18 +8,24 @@ class DetailItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.content,
+    this.switchTopPadding = false,
   });
 
   final String title;
   final String content;
+  final bool switchTopPadding;
+
+  void copyContent() async {
+    await Clipboard.setData(ClipboardData(text: content));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
       decoration: const BoxDecoration(
-        border: Border.symmetric(
-          horizontal: BorderSide(
+        border: Border(
+          bottom: BorderSide(
             color: ThemeHelper.color414141,
             width: 0.2,
           ),
@@ -49,7 +55,12 @@ class DetailItem extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           IconButton(
-            onPressed: () => {},
+            onPressed: () {
+              copyContent();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Скопировано")),
+              );
+            },
             icon: const Icon(
               Icons.copy,
               size: 18,
