@@ -30,24 +30,17 @@ class UserDataBoxWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: context.width * 0.44,
-                child: Text(
-                  'Thor',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyleHelper.f18w500
-                      .copyWith(fontWeight: FontWeight.w800),
-                ),
+              Text(
+                'Thor',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyleHelper.f18w500
+                    .copyWith(fontWeight: FontWeight.w800),
               ),
-              SizedBox(
-                width: context.width * 0.44,
-                child: const Text(
-                  'Son of Odin',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyleHelper.f14w600,
-                ),
+              const Text(
+                'Son of Odin',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyleHelper.f14w600,
               ),
             ],
           ),

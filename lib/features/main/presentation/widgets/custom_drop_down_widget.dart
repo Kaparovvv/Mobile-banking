@@ -27,11 +27,19 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2(
+      child: DropdownButtonFormField2(
         hint: Text(
           widget.hintText,
           style: TextStyleHelper.f14w600,
         ),
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        validator: (value) => widget.validator!(value),
         items: widget.listOfItem.map((value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -53,9 +61,6 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
           height: 50,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-            border: Border.all(
-              color: ThemeHelper.color414141,
-            ),
             borderRadius: BorderRadius.circular(10),
           ),
         ),

@@ -5,8 +5,8 @@ import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/bank_card_widget.dart';
 
-import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/cached_network_image_widget.dart';
+import '../widgets/notification_button_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         automaticallyImplyLeading: false,
         title: Material(
           child: InkWell(
@@ -42,46 +43,39 @@ class _MainScreenState extends State<MainScreen> {
             onTap: () => context.router.push(const ProfileScreenRoute()),
           ),
         ),
-        actions: [
-          Material(
-            child: InkWell(
-              borderRadius: BorderRadius.circular(30),
-              child: Image.asset(
-                width: context.width * 0.08,
-                height: context.height * 0.036,
-                IconHelper.bell,
-              ),
-              onTap: () => context.router.push(const NotificationScreenRoute()),
-            ),
-          ),
+        actions: const [
+          NotificationButtonWidget(),
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-          child: Column(
-            children: [
-              const BankCardWidget(
-                bankAccount: '2647485679374989',
-                balance: 245030.67,
-              ),
-              const SizedBox(height: 40),
-              CustomElevatedButtonWidget(
-                textButton: TextHelper.publicServices,
-                iconUrl: IconHelper.publicServices,
-                onPressed: () => context.router.push(
-                  const PublicServicesScreenRoute(),
+        child: RefreshIndicator(
+          onRefresh: () async {},
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+            child: Column(
+              children: [
+                const BankCardWidget(
+                  bankAccount: '2647485679374989',
+                  balance: 245030.67,
                 ),
-              ),
-              const SizedBox(height: 20),
-              CustomElevatedButtonWidget(
-                textButton: TextHelper.myDocuments,
-                iconUrl: IconHelper.myDocument,
-                onPressed: () => context.router.push(
-                  const DocumentsScreenRoute(),
+                const SizedBox(height: 40),
+                CustomElevatedButtonWidget(
+                  textButton: TextHelper.publicServices,
+                  iconUrl: IconHelper.publicServices,
+                  onPressed: () => context.router.push(
+                    const PublicServicesScreenRoute(),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                CustomElevatedButtonWidget(
+                  textButton: TextHelper.myDocuments,
+                  iconUrl: IconHelper.myDocument,
+                  onPressed: () => context.router.push(
+                    const DocumentsScreenRoute(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

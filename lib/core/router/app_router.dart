@@ -13,6 +13,8 @@ import 'package:my_family_flutter/features/main/presentation/screens/services_fo
 import 'package:my_family_flutter/features/notification/presentation/pages/notification_screen.dart';
 import 'package:my_family_flutter/features/profile/presentation/screens/profile_screen.dart';
 
+import '../../features/notification/presentation/pages/notification_list_screen.dart';
+
 @MaterialAutoRouter(
   replaceInRouteName: 'Page Route',
   routes: <AutoRoute>[
@@ -35,6 +37,7 @@ import 'package:my_family_flutter/features/profile/presentation/screens/profile_
     AutoRoute(path: 'documents', page: DocumentsScreen),
     AutoRoute(path: 'documentDetails', page: DocumentDetailsScreen),
     AutoRoute(path: 'notification', page: NotificationScreen),
+    AutoRoute(path: 'notificationList', page: NotificationListScreen),
   ],
 )
 class $AppRouter {}

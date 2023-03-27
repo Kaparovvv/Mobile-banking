@@ -30,4 +30,16 @@ class ValidatesHelper {
       return null;
     }
   }
+
+  identityNumberValidate(String value, String valueType) {
+    if (value.isNotEmpty) {
+      if (RegExp(".{12,}").hasMatch(value)) {
+        return null;
+      } else {
+        return 'Введите корректный ИНН';
+      }
+    } else {
+      return 'Введите $valueType, пожалуйста';
+    }
+  }
 }

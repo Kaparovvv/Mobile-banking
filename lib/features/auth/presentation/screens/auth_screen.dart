@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
 import '../../../../core/exports/exports.dart';
+import '../../../../core/widgets/custom_snackbar.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/password_textfield_widget.dart';
 
@@ -66,7 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       controller: passwordController,
                       validate: (value) => validatesHelper.titleValidate(
                         value!,
-                        TextHelper.password,
+                        TextHelper.password.toLowerCase(),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -97,11 +100,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       listener: (context, state) {
                         if (state is AuthLoadedState) {
                           widget.onLoginResult?.call(true);
+                          context.router.replace(const NavBarRouterRoute());
                         }
                         if (state is AuthErrorState) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(state.message)),
-                          );
+                          showCustomSnackBar(context, state.message);
                         }
                       },
                     )
