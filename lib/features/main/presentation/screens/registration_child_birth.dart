@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 
 class RegistrationChildBirthScreen extends StatelessWidget {
   const RegistrationChildBirthScreen({super.key});

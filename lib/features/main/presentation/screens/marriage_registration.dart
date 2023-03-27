@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/core/widgets/icon_background_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/custom_textfield_widget.dart';
 import '../../../../core/widgets/payments_bottom_sheet_widget.dart';
 import '../widgets/who_pay_thefee_widget.dart';
@@ -59,9 +59,9 @@ class _MarriageRegistrationScreenState
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,8 +84,9 @@ class _MarriageRegistrationScreenState
                   label: TextHelper.partnersIIN,
                   controller: _partnersIndenNumber,
                   keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
                   inputFormatters: [Masks.identificationNumber],
-                  validate: (value) => validatesHelper.titleValidate(
+                  validate: (value) => validatesHelper.identityNumberValidate(
                     value!,
                     TextHelper.partnersIIN,
                   ),
@@ -117,22 +118,24 @@ class _MarriageRegistrationScreenState
                       )
                     : const SizedBox(),
                 _whoIsPayWidget(),
-                isUserPay == false
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: CustomElevatedButtonWidget(
-                            title: TextHelper.submitAnApplication.toUpperCase(),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                _showDialog(context);
-                              }
-                            },
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: CustomElevatedButtonWidget(
+                      title: TextHelper.submitAnApplication.toUpperCase(),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (_partnersIndenNumber.text.isNotEmpty &&
+                              selectedRegion != null &&
+                              selectedRegistryOffice != null) {
+                            _showDialog(context);
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -186,9 +189,9 @@ class _MarriageRegistrationScreenState
       context: context,
       builder: (context) => DialogApplicationWidget(
         statusIcon: IconHelper.done,
-        content: TextHelper.applicationUnsuccess,
-        buttonTitle: TextHelper.well,
-        onPressed: () => context.router.pop(),
+        content: TextHelper.applicationSuccess,
+        buttonTitle: TextHelper.returnToMainScreen,
+        onPressed: () => context.router.replace(const NavBarRouterRoute()),
       ),
     );
   }

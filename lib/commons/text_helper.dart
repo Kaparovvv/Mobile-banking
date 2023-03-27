@@ -42,4 +42,5 @@ class TextHelper {
   static const String userBalance = 'Ваш баланс:';
   static const String dontEnoughFundsance = 'У вас недостаточно средств';
   static const String notification = 'Уведомления';
+  static const String returnToMainScreen = 'на главный экран';
 }

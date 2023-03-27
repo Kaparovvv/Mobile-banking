@@ -20,7 +20,7 @@ class LoadingOverlayWidget extends StatelessWidget {
           ),
           Center(
             child: CircularProgressIndicator(
-              color: ThemeHelper.color5061FF,
+              color: ThemeHelper.color7E5BC2,
             ),
           ),
         ],

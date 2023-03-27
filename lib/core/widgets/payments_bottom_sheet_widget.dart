@@ -5,6 +5,8 @@ import 'package:my_family_flutter/core/widgets/button_with_background_widget.dar
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 
+import '../router/app_router.gr.dart';
+
 class PaymentsBottomSheetWidget extends StatefulWidget {
   final String transaction;
   final String recepient;
@@ -169,10 +171,10 @@ class _PaymentsBottomSheetWidgetState extends State<PaymentsBottomSheetWidget> {
     showDialog(
       context: context,
       builder: (context) => DialogApplicationWidget(
-        content: TextHelper.paidFor,
         statusIcon: IconHelper.done,
-        buttonTitle: TextHelper.back,
-        onPressed: () => context.router.pop(),
+        content: TextHelper.applicationSuccess,
+        buttonTitle: TextHelper.returnToMainScreen,
+        onPressed: () => context.router.replace(const NavBarRouterRoute()),
       ),
     );
   }

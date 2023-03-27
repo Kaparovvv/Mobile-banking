@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/features/profile/presentation/widgets/logout_dialog_widget.dart';
 
-import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/icon_background_widget.dart';
 import '../widgets/user_data_box_widget.dart';
 
@@ -52,11 +51,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Divider(),
                   customTextRow(
                     context: context,
+                    iconUrl: IconHelper.familyStatus,
+                    value: 'холост',
+                  ),
+                  const Divider(),
+                  customTextRow(
+                    context: context,
                     iconUrl: IconHelper.creditCard,
                     value: '8990 7383 8293 7328',
                   ),
                   const Divider(),
                   Material(
+                    color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
                       child: customTextRow(

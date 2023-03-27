@@ -4,7 +4,6 @@ import 'package:my_family_flutter/features/history/presentation/widgets/list_of_
 import 'package:my_family_flutter/features/history/presentation/widgets/request_tabbar_widget.dart';
 
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});

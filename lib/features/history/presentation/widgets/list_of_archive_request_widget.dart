@@ -54,7 +54,9 @@ class _ListOfArchiveRequestWidgetState
                           borderRadius: BorderRadius.circular(15),
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
+                          horizontal: 20,
+                          vertical: 15,
+                        ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,

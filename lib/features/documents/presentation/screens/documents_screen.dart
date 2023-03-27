@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 
 class DocumentsScreen extends StatefulWidget {
   const DocumentsScreen({super.key});
