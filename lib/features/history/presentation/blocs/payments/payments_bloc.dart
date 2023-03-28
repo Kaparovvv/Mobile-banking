@@ -20,18 +20,40 @@ class PaymentsBloc extends Bloc<PaymentsEvent, PaymentsState> {
 List<Payment> listOfPayments = List.generate(
   10,
   (index) => Payment(
-    'https://live24.ru/wp-content/uploads/2021/04/1558943321_tinkoff.png',
-    'Kaspi Bank',
-    '+7 777 444 56 76',
-    6750.0,
-  ),
+      'https://static10.tgstat.ru/channels/_0/32/32037638e513d700dace34fa7a514b50.jpg',
+      'Налоговая служба Казахстана',
+      '1233444455573887',
+      '6327637832899008',
+      '12.03.2023, 13:23',
+      3063,
+      0,
+      'Успешно выполнен',
+      'оплата госпошлины',
+      '8293364'),
 );
 
 class Payment {
-  final String logoUrl;
-  final String transaction;
-  final String account;
+  final String recepientLogo;
+  final String recepient;
+  final String recepientAccount;
+  final String sender;
+  final String date;
   final double sum;
+  final double commission;
+  final String status;
+  final String transaction;
+  final String checkNumber;
 
-  Payment(this.logoUrl, this.transaction, this.account, this.sum);
+  Payment(
+    this.recepientLogo,
+    this.recepient,
+    this.recepientAccount,
+    this.sender,
+    this.date,
+    this.sum,
+    this.commission,
+    this.status,
+    this.transaction,
+    this.checkNumber,
+  );
 }

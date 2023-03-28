@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 
+import '../../features/history/presentation/blocs/payments/payments_bloc.dart';
+import '../exports/exports.dart';
+
 class TransactionCheckDialogWidget extends StatelessWidget {
-  const TransactionCheckDialogWidget({super.key});
+  const TransactionCheckDialogWidget({super.key, required this.paymentData});
+
+  final Payment paymentData;
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +18,34 @@ class TransactionCheckDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Чек',
+          const Text(
+            TextHelper.check,
             style: TextStyleHelper.f25w700,
           ),
           const SizedBox(height: 20),
-          _valueWithType(type: 'Операция', value: transactionData.transaction),
+          _valueWithType(type: 'Операция', value: paymentData.transaction),
           const SizedBox(height: 10),
-          _valueWithType(type: 'Дата', value: transactionData.date),
-          const SizedBox(height: 10),
-          _valueWithType(
-              type: 'Номер документа', value: transactionData.documentNumber),
-          const SizedBox(height: 10),
-          _valueWithType(type: 'Статус', value: transactionData.status),
-          const SizedBox(height: 10),
-          _valueWithType(type: 'Сумма', value: transactionData.sum.toString()),
+          _valueWithType(type: 'Дата', value: paymentData.date),
           const SizedBox(height: 10),
           _valueWithType(
-              type: 'Комиссия', value: transactionData.commission.toString()),
+              type: 'Номер документа', value: paymentData.checkNumber),
           const SizedBox(height: 10),
-          _valueWithType(type: 'Отправитель', value: transactionData.sender),
+          _valueWithType(type: 'Статус', value: paymentData.status),
           const SizedBox(height: 10),
-          _valueWithType(type: 'Получатель', value: transactionData.recepient),
+          _valueWithType(type: 'Сумма', value: paymentData.sum.toString()),
+          const SizedBox(height: 10),
+          _valueWithType(
+              type: 'Комиссия', value: paymentData.commission.toString()),
+          const SizedBox(height: 10),
+          _valueWithType(type: 'Отправитель', value: paymentData.sender),
+          const SizedBox(height: 10),
+          _valueWithType(
+              type: 'Получатель', value: paymentData.recepientAccount),
           const SizedBox(height: 30),
           Align(
             alignment: Alignment.center,
             child: CustomElevatedButtonWidget(
-              title: TextHelper.well,
+              title: TextHelper.back,
               onPressed: () => context.router.pop(),
             ),
           ),
@@ -48,17 +53,6 @@ class TransactionCheckDialogWidget extends StatelessWidget {
       ),
     );
   }
-
-  static TransactionData transactionData = TransactionData(
-    'перевод с карты на карту',
-    '12.03.2023, 12:45',
-    '728392380',
-    'Успешно выполнен',
-    3063.0,
-    0.00,
-    '**** 9679',
-    '**** 6756',
-  );
 
   Column _valueWithType({
     required String type,
@@ -80,18 +74,4 @@ class TransactionCheckDialogWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-class TransactionData {
-  final String transaction;
-  final String date;
-  final String documentNumber;
-  final String status;
-  final double sum;
-  final double commission;
-  final String sender;
-  final String recepient;
-
-  TransactionData(this.transaction, this.date, this.documentNumber, this.status,
-      this.sum, this.commission, this.sender, this.recepient);
 }

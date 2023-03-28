@@ -41,18 +41,4 @@ class _HistoryScreenState extends State<HistoryScreen> {
       ),
     );
   }
-
-  // List<Widget> requestViews = const [
-  //   ListOfRequestWidget(),
-  //   ListOfRequestWidget(),
-  // ];
-
-  // List<Widget> requestTabs = [
-  //   Tab(
-  //     text: TextHelper.archive.toUpperCase(),
-  //   ),
-  //   Tab(
-  //     text: TextHelper.active.toUpperCase(),
-  //   ),
-  // ];
 }

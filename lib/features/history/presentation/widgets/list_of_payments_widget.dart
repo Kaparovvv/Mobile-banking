@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/commons/text_formatted.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/widgets/cached_network_image_widget.dart';
 import 'package:my_family_flutter/core/widgets/loading_overlay_widget.dart';
 
+import '../../../../core/widgets/сheck_dialog_widget.dart';
 import '../blocs/payments/payments_bloc.dart';
 
 class ListOfPaymentsWidget extends StatefulWidget {
@@ -47,61 +49,7 @@ class _ListOfPaymentsWidgetState extends State<ListOfPaymentsWidget> {
                     ),
                     itemBuilder: (context, index) {
                       var payment = state.listOfPayments[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: ThemeHelper.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 15),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                CachedNetworkImageWidget(
-                                  width: context.width * 0.1,
-                                  height: context.height * 0.05,
-                                  radius: BorderRadius.circular(10),
-                                  imageUrl: payment.logoUrl,
-                                ),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                  width: context.width * 0.65,
-                                  child: Text(
-                                    payment.transaction,
-                                    style: TextStyleHelper.f16w700,
-                                    softWrap: true,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: context.width * 0.48,
-                                  child: Text(
-                                    payment.account,
-                                    style: TextStyleHelper.f14w600,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                Text(
-                                  '${payment.sum} тенге',
-                                  style: TextStyleHelper.f14w600
-                                      .copyWith(color: ThemeHelper.color5061FF),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
+                      return _paymentBox(context, payment);
                     },
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 20),
@@ -115,6 +63,69 @@ class _ListOfPaymentsWidgetState extends State<ListOfPaymentsWidget> {
           }
           return const SizedBox();
         },
+      ),
+    );
+  }
+
+  ElevatedButton _paymentBox(BuildContext context, Payment payment) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: const EdgeInsets.all(15),
+        backgroundColor: ThemeHelper.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CachedNetworkImageWidget(
+                width: context.width * 0.1,
+                height: context.height * 0.05,
+                radius: BorderRadius.circular(10),
+                imageUrl: payment.recepientLogo,
+              ),
+              const SizedBox(width: 10),
+              SizedBox(
+                width: context.width * 0.65,
+                child: Text(
+                  payment.recepient,
+                  style: TextStyleHelper.f16w700,
+                  softWrap: true,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: context.width * 0.48,
+                child: Text(
+                  TextFormated().recepientAccount(payment.recepientAccount),
+                  style: TextStyleHelper.f14w600,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(
+                '${payment.sum} тенге',
+                style: TextStyleHelper.f14w600
+                    .copyWith(color: ThemeHelper.color5061FF),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ],
+      ),
+      onPressed: () => showDialog(
+        context: context,
+        builder: (context) =>
+            TransactionCheckDialogWidget(paymentData: payment),
       ),
     );
   }
