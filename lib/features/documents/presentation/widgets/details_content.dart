@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/features/documents/data/models/id_card.dart';
+import '../../data/models/id_card.dart';
 import 'detail_item.dart';
 
 class DetailsContent extends StatelessWidget {
