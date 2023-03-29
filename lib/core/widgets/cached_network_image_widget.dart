@@ -43,6 +43,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
+              borderRadius: isRadius ? radius : null,
               color: ThemeHelper.blueGrey,
               shape: shape ?? BoxShape.rectangle,
             ),

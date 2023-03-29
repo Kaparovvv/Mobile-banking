@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/features/documents/data/models/id_card.dart';
+
+import '../../../../core/widgets/cached_network_image_widget.dart';
+import '../../data/models/id_card.dart';
 
 class ImageContent extends StatelessWidget {
   final IDCard idCard;
 
-  const ImageContent({
-    super.key,
-    required this.idCard,
-  });
+  const ImageContent({super.key, required this.idCard});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Placeholder(
-          child: SizedBox(
-            height: 200,
-            width: double.maxFinite,
-            child: Center(child: Text("Front image ID Card")),
-          ),
+      children: [
+        CachedNetworkImageWidget(
+          height: 200,
+          width: double.maxFinite,
+          radius: BorderRadius.circular(15),
+          imageUrl: idCard.frontImageURL,
         ),
-        SizedBox(height: 15),
-        Placeholder(
-          child: SizedBox(
-            height: 200,
-            width: double.maxFinite,
-            child: Center(child: Text("Back image ID Card")),
-          ),
+        const SizedBox(height: 30),
+        CachedNetworkImageWidget(
+          height: 200,
+          width: double.maxFinite,
+          radius: BorderRadius.circular(15),
+          imageUrl: idCard.backImageURL,
         ),
       ],
     );

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/widgets/app_bar_title.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
-import 'package:my_family_flutter/features/documents/data/models/id_card.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/details_content.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/image_content.dart';
 
+import '../../data/models/id_card.dart';
 import '../widgets/tab_bar_button.dart';
 
 class DocumentDetailsScreen extends StatefulWidget {
   final String title;
-  const DocumentDetailsScreen({super.key, required this.title});
+  final IDCard idCard;
+
+  const DocumentDetailsScreen({
+    super.key,
+    required this.title,
+    required this.idCard,
+  });
 
   @override
   State<DocumentDetailsScreen> createState() => _DocumentDetailsScreenState();
@@ -19,7 +25,6 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
     with TickerProviderStateMixin {
   int selectedTab = 0;
   late TabController tabController;
-  late IDCard idCard;
 
   @override
   void initState() {
@@ -27,20 +32,6 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
     tabController = TabController(
       length: 2,
       vsync: this,
-    );
-
-    idCard = IDCard(
-      title: "Удостоверение личности",
-      numberID: "3464535",
-      firstName: "Имя",
-      secondName: "Отчество",
-      lastName: "Фамилия",
-      birthDate: "01.01.2000",
-      identityNumber: "021209652389",
-      issueDate: "12.12.2018",
-      validDate: "12.12.2028",
-      frontImageURL: "assets/images/front.jpg",
-      backImageURL: "assets/images/back.jpg",
     );
   }
 
@@ -98,12 +89,12 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: ImageContent(idCard: idCard),
+                      child: ImageContent(idCard: widget.idCard),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: DetailsContent(idCard: idCard),
-                    )
+                      child: DetailsContent(idCard: widget.idCard),
+                    ),
                   ],
                 ),
               ),
