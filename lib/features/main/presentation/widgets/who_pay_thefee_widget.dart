@@ -16,7 +16,7 @@ class WhoPayTheFeeWidget extends StatefulWidget {
 }
 
 class _WhoPayTheFeeWidgetState extends State<WhoPayTheFeeWidget> {
-  var firstButton = true;
+  var firstButton = false;
   var secondButton = false;
 
   @override

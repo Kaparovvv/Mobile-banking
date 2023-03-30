@@ -4,26 +4,34 @@ class UserDataModel extends UserAuthEntity {
   const UserDataModel({
     required token,
     required phoneNumber,
-    required fullName,
     required roles,
+    required id,
+    required firstName,
+    required lastName,
   }) : super(
+          id: id,
           token: token,
           phoneNumber: phoneNumber,
-          fullName: fullName,
           roles: roles,
+          firstName: firstName,
+          lastName: lastName,
         );
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
         token: json["token"],
         phoneNumber: json["phoneNumber"],
-        fullName: json["fullName"],
         roles: json["roles"],
+        id: json['id'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
         "phoneNumber": phoneNumber,
-        "fullName": fullName,
         "roles": roles,
+        "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
       };
 }

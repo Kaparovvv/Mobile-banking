@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_family_flutter/commons/text_formatted.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 
 class BankCardWidget extends StatelessWidget {
@@ -42,7 +43,7 @@ class BankCardWidget extends StatelessWidget {
             ),
           ),
           Text(
-            _bankAccount(bankAccount),
+            TextFormated().bankAccount(bankAccount),
             style: TextStyleHelper.f18w500.copyWith(
               color: ThemeHelper.white,
               fontWeight: FontWeight.w900,
@@ -51,23 +52,28 @@ class BankCardWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              '$balance  тенге',
-              style: TextStyleHelper.f15w900.copyWith(
-                color: ThemeHelper.white,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  balance.toString(),
+                  style: TextStyleHelper.f15w900.copyWith(
+                    color: ThemeHelper.white,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Image.asset(
+                  IconHelper.tenge,
+                  width: context.width * 0.0556,
+                  height: context.height * 0.0246,
+                ),
+              ],
             ),
           )
         ],
       ),
     );
-  }
-
-  String _bankAccount(String account) {
-    String formattedAccount = account.replaceAllMapped(
-        RegExp(r".{4}"), (match) => "${match.group(0)} ");
-    return formattedAccount;
   }
 }

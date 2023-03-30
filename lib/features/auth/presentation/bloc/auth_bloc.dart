@@ -17,7 +17,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ));
       result.fold(
-        (l) => emit(AuthErrorState(message: l.exception.message)),
+        (l) => emit(const AuthErrorState(
+          message: 'Не удалось авторизоваться, пожалуйста попробуйте еще раз',
+        )),
         (r) => emit(AuthLoadedState()),
       );
     });

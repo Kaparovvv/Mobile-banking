@@ -17,7 +17,7 @@ class UserDataBoxWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(15),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           CachedNetworkImageWidget(
             width: context.width * 0.2778,
@@ -30,27 +30,21 @@ class UserDataBoxWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: context.width * 0.5,
-                child: Text(
-                  'Thor',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyleHelper.f18w500
-                      .copyWith(fontWeight: FontWeight.w800),
-                ),
+              Text(
+                'Thor',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyleHelper.f18w500
+                    .copyWith(fontWeight: FontWeight.w800),
               ),
-              SizedBox(
-                width: context.width * 0.5,
-                child: const Text(
-                  'Son of Odin',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyleHelper.f14w600,
-                ),
+              const Text(
+                'Son of Odin',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyleHelper.f14w600,
               ),
             ],
           ),
+          const SizedBox(width: 20),
         ],
       ),
     );

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:my_family_flutter/features/history/presentation/widgets/history_tabbar_widget.dart';
+import 'package:my_family_flutter/features/history/presentation/widgets/list_of_payments_widget.dart';
+import 'package:my_family_flutter/features/history/presentation/widgets/request_tabbar_widget.dart';
 
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +21,23 @@ class HistoryScreen extends StatelessWidget {
           title: TextHelper.history,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
-        child: Column(),
+      body: SafeArea(
+        child: HistoryTabBarWidget(
+          length: 2,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 50),
+          listOfTabs: [
+            Tab(
+              text: TextHelper.payments.toUpperCase(),
+            ),
+            Tab(
+              text: TextHelper.request.toUpperCase(),
+            ),
+          ],
+          listOfTabView: const [
+            ListOfPaymentsWidget(),
+            RequestTabBarWidget(),
+          ],
+        ),
       ),
     );
   }

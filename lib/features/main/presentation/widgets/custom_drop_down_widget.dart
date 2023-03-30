@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/exports/exports.dart';
@@ -25,38 +26,55 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
   dynamic _selectedValue;
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-      value: _selectedValue,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: ThemeHelper.color414141),
-          borderRadius: BorderRadius.circular(10),
+    return DropdownButtonHideUnderline(
+      child: DropdownButtonFormField2(
+        hint: Text(
+          widget.hintText,
+          style: TextStyleHelper.f14w600,
+        ),
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        validator: (value) => widget.validator!(value),
+        items: widget.listOfItem.map((value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value.toString(),
+              style: TextStyleHelper.f14w600,
+            ),
+          );
+        }).toList(),
+        value: _selectedValue,
+        onChanged: (value) {
+          setState(() {
+            _selectedValue = value;
+            widget.callback(value);
+          });
+        },
+        isExpanded: true,
+        buttonStyleData: ButtonStyleData(
+          height: 50,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        iconStyleData: const IconStyleData(
+          icon: Icon(Icons.expand_more_outlined),
+          iconSize: 25,
+          iconEnabledColor: ThemeHelper.color414141,
+        ),
+        dropdownStyleData: DropdownStyleData(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
         ),
       ),
-      hint: Text(
-        widget.hintText,
-        style: TextStyleHelper.f14w600,
-      ),
-      icon: const Icon(Icons.expand_more_outlined),
-      isExpanded: true,
-      borderRadius: BorderRadius.circular(10),
-      style: TextStyleHelper.f14w600,
-      validator: (dynamic value) => widget.validator!(value),
-      onChanged: (value) {
-        setState(() {
-          _selectedValue = value;
-          widget.callback(value);
-        });
-      },
-      items: widget.listOfItem.map((value) {
-        return DropdownMenuItem(
-          value: value,
-          child: Text(
-            value.toString(),
-            style: TextStyleHelper.f14w600,
-          ),
-        );
-      }).toList(),
     );
   }
 }
