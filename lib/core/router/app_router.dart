@@ -23,7 +23,7 @@ import '../../features/notification/presentation/pages/notification_list_screen.
       path: 'navbar',
       page: NavBarRouter,
       initial: true,
-      guards: [AuthGuard],
+      // guards: [AuthGuard],
       children: [
         AutoRoute(path: 'mainScreen', page: MainScreen),
         AutoRoute(path: 'history', page: HistoryScreen),

@@ -6,7 +6,7 @@ import '../exports/exports.dart';
 class CustomTextFieldWidget extends StatefulWidget {
   const CustomTextFieldWidget({
     Key? key,
-    required this.controller,
+    this.controller,
     this.keyboardType,
     this.maxLines,
     this.radius,
@@ -23,7 +23,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   }) : super(key: key);
 
   final FormFieldValidator<String>? validate;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType? keyboardType;
   final int? maxLines;
   final double? radius;
@@ -44,7 +44,7 @@ class CustomTextFieldWidget extends StatefulWidget {
 class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   void initState() {
-    widget.controller.text = widget.value;
+    widget.controller?.text = widget.value;
     super.initState();
   }
 

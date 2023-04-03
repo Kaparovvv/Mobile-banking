@@ -15,7 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i14;
 import 'package:flutter/material.dart' as _i15;
 
 import '../../features/auth/presentation/screens/auth_screen.dart' as _i1;
-import '../../features/documents/data/models/id_card.dart' as _i17;
+import '../../features/documents/data/models/id_card.dart' as _i16;
 import '../../features/documents/presentation/screens/document_details_screen.dart'
     as _i9;
 import '../../features/documents/presentation/screens/documents_screen.dart'
@@ -32,22 +32,17 @@ import '../../features/main/presentation/screens/registration_child_birth.dart'
 import '../../features/main/presentation/screens/services_for_my_family.dart'
     as _i5;
 import '../../features/notification/presentation/bloc/notification_bloc.dart'
-    as _i18;
+    as _i17;
 import '../../features/notification/presentation/pages/notification_list_screen.dart'
     as _i11;
 import '../../features/notification/presentation/pages/notification_screen.dart'
     as _i10;
 import '../../features/profile/presentation/screens/profile_screen.dart' as _i3;
-import 'auth_guard.dart' as _i16;
 import 'nav_bar_router.dart' as _i2;
 
 class AppRouter extends _i14.RootStackRouter {
-  AppRouter({
-    _i15.GlobalKey<_i15.NavigatorState>? navigatorKey,
-    required this.authGuard,
-  }) : super(navigatorKey);
-
-  final _i16.AuthGuard authGuard;
+  AppRouter([_i15.GlobalKey<_i15.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i14.PageFactory> pagesMap = {
@@ -164,7 +159,6 @@ class AppRouter extends _i14.RootStackRouter {
         _i14.RouteConfig(
           NavBarRouterRoute.name,
           path: 'navbar',
-          guards: [authGuard],
           children: [
             _i14.RouteConfig(
               MainScreenRoute.name,
@@ -343,7 +337,7 @@ class DocumentDetailsScreenRoute
   DocumentDetailsScreenRoute({
     _i15.Key? key,
     required String title,
-    required _i17.IDCard idCard,
+    required _i16.IDCard idCard,
   }) : super(
           DocumentDetailsScreenRoute.name,
           path: 'documentDetails',
@@ -368,7 +362,7 @@ class DocumentDetailsScreenRouteArgs {
 
   final String title;
 
-  final _i17.IDCard idCard;
+  final _i16.IDCard idCard;
 
   @override
   String toString() {
@@ -382,7 +376,7 @@ class NotificationScreenRoute
     extends _i14.PageRouteInfo<NotificationScreenRouteArgs> {
   NotificationScreenRoute({
     _i15.Key? key,
-    required _i18.NotificationModel notificationData,
+    required _i17.NotificationModel notificationData,
   }) : super(
           NotificationScreenRoute.name,
           path: 'notification',
@@ -403,7 +397,7 @@ class NotificationScreenRouteArgs {
 
   final _i15.Key? key;
 
-  final _i18.NotificationModel notificationData;
+  final _i17.NotificationModel notificationData;
 
   @override
   String toString() {
@@ -417,7 +411,7 @@ class NotificationListScreenRoute
     extends _i14.PageRouteInfo<NotificationListScreenRouteArgs> {
   NotificationListScreenRoute({
     _i15.Key? key,
-    required List<_i18.NotificationModel> notifications,
+    required List<_i17.NotificationModel> notifications,
   }) : super(
           NotificationListScreenRoute.name,
           path: 'notificationList',
@@ -438,7 +432,7 @@ class NotificationListScreenRouteArgs {
 
   final _i15.Key? key;
 
-  final List<_i18.NotificationModel> notifications;
+  final List<_i17.NotificationModel> notifications;
 
   @override
   String toString() {
