@@ -25,7 +25,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
       ),
       child: Text(
         title.toUpperCase(),
-        style: TextStyleHelper.f18w500.copyWith(color: ThemeHelper.white),
+        style: TextStyleHelper.f14w500.copyWith(color: ThemeHelper.white),
       ),
       onPressed: () => onPressed(),
     );

@@ -4,6 +4,7 @@ import 'package:my_family_flutter/core/router/nav_bar_router.dart';
 import 'package:my_family_flutter/features/documents/presentation/screens/document_details_screen.dart';
 import 'package:my_family_flutter/features/documents/presentation/screens/documents_screen.dart';
 import 'package:my_family_flutter/features/history/presentation/screens/history_screen.dart';
+import 'package:my_family_flutter/features/main/presentation/screens/child_info.dart';
 import 'package:my_family_flutter/features/main/presentation/screens/main_screen.dart';
 import 'package:my_family_flutter/features/auth/presentation/screens/auth_screen.dart';
 import 'package:my_family_flutter/features/main/presentation/screens/marriage_registration.dart';
@@ -38,6 +39,7 @@ import '../../features/notification/presentation/pages/notification_list_screen.
     AutoRoute(path: 'documentDetails', page: DocumentDetailsScreen),
     AutoRoute(path: 'notification', page: NotificationScreen),
     AutoRoute(path: 'notificationList', page: NotificationListScreen),
+    AutoRoute(path: 'childInfo', page: ChildInfoScreen),
   ],
 )
 class $AppRouter {}
