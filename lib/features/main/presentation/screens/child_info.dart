@@ -15,6 +15,8 @@ class ChildInfoScreen extends StatefulWidget {
 }
 
 class _ChildInfoScreenState extends State<ChildInfoScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   Object? selectedRegion;
   List<String> listOfRegion = <String>['ЗАГС 1', 'ЗАГС 2', 'ЗАГС 3'];
 
@@ -55,47 +57,54 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Заполните поля:",
-              style: TextStyleHelper.f14w700,
-            ),
-            for (int i = 0; i < 3; i++) ...[
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Заполните поля:",
+                style: TextStyleHelper.f14w700,
+              ),
+              for (int i = 0; i < 3; i++) ...[
+                const SizedBox(height: 15),
+                CustomTextFieldWidget(
+                  controller: _fieldControllers[i],
+                  label: _fieldNames[i],
+                  validate: (value) => ValidatesHelper.titleValidate(
+                    value ?? "",
+                    _fieldNames[i].toLowerCase(),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 30),
+              const Text(
+                "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
+                style: TextStyleHelper.f14w700,
+              ),
               const SizedBox(height: 15),
-              CustomTextFieldWidget(
-                controller: _fieldControllers[i],
-                label: _fieldNames[i],
+              CustomDropDownWidget(
+                listOfItem: listOfRegion,
+                hintText: "Выберите отдел ЗАГСа",
+                validator: (dynamic value) =>
+                    value == null ? TextHelper.chooseSity : null,
+                callback: ((item) => setState(
+                      () => selectedRegion = item,
+                    )),
+              ),
+              const SizedBox(height: 40),
+              SizedBox(
+                width: double.maxFinite,
+                height: 45,
+                child: CustomElevatedButtonWidget(
+                  onPressed: () {
+                    _showDialog(context);
+                  },
+                  title: 'Подать заявку',
+                ),
               ),
             ],
-            const SizedBox(height: 30),
-            const Text(
-              "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
-              style: TextStyleHelper.f14w700,
-            ),
-            const SizedBox(height: 15),
-            CustomDropDownWidget(
-              listOfItem: listOfRegion,
-              hintText: "Выберите отдел ЗАГСа",
-              validator: (dynamic value) =>
-                  value == null ? TextHelper.chooseSity : null,
-              callback: ((item) => setState(
-                    () => selectedRegion = item,
-                  )),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: double.maxFinite,
-              height: 45,
-              child: CustomElevatedButtonWidget(
-                onPressed: () {
-                  _showDialog(context);
-                },
-                title: 'Подать заявку',
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -22,7 +22,6 @@ class MarriageRegistrationScreen extends StatefulWidget {
 class _MarriageRegistrationScreenState
     extends State<MarriageRegistrationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  ValidatesHelper validatesHelper = ValidatesHelper();
   late TextEditingController _partnersIndenNumber;
   Object? selectedRegion;
   Object? selectedRegistryOffice;
@@ -86,7 +85,7 @@ class _MarriageRegistrationScreenState
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
                   inputFormatters: [Masks.identificationNumber],
-                  validate: (value) => validatesHelper.identityNumberValidate(
+                  validate: (value) => ValidatesHelper.identityNumberValidate(
                     value!,
                     TextHelper.partnersIIN,
                   ),

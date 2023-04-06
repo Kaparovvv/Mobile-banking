@@ -19,7 +19,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  ValidatesHelper validatesHelper = ValidatesHelper();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController phoneController;
   late TextEditingController passwordController;
@@ -58,7 +57,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       controller: phoneController,
                       keyboardType: TextInputType.phone,
                       inputFormatters: [Masks.phoneNumber],
-                      validate: (value) => validatesHelper.titleValidate(
+                      validate: (value) => ValidatesHelper.titleValidate(
                         value!,
                         TextHelper.yourPhone,
                       ),
@@ -67,7 +66,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     PasswordTextFieldWidget(
                       label: TextHelper.password,
                       controller: passwordController,
-                      validate: (value) => validatesHelper.titleValidate(
+                      validate: (value) => ValidatesHelper.titleValidate(
                         value!,
                         TextHelper.password.toLowerCase(),
                       ),

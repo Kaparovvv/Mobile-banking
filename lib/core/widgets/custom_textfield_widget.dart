@@ -59,11 +59,12 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       textInputAction: widget.textInputAction,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
       inputFormatters: widget.inputFormatters,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
-        hintStyle: TextStyleHelper.f14w600,
+        hintStyle: TextStyleHelper.f13w600,
         labelText: widget.label ?? '',
-        labelStyle: TextStyleHelper.f14w600,
+        labelStyle: TextStyleHelper.f13w600,
         constraints: widget.constraints ?? const BoxConstraints(),
         contentPadding: const EdgeInsets.only(top: 0.5, left: 18),
         border: OutlineInputBorder(
