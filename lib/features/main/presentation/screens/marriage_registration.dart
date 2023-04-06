@@ -49,93 +49,97 @@ class _MarriageRegistrationScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ThemeHelper.white,
-      appBar: AppBar(
-        title: const AppBarTitle(
-          title: TextHelper.marriageRegis,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: ThemeHelper.white,
+        appBar: AppBar(
+          title: const AppBarTitle(
+            title: TextHelper.marriageRegis,
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: IconBackgroundWidget(
-                    width: context.width * 0.5,
-                    height: context.height * 0.2,
-                    padding: const EdgeInsets.all(35),
-                    iconUrl: IconHelper.marriage,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                const Text(
-                  TextHelper.enterTheFollowingData,
-                  style: TextStyleHelper.f18w500,
-                ),
-                const SizedBox(height: 40),
-                CustomTextFieldWidget(
-                  label: TextHelper.partnersIIN,
-                  controller: _partnersIndenNumber,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  inputFormatters: [Masks.identificationNumber],
-                  validate: (value) => ValidatesHelper.identityNumberValidate(
-                    value!,
-                    TextHelper.partnersIIN,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                CustomDropDownWidget(
-                  listOfItem: listOfRegion,
-                  hintText: TextHelper.chooseSity,
-                  validator: (dynamic value) =>
-                      value == null ? TextHelper.chooseSity : null,
-                  callback: ((item) => setState(
-                        () => selectedRegion = item,
-                      )),
-                ),
-                selectedRegion != null
-                    ? Column(
-                        children: [
-                          const SizedBox(height: 40),
-                          CustomDropDownWidget(
-                            listOfItem: listOfOffice,
-                            hintText: TextHelper.chooseOffice,
-                            validator: (dynamic value) =>
-                                value == null ? TextHelper.chooseOffice : null,
-                            callback: ((item) => setState(
-                                  () => selectedRegistryOffice = item,
-                                )),
-                          ),
-                        ],
-                      )
-                    : const SizedBox(),
-                _whoIsPayWidget(),
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: CustomElevatedButtonWidget(
-                      title: TextHelper.submitAnApplication.toUpperCase(),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (_partnersIndenNumber.text.isNotEmpty &&
-                              selectedRegion != null &&
-                              selectedRegistryOffice != null) {
-                            _showDialog(context);
-                          }
-                        }
-                      },
+        body: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: IconBackgroundWidget(
+                      width: context.width * 0.5,
+                      height: context.height * 0.2,
+                      padding: const EdgeInsets.all(35),
+                      iconUrl: IconHelper.marriage,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 30),
+                  const Text(
+                    TextHelper.enterTheFollowingData,
+                    style: TextStyleHelper.f18w500,
+                  ),
+                  const SizedBox(height: 40),
+                  CustomTextFieldWidget(
+                    label: TextHelper.partnersIIN,
+                    controller: _partnersIndenNumber,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    inputFormatters: [Masks.identificationNumber],
+                    validate: (value) => ValidatesHelper.identityNumberValidate(
+                      value!,
+                      TextHelper.partnersIIN,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  CustomDropDownWidget(
+                    listOfItem: listOfRegion,
+                    hintText: TextHelper.chooseSity,
+                    validator: (dynamic value) =>
+                        value == null ? TextHelper.chooseSity : null,
+                    callback: ((item) => setState(
+                          () => selectedRegion = item,
+                        )),
+                  ),
+                  selectedRegion != null
+                      ? Column(
+                          children: [
+                            const SizedBox(height: 40),
+                            CustomDropDownWidget(
+                              listOfItem: listOfOffice,
+                              hintText: TextHelper.chooseOffice,
+                              validator: (dynamic value) => value == null
+                                  ? TextHelper.chooseOffice
+                                  : null,
+                              callback: ((item) => setState(
+                                    () => selectedRegistryOffice = item,
+                                  )),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
+                  _whoIsPayWidget(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: CustomElevatedButtonWidget(
+                        title: TextHelper.submitAnApplication.toUpperCase(),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (_partnersIndenNumber.text.isNotEmpty &&
+                                selectedRegion != null &&
+                                selectedRegistryOffice != null) {
+                              _showDialog(context);
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

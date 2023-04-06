@@ -37,96 +37,99 @@ class _RegistrationChildBirthScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const AppBarTitle(
-          title: TextHelper.regisChild,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const AppBarTitle(
+            title: TextHelper.regisChild,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Сведения о матери:",
-                style: TextStyleHelper.f14w700,
-              ),
-              for (int i = 0; i < 4; i++) ...[
-                const SizedBox(height: 15),
-                CustomTextFieldWidget(
-                  controller: _fieldControllers[i],
-                  label: _fieldNames[i],
-                  keyboardType:
-                      i == 3 ? TextInputType.number : TextInputType.text,
-                  validate: (value) => i == 3
-                      ? ValidatesHelper.identityNumberValidate(
-                          value ?? "",
-                          _fieldNames[i],
-                        )
-                      : ValidatesHelper.titleValidate(
-                          value ?? "",
-                          _fieldNames[i],
-                        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Сведения о матери:",
+                  style: TextStyleHelper.f14w700,
                 ),
-              ],
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Сведения об отце:",
-                    style: TextStyleHelper.f14w700,
+                for (int i = 0; i < 4; i++) ...[
+                  const SizedBox(height: 15),
+                  CustomTextFieldWidget(
+                    controller: _fieldControllers[i],
+                    label: _fieldNames[i],
+                    keyboardType:
+                        i == 3 ? TextInputType.number : TextInputType.text,
+                    validate: (value) => i == 3
+                        ? ValidatesHelper.identityNumberValidate(
+                            value ?? "",
+                            _fieldNames[i],
+                          )
+                        : ValidatesHelper.titleValidate(
+                            value ?? "",
+                            _fieldNames[i],
+                          ),
                   ),
-                  Switch(
-                    value: switcher,
-                    onChanged: (nextValue) {
-                      setState(() => switcher = !switcher);
-                      if (!switcher) _formKey.currentState!.validate();
+                ],
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Сведения об отце:",
+                      style: TextStyleHelper.f14w700,
+                    ),
+                    Switch(
+                      value: switcher,
+                      onChanged: (nextValue) {
+                        setState(() => switcher = !switcher);
+                        if (!switcher) _formKey.currentState!.validate();
+                      },
+                    ),
+                  ],
+                ),
+                for (int i = 0; i < 4; i++) ...[
+                  const SizedBox(height: 15),
+                  CustomTextFieldWidget(
+                    controller: _fieldControllers[i + 4],
+                    label: _fieldNames[i],
+                    enabled: switcher,
+                    keyboardType:
+                        i == 3 ? TextInputType.number : TextInputType.text,
+                    validate: (value) {
+                      if (switcher) {
+                        return i == 3
+                            ? ValidatesHelper.identityNumberValidate(
+                                value ?? "",
+                                _fieldNames[i],
+                              )
+                            : ValidatesHelper.titleValidate(
+                                value ?? "",
+                                _fieldNames[i],
+                              );
+                      }
                     },
                   ),
                 ],
-              ),
-              for (int i = 0; i < 4; i++) ...[
-                const SizedBox(height: 15),
-                CustomTextFieldWidget(
-                  controller: _fieldControllers[i + 4],
-                  label: _fieldNames[i],
-                  enabled: switcher,
-                  keyboardType:
-                      i == 3 ? TextInputType.number : TextInputType.text,
-                  validate: (value) {
-                    if (switcher) {
-                      return i == 3
-                          ? ValidatesHelper.identityNumberValidate(
-                              value ?? "",
-                              _fieldNames[i],
-                            )
-                          : ValidatesHelper.titleValidate(
-                              value ?? "",
-                              _fieldNames[i],
-                            );
-                    }
-                  },
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: double.maxFinite,
+                  height: 45,
+                  child: CustomElevatedButtonWidget(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.router.push(const ChildInfoScreenRoute());
+                      }
+                    },
+                    title: 'Далее',
+                  ),
                 ),
+                const SizedBox(height: 20),
               ],
-              const SizedBox(height: 40),
-              SizedBox(
-                width: double.maxFinite,
-                height: 45,
-                child: CustomElevatedButtonWidget(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.router.push(const ChildInfoScreenRoute());
-                    }
-                  },
-                  title: 'Далее',
-                ),
-              ),
-              const SizedBox(height: 20),
-            ],
+            ),
           ),
         ),
       ),
