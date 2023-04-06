@@ -73,7 +73,7 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                   label: _fieldNames[i],
                   validate: (value) => ValidatesHelper.titleValidate(
                     value ?? "",
-                    _fieldNames[i].toLowerCase(),
+                    _fieldNames[i],
                   ),
                 ),
               ],
