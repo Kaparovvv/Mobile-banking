@@ -63,6 +63,7 @@ class _RegistrationChildBirthScreenState
                     label: _fieldNames[i],
                     keyboardType:
                         i == 3 ? TextInputType.number : TextInputType.text,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validate: (value) => i == 3
                         ? ValidatesHelper.identityNumberValidate(
                             value ?? "",
@@ -99,6 +100,7 @@ class _RegistrationChildBirthScreenState
                     enabled: switcher,
                     keyboardType:
                         i == 3 ? TextInputType.number : TextInputType.text,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validate: (value) {
                       if (switcher) {
                         return i == 3
