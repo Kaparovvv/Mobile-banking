@@ -6,7 +6,7 @@ import '../exports/exports.dart';
 class CustomTextFieldWidget extends StatefulWidget {
   const CustomTextFieldWidget({
     Key? key,
-    required this.controller,
+    this.controller,
     this.keyboardType,
     this.maxLines,
     this.radius,
@@ -23,7 +23,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   }) : super(key: key);
 
   final FormFieldValidator<String>? validate;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType? keyboardType;
   final int? maxLines;
   final double? radius;
@@ -44,7 +44,7 @@ class CustomTextFieldWidget extends StatefulWidget {
 class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   void initState() {
-    widget.controller.text = widget.value;
+    widget.controller?.text = widget.value;
     super.initState();
   }
 
@@ -59,11 +59,12 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       textInputAction: widget.textInputAction,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
       inputFormatters: widget.inputFormatters,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
-        hintStyle: TextStyleHelper.f14w600,
+        hintStyle: TextStyleHelper.f13w600,
         labelText: widget.label ?? '',
-        labelStyle: TextStyleHelper.f14w600,
+        labelStyle: TextStyleHelper.f13w600,
         constraints: widget.constraints ?? const BoxConstraints(),
         contentPadding: const EdgeInsets.only(top: 0.5, left: 18),
         border: OutlineInputBorder(

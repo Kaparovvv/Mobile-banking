@@ -19,7 +19,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  ValidatesHelper validatesHelper = ValidatesHelper();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController phoneController;
   late TextEditingController passwordController;
@@ -36,81 +35,84 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                TextHelper.login,
-                style: TextStyleHelper.f25w700,
-              ),
-              const SizedBox(height: 40),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    CustomTextFieldWidget(
-                      label: TextHelper.phone,
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [Masks.phoneNumber],
-                      validate: (value) => validatesHelper.titleValidate(
-                        value!,
-                        TextHelper.yourPhone,
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    PasswordTextFieldWidget(
-                      label: TextHelper.password,
-                      controller: passwordController,
-                      validate: (value) => validatesHelper.titleValidate(
-                        value!,
-                        TextHelper.password.toLowerCase(),
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    BlocConsumer(
-                      bloc: _authBloc,
-                      builder: (context, state) {
-                        if (state is AuthLoadingState) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return CustomOutlinedButtonWidget(
-                          textButton: TextHelper.login.toUpperCase(),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _authBloc.add(
-                                AuthLogInEvent(
-                                  phoneNumber: phoneController.text
-                                      .replaceAll(RegExp(r'\D'), "")
-                                      .replaceFirst(r'7', '8'),
-                                  password: passwordController.text,
-                                ),
-                              );
-                            }
-                          },
-                        );
-                      },
-                      listener: (context, state) {
-                        if (state is AuthLoadedState) {
-                          widget.onLoginResult?.call(true);
-                          context.router.replace(const NavBarRouterRoute());
-                        }
-                        if (state is AuthErrorState) {
-                          showCustomSnackBar(context, state.message);
-                        }
-                      },
-                    )
-                  ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  TextHelper.login,
+                  style: TextStyleHelper.f25w700,
                 ),
-              ),
-            ],
+                const SizedBox(height: 40),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFieldWidget(
+                        label: TextHelper.phone,
+                        controller: phoneController,
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [Masks.phoneNumber],
+                        validate: (value) => ValidatesHelper.titleValidate(
+                          value!,
+                          TextHelper.yourPhone,
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      PasswordTextFieldWidget(
+                        label: TextHelper.password,
+                        controller: passwordController,
+                        validate: (value) => ValidatesHelper.titleValidate(
+                          value!,
+                          TextHelper.password.toLowerCase(),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      BlocConsumer(
+                        bloc: _authBloc,
+                        builder: (context, state) {
+                          if (state is AuthLoadingState) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return CustomOutlinedButtonWidget(
+                            textButton: TextHelper.login.toUpperCase(),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _authBloc.add(
+                                  AuthLogInEvent(
+                                    phoneNumber: phoneController.text
+                                        .replaceAll(RegExp(r'\D'), "")
+                                        .replaceFirst(r'7', '8'),
+                                    password: passwordController.text,
+                                  ),
+                                );
+                              }
+                            },
+                          );
+                        },
+                        listener: (context, state) {
+                          if (state is AuthLoadedState) {
+                            widget.onLoginResult?.call(true);
+                            context.router.replace(const NavBarRouterRoute());
+                          }
+                          if (state is AuthErrorState) {
+                            showCustomSnackBar(context, state.message);
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
