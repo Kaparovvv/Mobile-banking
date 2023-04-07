@@ -59,7 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
                         inputFormatters: [Masks.phoneNumber],
-                        validate: (value) => ValidatesHelper.titleValidate(
+                        validate: (value) => ValidatesHelper.phoneNumber(
                           value!,
                           TextHelper.yourPhone,
                         ),

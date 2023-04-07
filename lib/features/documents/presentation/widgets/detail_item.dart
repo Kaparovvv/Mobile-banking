@@ -58,7 +58,10 @@ class DetailItem extends StatelessWidget {
             onPressed: () {
               copyContent();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Скопировано")),
+                const SnackBar(
+                  content: Text("Скопировано"),
+                  duration: Duration(seconds: 1),
+                ),
               );
             },
             icon: const Icon(

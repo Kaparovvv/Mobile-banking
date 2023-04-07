@@ -31,6 +31,18 @@ class ValidatesHelper {
     }
   }
 
+  static phoneNumber(String value, String valueType) {
+    final formattedValue =
+        value.replaceAll(RegExp(r'\D'), "").replaceFirst(r'7', '8');
+    if (formattedValue.isEmpty) {
+      return 'Введите $valueType, пожалуйста';
+    } else if (formattedValue.length < 11) {
+      return 'Неправильный номер телефона';
+    } else {
+      return null;
+    }
+  }
+
   static identityNumberValidate(String value, String valueType) {
     if (value.isNotEmpty) {
       if (RegExp(".{12,}").hasMatch(value)) {

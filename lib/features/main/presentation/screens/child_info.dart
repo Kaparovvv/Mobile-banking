@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
-import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
@@ -73,6 +72,7 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                   CustomTextFieldWidget(
                     controller: _fieldControllers[i],
                     label: _fieldNames[i],
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validate: (value) => ValidatesHelper.titleValidate(
                       value ?? "",
                       _fieldNames[i],

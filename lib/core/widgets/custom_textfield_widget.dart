@@ -20,6 +20,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.value = '',
     this.autoFocus = false,
     this.textInputAction = TextInputAction.next,
+    this.autovalidateMode = AutovalidateMode.disabled,
   }) : super(key: key);
 
   final FormFieldValidator<String>? validate;
@@ -36,6 +37,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   final String value;
   final bool autoFocus;
   final TextInputAction textInputAction;
+  final AutovalidateMode autovalidateMode;
 
   @override
   State<CustomTextFieldWidget> createState() => _CustomTextFieldWidgetState();
@@ -59,7 +61,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       textInputAction: widget.textInputAction,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
       inputFormatters: widget.inputFormatters,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
         hintStyle: TextStyleHelper.f13w600,
