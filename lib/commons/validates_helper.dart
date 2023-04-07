@@ -1,5 +1,5 @@
 class ValidatesHelper {
-  passwordValidate(String value) {
+  static passwordValidate(String value) {
     if (value.isNotEmpty) {
       if (RegExp("(?:[a-z])").hasMatch(value)) {
         if (RegExp("(?:[A-Z])").hasMatch(value)) {
@@ -23,7 +23,7 @@ class ValidatesHelper {
     }
   }
 
-  titleValidate(String value, String valueType) {
+  static titleValidate(String value, String valueType) {
     if (value.isEmpty) {
       return 'Введите $valueType, пожалуйста';
     } else {
@@ -31,7 +31,19 @@ class ValidatesHelper {
     }
   }
 
-  identityNumberValidate(String value, String valueType) {
+  static phoneNumber(String value, String valueType) {
+    final formattedValue =
+        value.replaceAll(RegExp(r'\D'), "").replaceFirst(r'7', '8');
+    if (formattedValue.isEmpty) {
+      return 'Введите $valueType, пожалуйста';
+    } else if (formattedValue.length < 11) {
+      return 'Неправильный номер телефона';
+    } else {
+      return null;
+    }
+  }
+
+  static identityNumberValidate(String value, String valueType) {
     if (value.isNotEmpty) {
       if (RegExp(".{12,}").hasMatch(value)) {
         return null;

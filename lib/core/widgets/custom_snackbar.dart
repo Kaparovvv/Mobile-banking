@@ -32,7 +32,7 @@ showCustomSnackBar(BuildContext context, String message) {
                 message,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyleHelper.f16w500.copyWith(
+                style: TextStyleHelper.f12w500.copyWith(
                   color: ThemeHelper.white,
                 ),
               ),

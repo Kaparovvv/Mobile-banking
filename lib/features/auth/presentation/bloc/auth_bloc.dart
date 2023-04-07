@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ));
       result.fold(
         (l) => emit(const AuthErrorState(
-          message: 'Не удалось авторизоваться, пожалуйста попробуйте еще раз',
+          message: 'Неверный номер телефона или пароль',
         )),
         (r) => emit(AuthLoadedState()),
       );

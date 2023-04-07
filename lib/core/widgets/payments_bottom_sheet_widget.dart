@@ -119,7 +119,7 @@ class _PaymentsBottomSheetWidgetState extends State<PaymentsBottomSheetWidget> {
                   controller: _recepientController,
                   enabled: false,
                   value: widget.recepient,
-                  validate: (value) => ValidatesHelper().titleValidate(
+                  validate: (value) => ValidatesHelper.titleValidate(
                     value!,
                     TextHelper.recipient.toLowerCase(),
                   ),
@@ -136,7 +136,7 @@ class _PaymentsBottomSheetWidgetState extends State<PaymentsBottomSheetWidget> {
                   label: TextHelper.sum,
                   textInputAction: TextInputAction.done,
                   value: widget.amountToBePaid,
-                  validate: (value) => ValidatesHelper().titleValidate(
+                  validate: (value) => ValidatesHelper.titleValidate(
                     value!,
                     TextHelper.enterThePaymentSum.toLowerCase(),
                   ),
