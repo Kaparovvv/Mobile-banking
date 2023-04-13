@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../data/models/id_card.dart';
+import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'detail_item.dart';
 
 class DetailsContent extends StatelessWidget {
-  final IDCard idCard;
+  final DocumentEntity document;
   const DetailsContent({
     super.key,
-    required this.idCard,
+    required this.document,
   });
 
   @override
@@ -18,27 +18,27 @@ class DetailsContent extends StatelessWidget {
             DetailItem(
               title: "ФИО",
               content:
-                  "${idCard.firstName} ${idCard.secondName} ${idCard.lastName}",
+                  "${document.individual.firstName} ${document.individual.lastName}",
             ),
             DetailItem(
               title: "ИИН",
-              content: idCard.identityNumber,
+              content: document.individual.iin,
             ),
             DetailItem(
               title: "Дата рождения",
-              content: idCard.birthDate,
+              content: document.individual.birthDate,
             ),
             DetailItem(
               title: "Номер документа",
-              content: idCard.numberID,
+              content: document.licenseNumber ?? "-",
             ),
             DetailItem(
               title: "Дата выдачи",
-              content: idCard.issueDate,
+              content: document.issueDate ?? "-",
             ),
             DetailItem(
               title: "Срок действия",
-              content: idCard.validDate,
+              content: document.expirationDate ?? "-",
             ),
           ],
         )
