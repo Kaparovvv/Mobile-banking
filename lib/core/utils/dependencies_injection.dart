@@ -52,9 +52,6 @@ Future<void> init() async {
   di.registerFactory<DocumentRemoteDataSource>(
     () => DocumentRemoteDataSourceImpl(),
   );
-  di.registerFactory<DocumentLocalDataSource>(
-    () => DocumentLocalDataSourceImpl(sharedPreferences: di()),
-  );
 
   // Profile
 
@@ -96,7 +93,6 @@ Future<void> init() async {
   di.registerFactory<DocumentRepository>(
     () => DocumentRepositoryImpl(
       remoteDataSource: di(),
-      localDataSource: di(),
       networkInfo: di(),
     ),
   );

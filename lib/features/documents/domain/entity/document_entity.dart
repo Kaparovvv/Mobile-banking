@@ -8,8 +8,8 @@ import 'package:my_family_flutter/features/profile/data/models/individual_model.
 class DocumentEntity extends Equatable {
   final String id;
   final String documentType;
-  final String? issueDate;
-  final String? expirationDate;
+  final DateTime? issueDate;
+  final DateTime? expirationDate;
   final String? passportSeries;
   final String? licenseNumber;
   final String? issuingAuthority;

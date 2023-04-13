@@ -27,7 +27,6 @@ class DocumentRemoteDataSourceImpl extends BaseRepository
       RestMethod.get,
       "${URLs.documents}/$userID/${documentType.name}",
     );
-
     return result.then<Either<Failure, DocumentModel>>(
       (either) => either.fold(
         (l) => Left<Failure, DocumentModel>(l),

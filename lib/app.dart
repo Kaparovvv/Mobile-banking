@@ -13,6 +13,7 @@ class App extends StatelessWidget {
   App({super.key});
 
   final AppRouter _appRouter = AppRouter(authGuard: AuthGuard());
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

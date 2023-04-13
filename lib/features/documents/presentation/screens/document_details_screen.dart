@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/widgets/app_bar_title.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
-import 'package:my_family_flutter/features/documents/data/models/document_model.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/details_content.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/image_content.dart';
 import '../bloc/documents_bloc.dart';

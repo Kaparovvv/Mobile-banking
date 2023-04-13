@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'detail_item.dart';
 
@@ -26,7 +27,9 @@ class DetailsContent extends StatelessWidget {
             ),
             DetailItem(
               title: "Дата рождения",
-              content: document.individual.birthDate,
+              content: DateFormat('dd.MM.yyyy').format(
+                document.individual.birthDate,
+              ),
             ),
             DetailItem(
               title: "Номер документа",
@@ -34,11 +37,15 @@ class DetailsContent extends StatelessWidget {
             ),
             DetailItem(
               title: "Дата выдачи",
-              content: document.issueDate ?? "-",
+              content: DateFormat('dd.MM.yyyy').format(
+                document.issueDate ?? DateTime.now(),
+              ),
             ),
             DetailItem(
               title: "Срок действия",
-              content: document.expirationDate ?? "-",
+              content: DateFormat('dd.MM.yyyy').format(
+                document.expirationDate ?? DateTime.now(),
+              ),
             ),
           ],
         )

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class NetworkExceptions {
+class NetworkExceptions implements Exception {
   late String title;
   late String message;
   final int? statusCode;

@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class IndividualEntity extends Equatable {
@@ -10,7 +8,7 @@ class IndividualEntity extends Equatable {
   final String middleName;
   final String phoneNumber;
   final String iin;
-  final String birthDate;
+  final DateTime birthDate;
   final String homeCity;
   final String nationality;
   final String photo;
