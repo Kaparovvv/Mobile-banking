@@ -19,11 +19,8 @@ class LogoutDialogWidget extends StatefulWidget {
 }
 
 class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
-  late ProfileBloc _logoutBloc;
-
   @override
   void initState() {
-    _logoutBloc = di.get<ProfileBloc>();
     super.initState();
   }
 
@@ -32,7 +29,6 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
     return Stack(
       children: [
         BlocConsumer<ProfileBloc, ProfileState>(
-          bloc: _logoutBloc,
           listener: (context, state) {
             if (state is LoadingState) {
               context.router.replaceAll([AuthScreenRoute()]);
@@ -75,7 +71,9 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                       CustomOutlinedButtonWidget(
                         theme: ThemeHelper.red,
                         textButton: TextHelper.exit.toUpperCase(),
-                        onPressed: () => _logoutBloc.add(UserLogoutEvent()),
+                        onPressed: () => context.read<ProfileBloc>().add(
+                              UserLogoutEvent(),
+                            ),
                       ),
                     ],
                   )
