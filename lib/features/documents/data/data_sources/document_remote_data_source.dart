@@ -23,7 +23,6 @@ class DocumentRemoteDataSourceImpl extends BaseRepository
     final userID = di.get<SharedPreferences>().getString(
           CachedNames.cacheUserID,
         );
-
     final result = call(
       RestMethod.get,
       "${URLs.documents}/$userID/${documentType.name}",

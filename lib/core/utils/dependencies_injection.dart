@@ -8,6 +8,12 @@ import 'package:my_family_flutter/features/documents/data/repository/document_re
 import 'package:my_family_flutter/features/documents/domain/repository/document_repository.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_document.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/profile/data/data_sources/profile_local_data_source.dart';
+import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
+import 'package:my_family_flutter/features/profile/data/repository/profile_repository_impl.dart';
+import 'package:my_family_flutter/features/profile/domain/repository/profile_repository.dart';
+import 'package:my_family_flutter/features/profile/domain/usecase/usecase.dart';
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/data/data_sources/user_token_local_data_source.dart';
@@ -42,11 +48,21 @@ Future<void> init() async {
   );
 
   // Documents
+
   di.registerFactory<DocumentRemoteDataSource>(
     () => DocumentRemoteDataSourceImpl(),
   );
   di.registerFactory<DocumentLocalDataSource>(
     () => DocumentLocalDataSourceImpl(sharedPreferences: di()),
+  );
+
+  // Profile
+
+  di.registerFactory<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(),
+  );
+  di.registerFactory<ProfileLocalDataSource>(
+    () => ProfileLocalDataSourceImpl(),
   );
 
   /// Blocs
@@ -67,6 +83,8 @@ Future<void> init() async {
     ),
   );
 
+  // Document Bloc
+
   di.registerFactory<DocumentsBloc>(
     () => DocumentsBloc(getDocument: di()),
   );
@@ -77,6 +95,24 @@ Future<void> init() async {
 
   di.registerFactory<DocumentRepository>(
     () => DocumentRepositoryImpl(
+      remoteDataSource: di(),
+      localDataSource: di(),
+      networkInfo: di(),
+    ),
+  );
+
+  // Profile Bloc
+
+  di.registerFactory<ProfileBloc>(
+    () => ProfileBloc(getIndividualCase: di()),
+  );
+
+  di.registerFactory<GetIndividualCase>(
+    () => GetIndividualCase(profileRepository: di()),
+  );
+
+  di.registerFactory<ProfileRepository>(
+    () => ProfileRepositoryImpl(
       remoteDataSource: di(),
       localDataSource: di(),
       networkInfo: di(),

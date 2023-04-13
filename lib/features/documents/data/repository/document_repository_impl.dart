@@ -30,11 +30,11 @@ class DocumentRepositoryImpl implements DocumentRepository {
   }
 
   Future<Either<Failure, DocumentEntity>> _getDocument(
-    Future<Either<Failure, DocumentModel>> Function() auth,
+    Future<Either<Failure, DocumentModel>> Function() get,
   ) async {
     if (await networkInfo.isConnected) {
-      final remoteToken = await auth();
-      return remoteToken.fold(
+      final remote = await get();
+      return remote.fold(
         (l) => Left(l),
         (r) {
           // localDataSource.documentDataToCache(r);

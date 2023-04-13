@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/loading_overlay_widget.dart';
 
 import '../../../../core/exports/exports.dart';
 import '../../../../core/router/app_router.gr.dart';
 import '../../../../core/widgets/custom_outlined_button_widget.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
-import '../bloc/logout_bloc.dart';
+import '../bloc/profile_bloc.dart';
 
 class LogoutDialogWidget extends StatefulWidget {
   final void Function(bool isLoggedIn)? onLoginResult;
@@ -18,11 +19,11 @@ class LogoutDialogWidget extends StatefulWidget {
 }
 
 class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
-  late LogoutBloc _logoutBloc;
+  late ProfileBloc _logoutBloc;
 
   @override
   void initState() {
-    _logoutBloc = LogoutBloc();
+    _logoutBloc = di.get<ProfileBloc>();
     super.initState();
   }
 
@@ -30,19 +31,19 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BlocConsumer<LogoutBloc, LogoutState>(
+        BlocConsumer<ProfileBloc, ProfileState>(
           bloc: _logoutBloc,
           listener: (context, state) {
-            if (state is LoadedLogoutState) {
+            if (state is LoadingState) {
               context.router.replaceAll([AuthScreenRoute()]);
             }
-            if (state is ErrorLogoutState) {
+            if (state is ErrorState) {
               context.router.pop();
               showCustomSnackBar(context, state.message);
             }
           },
           builder: (context, state) {
-            if (state is LoadingLogoutState) {
+            if (state is LoadingState) {
               return const LoadingOverlayWidget();
             }
             return AlertDialog(
