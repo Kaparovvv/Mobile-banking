@@ -12,6 +12,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProfileBloc>().add(GetIndividual());
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(
