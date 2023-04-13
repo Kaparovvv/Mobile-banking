@@ -19,4 +19,11 @@ class ErrorState extends ProfileState {
   const ErrorState({required this.message});
 }
 
-class GetIndividal extends ProfileState {}
+class GetIndividal extends ProfileState {
+  final IndividualEntity profileData;
+
+  const GetIndividal({required this.profileData});
+
+  @override
+  List<Object> get props => [profileData];
+}

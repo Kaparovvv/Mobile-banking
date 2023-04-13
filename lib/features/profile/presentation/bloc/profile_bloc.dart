@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/domain/usecase/usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +24,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Future<void> getIndividual(
     GetIndividual event,
     Emitter<ProfileState> emit,
-  ) async {}
+  ) async {
+    emit(LoadingState());
+    final result = await getIndividualCase();
+
+    result.fold(
+      (l) => emit(ErrorState(
+        message: l.exception.message,
+      )),
+      (r) => emit(GetIndividal(profileData: r)),
+    );
+  }
 
   Future<void> logOut(
     UserLogoutEvent event,

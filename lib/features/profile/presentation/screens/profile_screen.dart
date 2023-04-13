@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/widgets/logout_dialog_widget.dart';
 
 import '../../../../core/widgets/icon_background_widget.dart';
 import '../widgets/user_data_box_widget.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,68 +18,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: TextHelper.profile,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-        child: Column(
-          children: [
-            const UserDataBoxWidget(),
-            const SizedBox(height: 40),
-            Container(
-              decoration: BoxDecoration(
-                color: ThemeHelper.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.all(15),
+      body: BlocConsumer<ProfileBloc, ProfileState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is LoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is GetIndividal) {
+            final name =
+                "${state.profileData.firstName} ${state.profileData.lastName} ${state.profileData.middleName}";
+            return Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  customTextRow(
-                    context: context,
-                    iconUrl: IconHelper.call,
-                    value: '+7 777-777-77-77',
+                  UserDataBoxWidget(
+                    name: name,
                   ),
-                  const Divider(),
-                  customTextRow(
-                    context: context,
-                    iconUrl: IconHelper.identityCard,
-                    value: '9328 8239 3829',
-                  ),
-                  const Divider(),
-                  customTextRow(
-                    context: context,
-                    iconUrl: IconHelper.familyStatus,
-                    value: 'холост',
-                  ),
-                  const Divider(),
-                  customTextRow(
-                    context: context,
-                    iconUrl: IconHelper.creditCard,
-                    value: '8990 7383 8293 7328',
-                  ),
-                  const Divider(),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      child: customTextRow(
-                        context: context,
-                        iconUrl: IconHelper.exit,
-                        value: 'выйти',
-                      ),
-                      onTap: () {
-                        showDialog(
+                  const SizedBox(height: 40),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: ThemeHelper.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        customTextRow(
                           context: context,
-                          builder: (context) => const LogoutDialogWidget(),
-                        );
-                      },
+                          iconUrl: IconHelper.call,
+                          value: state.profileData.phoneNumber,
+                        ),
+                        const Divider(),
+                        customTextRow(
+                          context: context,
+                          iconUrl: IconHelper.identityCard,
+                          value: state.profileData.iin,
+                        ),
+                        const Divider(),
+                        customTextRow(
+                          context: context,
+                          iconUrl: IconHelper.familyStatus,
+                          value: state.profileData.maritalStatus,
+                        ),
+                        const Divider(),
+                        customTextRow(
+                          context: context,
+                          iconUrl: IconHelper.creditCard,
+                          value: '8990 7383 8293 7328',
+                        ),
+                        const Divider(),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            child: customTextRow(
+                              context: context,
+                              iconUrl: IconHelper.exit,
+                              value: 'выйти',
+                            ),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    const LogoutDialogWidget(),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return const Center(child: Text("Error"));
+          }
+        },
       ),
     );
   }
