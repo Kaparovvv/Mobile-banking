@@ -27,14 +27,15 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButtonFormField2(
+      child: DropdownButtonFormField(
         hint: Text(
           widget.hintText,
           style: TextStyleHelper.f14w600,
         ),
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: EdgeInsets.zero,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -57,23 +58,10 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
           });
         },
         isExpanded: true,
-        buttonStyleData: ButtonStyleData(
-          height: 50,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        iconStyleData: const IconStyleData(
-          icon: Icon(Icons.expand_more_outlined),
-          iconSize: 25,
-          iconEnabledColor: ThemeHelper.color414141,
-        ),
-        dropdownStyleData: DropdownStyleData(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
+        borderRadius: BorderRadius.circular(10),
+        icon: const Icon(Icons.expand_more_outlined),
+        iconSize: 25,
+        iconEnabledColor: ThemeHelper.color414141,
       ),
     );
   }
