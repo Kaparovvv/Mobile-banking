@@ -11,7 +11,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.authUser}) : super(AuthInitial()) {
     on<AuthLogInEvent>((event, emit) async {
       emit(AuthLoadingState());
-
       final result = await authUser(AuthUserParams(
         phoneNumber: event.phoneNumber,
         password: event.password,

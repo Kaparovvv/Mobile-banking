@@ -6,6 +6,8 @@ import 'package:my_family_flutter/core/services/api_client.dart';
 import 'package:my_family_flutter/core/services/network_info.dart';
 import '../utils/dependencies_injection.dart';
 
+enum RestMethod { get, post, put, delete, patch }
+
 abstract class BaseRepository {
   final NetworkInfo networkInfo = di<NetworkInfo>();
   final APIClient restClientService = di<APIClient>();
@@ -67,7 +69,6 @@ abstract class BaseRepository {
             );
             break;
         }
-
         return Right(response.data);
       } on ServerException catch (exception) {
         return Left(ServerFailure(response: exception.response));
@@ -85,5 +86,3 @@ abstract class BaseRepository {
     }
   }
 }
-
-enum RestMethod { get, post, put, delete, patch }

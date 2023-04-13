@@ -31,10 +31,14 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
   }
 
   @override
-  Future<void> userDataToCache(UserDataModel userDataModel) {
-    return sharedPreferences.setString(
+  Future<void> userDataToCache(UserDataModel userDataModel) async {
+    sharedPreferences.setString(
       CachedNames.cacheUserData,
       userDataModel.token,
+    );
+    sharedPreferences.setString(
+      CachedNames.cacheUserID,
+      userDataModel.id,
     );
   }
 }

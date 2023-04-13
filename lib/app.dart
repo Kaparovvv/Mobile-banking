@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
-
+import 'package:my_family_flutter/l10n/l10n.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
+import 'features/documents/presentation/bloc/documents_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -20,7 +22,12 @@ class App extends StatelessWidget {
     ]);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => AuthBloc(authUser: di())),
+        BlocProvider<AuthBloc>(
+          create: (_) => di<AuthBloc>(),
+        ),
+        BlocProvider<DocumentsBloc>(
+          create: (_) => di.get<DocumentsBloc>(),
+        )
       ],
       child: MaterialApp.router(
         title: 'My Family',
@@ -33,6 +40,8 @@ class App extends StatelessWidget {
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(),
         debugShowCheckedModeBanner: false,
+        // supportedLocales: L10n.all,
+        // localizationsDelegates: AppLocalizations.localizationsDelegates,
       ),
     );
   }
