@@ -26,7 +26,7 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
         UserDataModel.fromJson(json.decode(userData)),
       );
     } else {
-      throw CacheException();
+      throw CacheException(message: "Could load the cache!");
     }
   }
 

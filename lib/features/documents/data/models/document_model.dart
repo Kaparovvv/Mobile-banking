@@ -27,8 +27,8 @@ class DocumentModel extends DocumentEntity {
   factory DocumentModel.fromJson(Map<String, dynamic> json) => DocumentModel(
         id: json['id'],
         documentType: json["documentType"],
-        issueDate: json["issueDate"],
-        expirationDate: json["expirationDate"],
+        issueDate: DateTime.parse(json["issueDate"] as String),
+        expirationDate: DateTime.parse(json["issueDate"] as String),
         passportSeries: json["passportSeries"],
         licenseNumber: json["licenseNumber"],
         issuingAuthority: json["issuingAuthority"],

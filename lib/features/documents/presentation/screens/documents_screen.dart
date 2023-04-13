@@ -14,11 +14,8 @@ class DocumentsScreen extends StatefulWidget {
 }
 
 class _DocumentsScreenState extends State<DocumentsScreen> {
-  late DocumentsBloc _documentsBloc;
-
   @override
   void initState() {
-    _documentsBloc = BlocProvider.of(context, listen: false);
     super.initState();
   }
 
@@ -38,7 +35,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               textButton: TextHelper.passport,
               iconUrl: IconHelper.identityCard,
               onPressed: () {
-                _documentsBloc.add(GetPasportEvent());
+                context.read<DocumentsBloc>().add(GetPasportEvent());
                 context.router.push(
                   DocumentDetailsScreenRoute(
                     title: TextHelper.passport,
@@ -51,7 +48,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               textButton: TextHelper.driverCard,
               iconUrl: IconHelper.driverCard,
               onPressed: () {
-                _documentsBloc.add(GetDriverLicenseEvent());
+                context.read<DocumentsBloc>().add(GetDriverLicenseEvent());
                 context.router.push(
                   DocumentDetailsScreenRoute(
                     title: TextHelper.driverCard,

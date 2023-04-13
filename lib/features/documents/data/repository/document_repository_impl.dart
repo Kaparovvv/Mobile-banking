@@ -11,12 +11,10 @@ import 'package:my_family_flutter/features/documents/domain/usecase/get_document
 
 class DocumentRepositoryImpl implements DocumentRepository {
   final DocumentRemoteDataSource remoteDataSource;
-  final DocumentLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
   DocumentRepositoryImpl({
     required this.remoteDataSource,
-    required this.localDataSource,
     required this.networkInfo,
   });
 
@@ -36,18 +34,10 @@ class DocumentRepositoryImpl implements DocumentRepository {
       final remote = await get();
       return remote.fold(
         (l) => Left(l),
-        (r) {
-          // localDataSource.documentDataToCache(r);
-          return Right(r);
-        },
+        (r) => Right(r),
       );
     } else {
-      try {
-        final localToken = await localDataSource.getDocumentDataFromCache();
-        return Right(localToken);
-      } on CacheException {
-        return Left(CacheFailure());
-      }
+      return Left(CacheFailure());
     }
   }
 }

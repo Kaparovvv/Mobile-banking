@@ -34,7 +34,7 @@ class IndividualModel extends IndividualEntity {
         firstName: json["firstName"],
         lastName: json["lastName"],
         middleName: json["middleName"],
-        birthDate: json["birthDate"],
+        birthDate: DateTime.parse(json["birthDate"] as String),
         phoneNumber: json["phoneNumber"],
         photo: json["photo"],
         nationality: json["nationality"],
