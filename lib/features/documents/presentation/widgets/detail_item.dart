@@ -60,7 +60,7 @@ class DetailItem extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text("Скопировано"),
-                  duration: Duration(seconds: 1),
+                  duration: Duration(milliseconds: 50),
                 ),
               );
             },

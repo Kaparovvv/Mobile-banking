@@ -17,7 +17,7 @@ class WhoPayTheFeeWidget extends StatefulWidget {
 
 class _WhoPayTheFeeWidgetState extends State<WhoPayTheFeeWidget> {
   var firstButton = false;
-  var secondButton = false;
+  var secondButton = true;
 
   @override
   Widget build(BuildContext context) {

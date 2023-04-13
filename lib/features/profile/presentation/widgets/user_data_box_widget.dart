@@ -4,9 +4,9 @@ import 'package:my_family_flutter/core/widgets/cached_network_image_widget.dart'
 import '../../../../core/exports/exports.dart';
 
 class UserDataBoxWidget extends StatelessWidget {
-  const UserDataBoxWidget({
-    super.key,
-  });
+  const UserDataBoxWidget({super.key, required this.name});
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class UserDataBoxWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Thor',
+                name,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyleHelper.f18w500
                     .copyWith(fontWeight: FontWeight.w800),

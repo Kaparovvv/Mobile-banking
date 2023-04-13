@@ -7,10 +7,12 @@ class CustomElevatedButtonWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.enabled = true,
   });
 
   final String title;
   final void Function() onPressed;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
           horizontal: 50,
           vertical: 8,
         ),
-        backgroundColor: ThemeHelper.color5061FF,
+        backgroundColor: enabled ? ThemeHelper.color5061FF : ThemeHelper.grey,
         foregroundColor: ThemeHelper.white,
       ),
       child: Text(

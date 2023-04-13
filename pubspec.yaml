@@ -21,8 +21,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_native_splash: ^2.2.17
+  freezed_annotation: ^2.2.0
   get_it: ^7.2.0
   intl: ^0.18.0
+  json_annotation: ^4.8.0
   mask_text_input_formatter: ^2.4.0
   shared_preferences: ^2.0.16
 
@@ -32,6 +34,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
 
 flutter:
   uses-material-design: true
@@ -83,9 +87,3 @@ flutter:
           weight: 100
         - asset: assets/fonts/Montserrat-ThinItalic.ttf
           weight: 100
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700

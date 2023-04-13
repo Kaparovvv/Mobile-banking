@@ -126,8 +126,10 @@ class _MarriageRegistrationScreenState
                       padding: const EdgeInsets.only(top: 40),
                       child: CustomElevatedButtonWidget(
                         title: TextHelper.submitAnApplication.toUpperCase(),
+                        enabled: isUserPay != true,
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate() &&
+                              isUserPay != true) {
                             if (_partnersIndenNumber.text.isNotEmpty &&
                                 selectedRegion != null &&
                                 selectedRegistryOffice != null) {
