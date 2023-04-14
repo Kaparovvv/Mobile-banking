@@ -1,16 +1,9 @@
 part of 'profile_bloc.dart';
 
-abstract class ProfileEvent extends Equatable {
-  const ProfileEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class ProfileEvent with _$ProfileEvent {
+  const factory ProfileEvent.started() = Started;
+  const factory ProfileEvent.getUserData() = GetUserData;
+  const factory ProfileEvent.getIndividual() = GetIndividual;
+  const factory ProfileEvent.logOut() = LogoutEvent;
 }
-
-class UserLogoutEvent extends ProfileEvent {}
-
-class GetIndividual extends ProfileEvent {}
-
-class GetUserData extends ProfileEvent {}
-
-class Reset extends ProfileEvent {}

@@ -126,6 +126,7 @@ Future<void> init() async {
     () => ProfileBloc(
       getIndividualCase: di(),
       getUserDataCase: di(),
+      sharedPreferences: di(),
     ),
   );
 
