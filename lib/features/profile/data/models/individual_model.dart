@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 
 class IndividualModel extends IndividualEntity {

@@ -174,9 +174,11 @@ class _PaymentsBottomSheetWidgetState extends State<PaymentsBottomSheetWidget> {
     showDialog(
       context: context,
       builder: (context) => DialogApplicationWidget(
-        statusIcon: IconHelper.done,
-        content: TextHelper.applicationSuccess,
-        buttonTitle: TextHelper.returnToMainScreen,
+        params: DialogApplicationWidgetParams(
+          statusIcon: IconHelper.done,
+          content: TextHelper.applicationSuccess,
+          buttonTitle: TextHelper.returnToMainScreen,
+        ),
         onPressed: () => context.router.replace(const NavBarRouterRoute()),
       ),
     );

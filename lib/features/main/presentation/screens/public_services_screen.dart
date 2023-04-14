@@ -27,14 +27,6 @@ class PublicServicesScreen extends StatelessWidget {
                 const ServicesForMyFamilyScreenRoute(),
               ),
             ),
-            // const SizedBox(height: 20),
-            // CustomElevatedButtonWidget(
-            //   textButton: TextHelper.myDocuments,
-            //   iconUrl: IconHelper.myDocument,
-            //   onPressed: () => context.router.push(
-            //     const DocumentsScreenRoute(),
-            //   ),
-            // ),
           ],
         ),
       ),
