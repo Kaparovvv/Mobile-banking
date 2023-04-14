@@ -9,13 +9,23 @@ import 'package:my_family_flutter/features/profile/presentation/bloc/profile_blo
 import '../../../../core/widgets/cached_network_image_widget.dart';
 import '../widgets/notification_button_widget.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> with AutoRouteAware {
+  @override
+  void didChangeDependencies() {
     context.read<ProfileBloc>().add(GetUserData());
     context.read<ProfileBloc>().add(GetIndividual());
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -38,7 +48,11 @@ class MainScreen extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () => context.router.push(const ProfileScreenRoute()),
+            onTap: () {
+              context.read<ProfileBloc>().add(GetUserData());
+              context.read<ProfileBloc>().add(GetIndividual());
+              context.router.push(const ProfileScreenRoute());
+            },
           ),
         ),
         actions: const [

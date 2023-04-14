@@ -64,6 +64,7 @@ class _RegistrationChildBirthScreenState
                     keyboardType:
                         i == 3 ? TextInputType.number : TextInputType.text,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    inputFormatters: i == 3 ? [Masks.identificationNumber] : [],
                     validate: (value) => i == 3
                         ? ValidatesHelper.identityNumberValidate(
                             value ?? "",
@@ -101,6 +102,7 @@ class _RegistrationChildBirthScreenState
                     keyboardType:
                         i == 3 ? TextInputType.number : TextInputType.text,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    inputFormatters: i == 3 ? [Masks.identificationNumber] : [],
                     validate: (value) {
                       if (switcher) {
                         return i == 3

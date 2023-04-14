@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/widgets/cached_network_image_widget.dart';
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
 
-class UserDataBoxWidget extends StatelessWidget {
-  const UserDataBoxWidget({super.key, required this.name});
+class UserDataBoxWidget extends StatefulWidget {
+  const UserDataBoxWidget({super.key});
 
-  final String name;
+  @override
+  State<UserDataBoxWidget> createState() => _UserDataBoxWidgetState();
+}
 
+class _UserDataBoxWidgetState extends State<UserDataBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +25,7 @@ class UserDataBoxWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           CachedNetworkImageWidget(
-            width: context.width * 0.2778,
+            width: context.width * 0.2,
             height: context.height * 0.1232,
             shape: BoxShape.circle,
             imageUrl: 'https://i.yapx.cc/EKqLO.jpg',
@@ -30,11 +35,17 @@ class UserDataBoxWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyleHelper.f18w500
-                    .copyWith(fontWeight: FontWeight.w800),
+              BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  return Text(
+                    state is IndividalLoaded
+                        ? "${state.profileData.firstName} ${state.profileData.lastName}"
+                        : "-",
+                    overflow: TextOverflow.fade,
+                    style: TextStyleHelper.f16w500
+                        .copyWith(fontWeight: FontWeight.w800),
+                  );
+                },
               ),
               const Text(
                 'Son of Odin',

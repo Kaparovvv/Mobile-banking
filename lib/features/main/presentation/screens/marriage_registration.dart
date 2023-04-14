@@ -171,7 +171,7 @@ class _MarriageRegistrationScreenState
                                             partnerIin: _partnersIndenNumber
                                                 .text
                                                 .replaceAll(' ', ''),
-                                            isUserPay: isUserPay ?? false,
+                                            isUserPay: true,
                                           ),
                                         ),
                                       );

@@ -35,15 +35,17 @@ class PublicServicesRepositoryImpl extends PublicServicesRepository {
   }
 
   Future<Either<Failure, RegisterCoupleResponseEntity>> _registerCouple(
-    Future<Either<Failure, RegisterCoupleResponseModel>> Function() auth,
+    Future<Either<Failure, RegisterCoupleResponseModel>> Function() register,
   ) async {
     if (await networkInfo.isConnected) {
-      final result = await auth();
+      print("============CONNECTED============");
+      final result = await register();
       return result.fold(
         (l) => Left(l),
         (r) => Right(r),
       );
     } else {
+      print("============NOOOOOO============");
       return Left(CacheFailure());
     }
   }

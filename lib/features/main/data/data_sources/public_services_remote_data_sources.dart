@@ -3,7 +3,6 @@ import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/constants/urls.dart';
 import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/services/base_repository.dart';
-import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/features/main/data/models/register_couple_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
