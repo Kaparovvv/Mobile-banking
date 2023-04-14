@@ -52,6 +52,7 @@ class _MarriageRegistrationScreenState
 
   @override
   Widget build(BuildContext context) {
+    context.read<RegisterCoupleBloc>().add(const Started());
     return BlocConsumer<RegisterCoupleBloc, RegisterCoupleState>(
       listener: (context, state) {
         if (state is Registered) {
@@ -161,20 +162,19 @@ class _MarriageRegistrationScreenState
                                 if (_partnersIndenNumber.text.isNotEmpty &&
                                     selectedRegion != null &&
                                     selectedRegistryOffice != null) {
-                                  print("clicked");
                                   context.read<RegisterCoupleBloc>().add(
                                         RegisterCoupleEvent.register(
                                           RegisterCoupleParams(
                                             city: selectedRegion as String,
                                             office: selectedRegistryOffice
                                                 as String,
-                                            partnerIin:
-                                                _partnersIndenNumber.text,
+                                            partnerIin: _partnersIndenNumber
+                                                .text
+                                                .replaceAll(' ', ''),
                                             isUserPay: isUserPay ?? false,
                                           ),
                                         ),
                                       );
-                                  print("proceed");
                                 }
                               }
                             },

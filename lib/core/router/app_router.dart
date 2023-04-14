@@ -13,7 +13,6 @@ import 'package:my_family_flutter/features/main/presentation/screens/registratio
 import 'package:my_family_flutter/features/main/presentation/screens/services_for_my_family.dart';
 import 'package:my_family_flutter/features/notification/presentation/pages/notification_screen.dart';
 import 'package:my_family_flutter/features/profile/presentation/screens/profile_screen.dart';
-
 import '../../features/notification/presentation/pages/notification_list_screen.dart';
 
 @MaterialAutoRouter(
@@ -21,7 +20,7 @@ import '../../features/notification/presentation/pages/notification_list_screen.
   routes: <AutoRoute>[
     AutoRoute(path: 'loginScreen', page: AuthScreen),
     AutoRoute(
-      path: 'navbar',
+      path: 'navBar',
       page: NavBarRouter,
       initial: true,
       guards: [AuthGuard],

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
+import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
+import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/widgets/logout_dialog_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/widgets/icon_background_widget.dart';
 import '../widgets/user_data_box_widget.dart';
@@ -28,16 +32,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           if (state is LoadingState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is GetIndividal) {
-            final name =
-                "${state.profileData.firstName} ${state.profileData.lastName} ${state.profileData.middleName}";
+          } else if (state is ErrorState) {
+            return const Center(child: Text("Error"));
+          } else if (state is IndividalLoaded) {
             return Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
               child: Column(
                 children: [
-                  UserDataBoxWidget(
-                    name: name,
-                  ),
+                  UserDataBoxWidget(name: _getFullName(state.profileData)),
                   const SizedBox(height: 40),
                   Container(
                     decoration: BoxDecoration(
@@ -70,7 +72,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         customTextRow(
                           context: context,
                           iconUrl: IconHelper.creditCard,
-                          value: '8990 7383 8293 7328',
+                          value: di.get<SharedPreferences>().getString(
+                                    CachedNames.cardNumber,
+                                  ) ??
+                              "-",
                         ),
                         const Divider(),
                         Material(
@@ -98,11 +103,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             );
           } else {
-            return const Center(child: Text("Error"));
+            return const Placeholder();
           }
         },
       ),
     );
+  }
+
+  String _getFullName(IndividualEntity date) {
+    return "${date.firstName} ${date.lastName} ${date.middleName}";
   }
 
   Row customTextRow({

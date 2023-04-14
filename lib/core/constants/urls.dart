@@ -4,4 +4,5 @@ class URLs {
   static const String individuals = '/api/individuals';
   static const String registerCouple =
       '/api/government-requests/register-couple';
+  static const String userInfo = '/api/users/user-id';
 }

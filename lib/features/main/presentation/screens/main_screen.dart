@@ -1,23 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/bank_card_widget.dart';
-
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import '../../../../core/widgets/cached_network_image_widget.dart';
 import '../widgets/notification_button_widget.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  @override
   Widget build(BuildContext context) {
+    context.read<ProfileBloc>().add(GetUserData());
+    context.read<ProfileBloc>().add(GetIndividual());
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,

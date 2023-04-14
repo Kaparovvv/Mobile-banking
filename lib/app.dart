@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
-import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
 import 'features/documents/presentation/bloc/documents_bloc.dart';
+import 'features/main/presentation/blocs/bloc/register_couple_bloc.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -23,14 +23,14 @@ class App extends StatelessWidget {
     ]);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
+        BlocProvider(
           create: (_) => di<AuthBloc>(),
         ),
         BlocProvider<DocumentsBloc>(
           create: (_) => di<DocumentsBloc>(),
         ),
         BlocProvider<ProfileBloc>(
-          create: (_) => di<ProfileBloc>()..add(GetIndividual()),
+          create: (_) => di<ProfileBloc>(),
         ),
         BlocProvider<RegisterCoupleBloc>(
           create: (_) => di<RegisterCoupleBloc>(),
