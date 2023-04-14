@@ -38,9 +38,7 @@ class _UserDataBoxWidgetState extends State<UserDataBoxWidget> {
               BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
                   return Text(
-                    state is IndividalLoaded
-                        ? "${state.profileData.firstName} ${state.profileData.lastName}"
-                        : "-",
+                    "${state.profileData.firstName} ${state.profileData.lastName}",
                     overflow: TextOverflow.fade,
                     style: TextStyleHelper.f16w500
                         .copyWith(fontWeight: FontWeight.w800),

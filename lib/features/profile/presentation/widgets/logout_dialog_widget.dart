@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/loading_overlay_widget.dart';
 
 import '../../../../core/exports/exports.dart';
@@ -30,16 +29,16 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
       children: [
         BlocConsumer<ProfileBloc, ProfileState>(
           listener: (context, state) {
-            if (state is LoadingState) {
+            if (state.loading) {
               context.router.replaceAll([AuthScreenRoute()]);
             }
-            if (state is ErrorState) {
+            if (state.isFailed) {
               context.router.pop();
               showCustomSnackBar(context, state.message);
             }
           },
           builder: (context, state) {
-            if (state is LoadingState) {
+            if (state.loading) {
               return const LoadingOverlayWidget();
             }
             return AlertDialog(
@@ -72,7 +71,7 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                         theme: ThemeHelper.red,
                         textButton: TextHelper.exit.toUpperCase(),
                         onPressed: () => context.read<ProfileBloc>().add(
-                              UserLogoutEvent(),
+                              const LogoutEvent(),
                             ),
                       ),
                     ],

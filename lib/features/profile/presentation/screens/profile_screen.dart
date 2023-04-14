@@ -1,13 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
-import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/widgets/logout_dialog_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/widgets/icon_background_widget.dart';
 import '../widgets/user_data_box_widget.dart';
@@ -32,10 +28,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           return RefreshIndicator(
             onRefresh: () async {
-              context.read<ProfileBloc>().add(GetUserData());
-              context.read<ProfileBloc>().add(GetIndividual());
+              context.read<ProfileBloc>().add(const GetUserData());
+              context.read<ProfileBloc>().add(const GetIndividual());
             },
-            child: state is LoadingState
+            child: state.loading
                 ? const Center(child: CircularProgressIndicator())
                 : SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
@@ -62,35 +58,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   customTextRow(
                                     context: context,
                                     iconUrl: IconHelper.call,
-                                    value: state is IndividalLoaded
-                                        ? state.profileData.phoneNumber
-                                        : "-",
+                                    value: state.profileData.phoneNumber,
                                   ),
                                   const Divider(),
                                   customTextRow(
                                     context: context,
                                     iconUrl: IconHelper.identityCard,
-                                    value: state is IndividalLoaded
-                                        ? state.profileData.iin
-                                        : "-",
+                                    value: state.profileData.iin,
                                   ),
                                   const Divider(),
                                   customTextRow(
                                     context: context,
                                     iconUrl: IconHelper.familyStatus,
-                                    value: state is IndividalLoaded
-                                        ? state.profileData.maritalStatus
-                                        : "-",
+                                    value: state.profileData.maritalStatus,
                                   ),
                                   const Divider(),
                                   customTextRow(
                                     context: context,
                                     iconUrl: IconHelper.creditCard,
-                                    value:
-                                        di.get<SharedPreferences>().getString(
-                                                  CachedNames.cardNumber,
-                                                ) ??
-                                            "-",
+                                    value: state.userData.cardNumber,
                                   ),
                                   const Divider(),
                                   Material(

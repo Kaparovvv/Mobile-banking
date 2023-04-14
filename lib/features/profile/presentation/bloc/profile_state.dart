@@ -1,38 +1,42 @@
 part of 'profile_bloc.dart';
 
-abstract class ProfileState extends Equatable {
-  const ProfileState();
+@freezed
+class ProfileState with _$ProfileState {
+  factory ProfileState({
+    required IndividualEntity profileData,
+    required UserDataEntity userData,
+    required bool loading,
+    required bool isFailed,
+    required String message,
+  }) = _ProfileState;
 
-  @override
-  List<Object> get props => [];
-}
+  const ProfileState._();
 
-class ProfileInitial extends ProfileState {}
-
-class LoadingState extends ProfileState {}
-
-class LogoutState extends ProfileState {}
-
-class ErrorState extends ProfileState {
-  final String message;
-
-  const ErrorState({required this.message});
-}
-
-class IndividalLoaded extends ProfileState {
-  final IndividualEntity profileData;
-
-  const IndividalLoaded({required this.profileData});
-
-  @override
-  List<Object> get props => [profileData];
-}
-
-class UserDataLoaded extends ProfileState {
-  final UserDataEntity userData;
-
-  const UserDataLoaded({required this.userData});
-
-  @override
-  List<Object> get props => [userData];
+  factory ProfileState.initial() => ProfileState(
+        profileData: IndividualEntity(
+          id: "",
+          firstName: "",
+          lastName: "",
+          middleName: "",
+          phoneNumber: "",
+          iin: "",
+          birthDate: DateTime.now(),
+          homeCity: "",
+          nationality: "",
+          photo: "",
+          maritalStatus: "",
+        ),
+        userData: const UserDataEntity(
+          firstName: "",
+          lastName: "",
+          status: "",
+          iin: "",
+          cardNumber: "",
+          balance: 0,
+          email: "",
+        ),
+        loading: false,
+        isFailed: false,
+        message: "",
+      );
 }
