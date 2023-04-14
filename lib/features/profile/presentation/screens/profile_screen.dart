@@ -27,85 +27,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: TextHelper.profile,
         ),
       ),
-      body: BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is LoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is ErrorState) {
-            return const Center(child: Text("Error"));
-          } else if (state is IndividalLoaded) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-              child: Column(
-                children: [
-                  UserDataBoxWidget(name: _getFullName(state.profileData)),
-                  const SizedBox(height: 40),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: ThemeHelper.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        customTextRow(
-                          context: context,
-                          iconUrl: IconHelper.call,
-                          value: state.profileData.phoneNumber,
-                        ),
-                        const Divider(),
-                        customTextRow(
-                          context: context,
-                          iconUrl: IconHelper.identityCard,
-                          value: state.profileData.iin,
-                        ),
-                        const Divider(),
-                        customTextRow(
-                          context: context,
-                          iconUrl: IconHelper.familyStatus,
-                          value: state.profileData.maritalStatus,
-                        ),
-                        const Divider(),
-                        customTextRow(
-                          context: context,
-                          iconUrl: IconHelper.creditCard,
-                          value: di.get<SharedPreferences>().getString(
-                                    CachedNames.cardNumber,
-                                  ) ??
-                              "-",
-                        ),
-                        const Divider(),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(10),
-                            child: customTextRow(
-                              context: context,
-                              iconUrl: IconHelper.exit,
-                              value: 'выйти',
-                            ),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    const LogoutDialogWidget(),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+        child: Column(
+          children: [
+            const UserDataBoxWidget(),
+            const SizedBox(height: 40),
+            Container(
+              decoration: BoxDecoration(
+                color: ThemeHelper.white,
+                borderRadius: BorderRadius.circular(20),
               ),
-            );
-          } else {
-            return const Placeholder();
-          }
-        },
+              padding: const EdgeInsets.all(15),
+              child: BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      customTextRow(
+                        context: context,
+                        iconUrl: IconHelper.call,
+                        value: state is IndividalLoaded
+                            ? state.profileData.phoneNumber
+                            : "-",
+                      ),
+                      const Divider(),
+                      customTextRow(
+                        context: context,
+                        iconUrl: IconHelper.identityCard,
+                        value: state is IndividalLoaded
+                            ? state.profileData.iin
+                            : "-",
+                      ),
+                      const Divider(),
+                      customTextRow(
+                        context: context,
+                        iconUrl: IconHelper.familyStatus,
+                        value: state is IndividalLoaded
+                            ? state.profileData.maritalStatus
+                            : "-",
+                      ),
+                      const Divider(),
+                      customTextRow(
+                        context: context,
+                        iconUrl: IconHelper.creditCard,
+                        value: di.get<SharedPreferences>().getString(
+                                  CachedNames.cardNumber,
+                                ) ??
+                            "-",
+                      ),
+                      const Divider(),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          child: customTextRow(
+                            context: context,
+                            iconUrl: IconHelper.exit,
+                            value: 'выйти',
+                          ),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const LogoutDialogWidget(),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

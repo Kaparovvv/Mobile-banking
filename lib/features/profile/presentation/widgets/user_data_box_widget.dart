@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/widgets/cached_network_image_widget.dart';
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
 
 class UserDataBoxWidget extends StatelessWidget {
-  const UserDataBoxWidget({super.key, required this.name});
-
-  final String name;
+  const UserDataBoxWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,17 @@ class UserDataBoxWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyleHelper.f18w500
-                    .copyWith(fontWeight: FontWeight.w800),
+              BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  return Text(
+                    state is IndividalLoaded
+                        ? "${state.profileData.firstName} ${state.profileData.lastName} ${state.profileData.middleName}"
+                        : "-",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyleHelper.f18w500
+                        .copyWith(fontWeight: FontWeight.w800),
+                  );
+                },
               ),
               const Text(
                 'Son of Odin',
