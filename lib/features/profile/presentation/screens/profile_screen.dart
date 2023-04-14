@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/constants/cached_names.dart';
@@ -27,81 +28,99 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: TextHelper.profile,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-        child: Column(
-          children: [
-            const UserDataBoxWidget(),
-            const SizedBox(height: 40),
-            Container(
-              decoration: BoxDecoration(
-                color: ThemeHelper.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.all(15),
-              child: BlocBuilder<ProfileBloc, ProfileState>(
-                builder: (context, state) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      customTextRow(
-                        context: context,
-                        iconUrl: IconHelper.call,
-                        value: state is IndividalLoaded
-                            ? state.profileData.phoneNumber
-                            : "-",
-                      ),
-                      const Divider(),
-                      customTextRow(
-                        context: context,
-                        iconUrl: IconHelper.identityCard,
-                        value: state is IndividalLoaded
-                            ? state.profileData.iin
-                            : "-",
-                      ),
-                      const Divider(),
-                      customTextRow(
-                        context: context,
-                        iconUrl: IconHelper.familyStatus,
-                        value: state is IndividalLoaded
-                            ? state.profileData.maritalStatus
-                            : "-",
-                      ),
-                      const Divider(),
-                      customTextRow(
-                        context: context,
-                        iconUrl: IconHelper.creditCard,
-                        value: di.get<SharedPreferences>().getString(
-                                  CachedNames.cardNumber,
-                                ) ??
-                            "-",
-                      ),
-                      const Divider(),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          child: customTextRow(
-                            context: context,
-                            iconUrl: IconHelper.exit,
-                            value: 'выйти',
-                          ),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => const LogoutDialogWidget(),
-                            );
-                          },
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              context.read<ProfileBloc>().add(GetUserData());
+              context.read<ProfileBloc>().add(GetIndividual());
+            },
+            child: state is LoadingState
+                ? const Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                      height: context.height,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 30),
+                        child: Column(
+                          children: [
+                            const UserDataBoxWidget(),
+                            const SizedBox(height: 40),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: ThemeHelper.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  customTextRow(
+                                    context: context,
+                                    iconUrl: IconHelper.call,
+                                    value: state is IndividalLoaded
+                                        ? state.profileData.phoneNumber
+                                        : "-",
+                                  ),
+                                  const Divider(),
+                                  customTextRow(
+                                    context: context,
+                                    iconUrl: IconHelper.identityCard,
+                                    value: state is IndividalLoaded
+                                        ? state.profileData.iin
+                                        : "-",
+                                  ),
+                                  const Divider(),
+                                  customTextRow(
+                                    context: context,
+                                    iconUrl: IconHelper.familyStatus,
+                                    value: state is IndividalLoaded
+                                        ? state.profileData.maritalStatus
+                                        : "-",
+                                  ),
+                                  const Divider(),
+                                  customTextRow(
+                                    context: context,
+                                    iconUrl: IconHelper.creditCard,
+                                    value:
+                                        di.get<SharedPreferences>().getString(
+                                                  CachedNames.cardNumber,
+                                                ) ??
+                                            "-",
+                                  ),
+                                  const Divider(),
+                                  Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: customTextRow(
+                                        context: context,
+                                        iconUrl: IconHelper.exit,
+                                        value: 'выйти',
+                                      ),
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              const LogoutDialogWidget(),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+                    ),
+                  ),
+          );
+        },
       ),
     );
   }

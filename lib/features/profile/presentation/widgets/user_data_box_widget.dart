@@ -5,9 +5,14 @@ import 'package:my_family_flutter/features/profile/presentation/bloc/profile_blo
 
 import '../../../../core/exports/exports.dart';
 
-class UserDataBoxWidget extends StatelessWidget {
+class UserDataBoxWidget extends StatefulWidget {
   const UserDataBoxWidget({super.key});
 
+  @override
+  State<UserDataBoxWidget> createState() => _UserDataBoxWidgetState();
+}
+
+class _UserDataBoxWidgetState extends State<UserDataBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +25,7 @@ class UserDataBoxWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           CachedNetworkImageWidget(
-            width: context.width * 0.2778,
+            width: context.width * 0.2,
             height: context.height * 0.1232,
             shape: BoxShape.circle,
             imageUrl: 'https://i.yapx.cc/EKqLO.jpg',
@@ -34,10 +39,10 @@ class UserDataBoxWidget extends StatelessWidget {
                 builder: (context, state) {
                   return Text(
                     state is IndividalLoaded
-                        ? "${state.profileData.firstName} ${state.profileData.lastName} ${state.profileData.middleName}"
+                        ? "${state.profileData.firstName} ${state.profileData.lastName}"
                         : "-",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyleHelper.f18w500
+                    overflow: TextOverflow.fade,
+                    style: TextStyleHelper.f16w500
                         .copyWith(fontWeight: FontWeight.w800),
                   );
                 },

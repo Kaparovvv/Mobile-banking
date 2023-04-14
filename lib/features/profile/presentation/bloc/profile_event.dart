@@ -12,3 +12,5 @@ class UserLogoutEvent extends ProfileEvent {}
 class GetIndividual extends ProfileEvent {}
 
 class GetUserData extends ProfileEvent {}
+
+class Reset extends ProfileEvent {}

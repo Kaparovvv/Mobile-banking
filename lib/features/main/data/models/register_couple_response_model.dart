@@ -13,9 +13,9 @@ class RegisterCoupleResponseModel extends RegisterCoupleResponseEntity {
 
   factory RegisterCoupleResponseModel.fromJson(Map<String, dynamic> json) =>
       RegisterCoupleResponseModel(
-        requestId: json['requestId'],
-        sum: json["sum"],
-        date: json["date"],
+        requestId: json['requestId'] as String,
+        sum: json["sum"] as int,
+        date: DateTime.parse(json["date"] as String),
       );
 
   Map<String, dynamic> toJson() => {

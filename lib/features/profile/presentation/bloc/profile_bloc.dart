@@ -25,6 +25,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UserLogoutEvent>((event, emit) => logOut(event, emit));
     on<GetIndividual>((event, emit) => getIndividual(event, emit));
     on<GetUserData>((event, emit) => getUserData(event, emit));
+    on<Reset>((event, emit) => reset(event, emit));
+  }
+
+  Future<void> reset(Reset event, Emitter<ProfileState> emit) async {
+    emit(ProfileInitial());
   }
 
   Future<void> getUserData(
@@ -61,10 +66,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(LoadingState());
 
     await Future.delayed(const Duration(seconds: 2), () async {
-      token = await di.get<SharedPreferences>().remove(
-            CachedNames.cacheUserData,
-          );
-      await di.get<SharedPreferences>().remove(CachedNames.cacheUserID);
+      token = await di.get<SharedPreferences>().clear();
       var token2 = di.get<SharedPreferences>().getString(
             CachedNames.cacheUserData,
           );

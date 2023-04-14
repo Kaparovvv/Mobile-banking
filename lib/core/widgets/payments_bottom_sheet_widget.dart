@@ -143,7 +143,9 @@ class _PaymentsBottomSheetWidgetState extends State<PaymentsBottomSheetWidget> {
                       TextHelper.enterThePaymentSum.toLowerCase(),
                     ),
                     onChanged: (value) {
-                      _onChangedSum(double.parse(value));
+                      _onChangedSum(
+                        double.parse(value.isNotEmpty ? value : "0"),
+                      );
                     },
                   ),
                   const SizedBox(height: 40),
