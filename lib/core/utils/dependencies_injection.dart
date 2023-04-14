@@ -13,6 +13,11 @@ import 'package:my_family_flutter/features/main/data/repository/public_services_
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
+import 'package:my_family_flutter/features/notification/data/datasources/notification_remote_data_source.dart';
+import 'package:my_family_flutter/features/notification/data/repository/notification_repository_impl.dart';
+import 'package:my_family_flutter/features/notification/domain/repository/notification_repository.dart';
+import 'package:my_family_flutter/features/notification/domain/usecase/notification_case.dart';
+import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_local_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/repository/profile_repository_impl.dart';
@@ -72,6 +77,12 @@ Future<void> init() async {
 
   di.registerFactory<PublicServicesRemoteDataSource>(
     () => PublicServicesRemoteDataSourceImpl(sharedPreferences: di()),
+  );
+
+  // Notification Data Sources
+
+  di.registerFactory<NotificationRemoteDataSource>(
+    () => NotificationRemoteDataSourceImpl(sharedPreferences: di()),
   );
 
   /// Blocs
@@ -146,6 +157,23 @@ Future<void> init() async {
 
   di.registerFactory<PublicServicesRepository>(
     () => PublicServicesRepositoryImpl(
+      remoteDataSource: di(),
+      networkInfo: di(),
+    ),
+  );
+
+  // Notification Bloc
+
+  di.registerFactory<NotificationBloc>(
+    () => NotificationBloc(notificationCase: di()),
+  );
+
+  di.registerFactory<NotificationCase>(
+    () => NotificationCase(repository: di()),
+  );
+
+  di.registerFactory<NotificationRepository>(
+    () => NotificationRepositoryImpl(
       remoteDataSource: di(),
       networkInfo: di(),
     ),

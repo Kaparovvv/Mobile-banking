@@ -31,7 +31,7 @@ import '../../features/main/presentation/screens/registration_child_birth.dart'
     as _i6;
 import '../../features/main/presentation/screens/services_for_my_family.dart'
     as _i5;
-import '../../features/notification/presentation/bloc/notification_bloc.dart'
+import '../../features/notification/domain/entity/notification_entity.dart'
     as _i18;
 import '../../features/notification/presentation/pages/notification_list_screen.dart'
     as _i11;
@@ -386,7 +386,7 @@ class NotificationScreenRoute
     extends _i15.PageRouteInfo<NotificationScreenRouteArgs> {
   NotificationScreenRoute({
     _i16.Key? key,
-    required _i18.NotificationModel notificationData,
+    required _i18.NotificationEntity notificationData,
   }) : super(
           NotificationScreenRoute.name,
           path: 'notification',
@@ -407,7 +407,7 @@ class NotificationScreenRouteArgs {
 
   final _i16.Key? key;
 
-  final _i18.NotificationModel notificationData;
+  final _i18.NotificationEntity notificationData;
 
   @override
   String toString() {
@@ -421,7 +421,7 @@ class NotificationListScreenRoute
     extends _i15.PageRouteInfo<NotificationListScreenRouteArgs> {
   NotificationListScreenRoute({
     _i16.Key? key,
-    required List<_i18.NotificationModel> notifications,
+    required List<_i18.NotificationEntity> notifications,
   }) : super(
           NotificationListScreenRoute.name,
           path: 'notificationList',
@@ -442,7 +442,7 @@ class NotificationListScreenRouteArgs {
 
   final _i16.Key? key;
 
-  final List<_i18.NotificationModel> notifications;
+  final List<_i18.NotificationEntity> notifications;
 
   @override
   String toString() {

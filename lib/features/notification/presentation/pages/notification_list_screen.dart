@@ -1,14 +1,19 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
+import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/custom_snackbar.dart';
+import 'package:my_family_flutter/features/notification/domain/entity/notification_entity.dart';
 
 import '../../../../core/exports/exports.dart';
 import '../bloc/notification_bloc.dart';
 
 class NotificationListScreen extends StatefulWidget {
-  final List<NotificationModel> notifications;
+  final List<NotificationEntity> notifications;
   const NotificationListScreen({super.key, required this.notifications});
 
   @override
@@ -16,14 +21,6 @@ class NotificationListScreen extends StatefulWidget {
 }
 
 class _NotificationListScreenState extends State<NotificationListScreen> {
-  late NotificationBloc _notificationBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _notificationBloc = NotificationBloc();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,31 +32,25 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
             ),
           ),
           body: SafeArea(
-            child: RefreshIndicator(
-              onRefresh: () async =>
-                  _notificationBloc.add(GetNotificationsEvent()),
-              child: BlocConsumer<NotificationBloc, NotificationState>(
-                bloc: _notificationBloc,
-                listener: (context, state) {
-                  if (state is ErrorNotificationState) {
-                    showCustomSnackBar(context, state.message);
-                  }
-                },
-                builder: (context, state) {
-                  if (state is LoadedNotificationState) {
-                    return state.notifications.isNotEmpty
+            child: BlocConsumer<NotificationBloc, NotificationState>(
+              listener: (context, state) {
+                if (state.isFailed) {
+                  showCustomSnackBar(context, state.message);
+                }
+              },
+              builder: (context, state) {
+                return RefreshIndicator(
+                  onRefresh: () async {},
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: state.list.isNotEmpty
                         ? _listOfNotitfication(
-                            listOfNotification: state.notifications,
+                            listOfNotification: state.list,
                           )
-                        : nothingHereYet(context);
-                  }
-                  return widget.notifications.isNotEmpty
-                      ? _listOfNotitfication(
-                          listOfNotification: widget.notifications,
-                        )
-                      : nothingHereYet(context);
-                },
-              ),
+                        : nothingHereYet(context),
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -67,11 +58,13 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
     );
   }
 
-  ListView _listOfNotitfication(
-      {required List<NotificationModel> listOfNotification}) {
+  ListView _listOfNotitfication({
+    required List<NotificationEntity> listOfNotification,
+  }) {
     return ListView.separated(
       itemCount: listOfNotification.length,
       padding: const EdgeInsets.all(20),
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         var notification = listOfNotification[index];
         return listOfNotification.isNotEmpty
@@ -90,7 +83,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      notification.title,
+                      notification.office,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleHelper.f18w500
@@ -98,7 +91,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      notification.descrition,
+                      notification.status,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleHelper.f14w600,
@@ -107,7 +100,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        notification.date,
+                        DateFormat("dd.MM.yyyy").format(notification.date),
                         maxLines: 3,
                         textAlign: TextAlign.right,
                         overflow: TextOverflow.ellipsis,

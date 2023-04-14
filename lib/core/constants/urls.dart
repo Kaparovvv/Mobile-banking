@@ -5,4 +5,6 @@ class URLs {
   static const String registerCouple =
       '/api/government-requests/register-couple';
   static const String userInfo = '/api/users/user-id';
+  static const String notificationList =
+      '/api/government-requests/notifications/user-id';
 }
