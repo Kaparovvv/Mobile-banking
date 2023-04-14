@@ -7,12 +7,16 @@ import 'package:my_family_flutter/features/profile/presentation/widgets/logout_d
 import '../../../../core/widgets/icon_background_widget.dart';
 import '../widgets/user_data_box_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
   Widget build(BuildContext context) {
-    context.read<ProfileBloc>().add(GetIndividual());
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(

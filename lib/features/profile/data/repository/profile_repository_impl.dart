@@ -34,7 +34,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
       final remote = await get();
       return remote.fold(
         (l) => Left(l),
-        (r) => Right(r),
+        (r) {
+          localDataSource.userDataToCache(r);
+          return Right(r);
+        },
       );
     } else {
       return Left(CacheFailure());

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
@@ -26,10 +27,13 @@ class App extends StatelessWidget {
           create: (_) => di<AuthBloc>(),
         ),
         BlocProvider<DocumentsBloc>(
-          create: (_) => di.get<DocumentsBloc>(),
+          create: (_) => di<DocumentsBloc>(),
         ),
         BlocProvider<ProfileBloc>(
-          create: (_) => di.get<ProfileBloc>(),
+          create: (_) => di<ProfileBloc>()..add(GetIndividual()),
+        ),
+        BlocProvider<RegisterCoupleBloc>(
+          create: (_) => di<RegisterCoupleBloc>(),
         )
       ],
       child: MaterialApp.router(

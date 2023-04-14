@@ -37,10 +37,12 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
     showDialog(
       context: context,
       builder: (context) => DialogApplicationWidget(
-        statusIcon: IconHelper.done,
-        content:
-            "Заявление успешно подано. Можете отследить статус заявки в странице “Истории гос. услуг”",
-        buttonTitle: TextHelper.returnToMainScreen,
+        params: DialogApplicationWidgetParams(
+          statusIcon: IconHelper.done,
+          content:
+              "Заявление успешно подано. Можете отследить статус заявки в странице “Истории гос. услуг”",
+          buttonTitle: TextHelper.returnToMainScreen,
+        ),
         onPressed: () => context.router.popUntilRoot(),
       ),
     );

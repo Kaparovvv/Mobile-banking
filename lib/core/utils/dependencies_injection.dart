@@ -8,6 +8,11 @@ import 'package:my_family_flutter/features/documents/data/repository/document_re
 import 'package:my_family_flutter/features/documents/domain/repository/document_repository.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_document.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
+import 'package:my_family_flutter/features/main/data/repository/public_services_repository_impl.dart';
+import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_local_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/repository/profile_repository_impl.dart';
@@ -38,7 +43,7 @@ Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   di.registerLazySingleton(() => sharedPreferences);
 
-  //UserToken
+  //User Token Data Sources
 
   di.registerFactory<UserDataRemoteDataSource>(
     () => UserDataRemoteDataSourceImpl(),
@@ -47,19 +52,25 @@ Future<void> init() async {
     () => UserDataLocalDataSourceImpl(sharedPreferences: di()),
   );
 
-  // Documents
+  // Documents Data Sources
 
   di.registerFactory<DocumentRemoteDataSource>(
-    () => DocumentRemoteDataSourceImpl(),
+    () => DocumentRemoteDataSourceImpl(sharedPreferences: di()),
   );
 
-  // Profile
+  // Profile Data Sources
 
   di.registerFactory<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSourceImpl(),
   );
   di.registerFactory<ProfileLocalDataSource>(
-    () => ProfileLocalDataSourceImpl(),
+    () => ProfileLocalDataSourceImpl(sharedPreferences: di()),
+  );
+
+  // Public Services Data Sources
+
+  di.registerFactory<PublicServicesRemoteDataSource>(
+    () => PublicServicesRemoteDataSourceImpl(sharedPreferences: di()),
   );
 
   /// Blocs
@@ -111,6 +122,23 @@ Future<void> init() async {
     () => ProfileRepositoryImpl(
       remoteDataSource: di(),
       localDataSource: di(),
+      networkInfo: di(),
+    ),
+  );
+
+  // Register Couple Bloc
+
+  di.registerFactory<RegisterCoupleBloc>(
+    () => RegisterCoupleBloc(registerCoupleCase: di()),
+  );
+
+  di.registerFactory<RegisterCoupleCase>(
+    () => RegisterCoupleCase(repository: di()),
+  );
+
+  di.registerFactory<PublicServicesRepository>(
+    () => PublicServicesRepositoryImpl(
+      remoteDataSource: di(),
       networkInfo: di(),
     ),
   );
