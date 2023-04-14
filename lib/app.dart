@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
 import 'features/documents/presentation/bloc/documents_bloc.dart';
@@ -24,16 +25,22 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => di<AuthBloc>(),
+          create: (_) => di.get<AuthBloc>(),
         ),
         BlocProvider<DocumentsBloc>(
-          create: (_) => di<DocumentsBloc>(),
+          create: (_) => di.get<DocumentsBloc>(),
         ),
         BlocProvider<ProfileBloc>(
-          create: (_) => di<ProfileBloc>(),
+          create: (_) => di.get<ProfileBloc>(),
         ),
         BlocProvider<RegisterCoupleBloc>(
-          create: (_) => di<RegisterCoupleBloc>(),
+          create: (_) => di.get<RegisterCoupleBloc>(),
+        ),
+        BlocProvider<NotificationBloc>(
+          create: (_) => di.get<NotificationBloc>()
+            ..add(
+              const GetData(),
+            ),
         )
       ],
       child: MaterialApp.router(

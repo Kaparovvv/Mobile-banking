@@ -1,24 +1,33 @@
 part of 'notification_bloc.dart';
 
-abstract class NotificationState extends Equatable {
-  const NotificationState();
+@freezed
+class NotificationState with _$NotificationState {
+  factory NotificationState({
+    required List<NotificationEntity> list,
+    required String message,
+    required bool isFailed,
+  }) = _NotificationState;
 
-  @override
-  List<Object> get props => [];
-}
+  const NotificationState._();
 
-class NotificationInitial extends NotificationState {}
-
-class LoadingNotificationState extends NotificationState {}
-
-class LoadedNotificationState extends NotificationState {
-  final List<NotificationModel> notifications;
-
-  const LoadedNotificationState({required this.notifications});
-}
-
-class ErrorNotificationState extends NotificationState {
-  final String message;
-
-  const ErrorNotificationState({required this.message});
+  factory NotificationState.initial() => NotificationState(
+        list: [],
+        message: "Starting",
+        isFailed: false,
+      );
+  factory NotificationState.loading() => NotificationState(
+        list: [],
+        message: "Loading",
+        isFailed: false,
+      );
+  factory NotificationState.loaded() => NotificationState(
+        list: [],
+        message: "Loaded",
+        isFailed: false,
+      );
+  factory NotificationState.error() => NotificationState(
+        list: [],
+        message: "Error",
+        isFailed: true,
+      );
 }

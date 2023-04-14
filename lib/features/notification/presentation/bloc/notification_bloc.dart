@@ -1,37 +1,32 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:my_family_flutter/features/notification/domain/entity/notification_entity.dart';
+import 'package:my_family_flutter/features/notification/domain/usecase/notification_case.dart';
 
 part 'notification_event.dart';
 part 'notification_state.dart';
+part 'notification_bloc.freezed.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-  NotificationBloc() : super(NotificationInitial()) {
-    on<NotificationEvent>((event, emit) async {
-      emit(LoadingNotificationState());
-      try {
-        await Future.delayed(const Duration(seconds: 3), () async {
-          emit(LoadedNotificationState(notifications: listOfNotications));
-        });
-      } catch (e) {
-        emit(ErrorNotificationState(message: e.toString()));
-      }
-    });
+  NotificationBloc({
+    required this.notificationCase,
+  }) : super(NotificationState.initial()) {
+    on<GetData>((event, emit) => getNotificationList(event, emit));
   }
-}
 
-List<NotificationModel> listOfNotications = List.generate(
-  10,
-  (index) => NotificationModel(
-    'Регистрация брака',
-    'На ваш аккаунт поступило уведомление о подаче заявки на регистрацию брака со стороны Асанова Асана, ',
-    '12.09.2013',
-  ),
-);
+  final NotificationCase notificationCase;
 
-class NotificationModel {
-  final String title;
-  final String descrition;
-  final String date;
-
-  NotificationModel(this.title, this.descrition, this.date);
+  Future<void> getNotificationList(
+    GetData event,
+    Emitter<NotificationState> emit,
+  ) async {
+    emit(NotificationState.loading());
+    final result = await notificationCase();
+    result.fold(
+      (l) => emit(NotificationState.error()),
+      (r) => emit(NotificationState.loaded().copyWith(
+        list: r.notification,
+      )),
+    );
+  }
 }
