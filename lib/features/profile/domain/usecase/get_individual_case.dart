@@ -5,12 +5,12 @@ import 'package:my_family_flutter/features/profile/domain/entity/individual_enti
 import 'package:my_family_flutter/features/profile/domain/repository/profile_repository.dart';
 
 class GetIndividualCase extends UseCaseNoParams<IndividualEntity> {
-  final ProfileRepository profileRepository;
+  final ProfileRepository repository;
 
-  GetIndividualCase({required this.profileRepository});
+  GetIndividualCase({required this.repository});
 
   @override
   Future<Either<Failure, IndividualEntity>> call() async {
-    return await profileRepository.getIndividual();
+    return await repository.getIndividual();
   }
 }

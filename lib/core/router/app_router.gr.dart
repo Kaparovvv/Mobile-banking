@@ -159,7 +159,7 @@ class AppRouter extends _i15.RootStackRouter {
         _i15.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: 'navbar',
+          redirectTo: 'navBar',
           fullMatch: true,
         ),
         _i15.RouteConfig(
@@ -168,7 +168,7 @@ class AppRouter extends _i15.RootStackRouter {
         ),
         _i15.RouteConfig(
           NavBarRouterRoute.name,
-          path: 'navbar',
+          path: 'navBar',
           guards: [authGuard],
           children: [
             _i15.RouteConfig(
@@ -266,7 +266,7 @@ class NavBarRouterRoute extends _i15.PageRouteInfo<void> {
   const NavBarRouterRoute({List<_i15.PageRouteInfo>? children})
       : super(
           NavBarRouterRoute.name,
-          path: 'navbar',
+          path: 'navBar',
           initialChildren: children,
         );
 

@@ -6,8 +6,8 @@ import '../../../../core/exceptions/exceptions.dart';
 import '../model/user_auth_model.dart';
 
 abstract class UserDataLocalDataSource {
-  Future<UserDataModel> getUserDataFromCache();
-  Future<void> userDataToCache(UserDataModel userTokenModel);
+  Future<UserAuthModel> getUserAuthFromCache();
+  Future<void> userAuthToCache(UserAuthModel userTokenModel);
 }
 
 class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
@@ -16,14 +16,14 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
   UserDataLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<UserDataModel> getUserDataFromCache() {
+  Future<UserAuthModel> getUserAuthFromCache() {
     final userData = sharedPreferences.getString(
       CachedNames.cacheUserData,
     );
     if (userData != null && userData.isNotEmpty) {
       log(userData.toString());
       return Future.value(
-        UserDataModel.fromJson(json.decode(userData)),
+        UserAuthModel.fromJson(json.decode(userData)),
       );
     } else {
       throw CacheException(message: "Could load the cache!");
@@ -31,7 +31,7 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
   }
 
   @override
-  Future<void> userDataToCache(UserDataModel userDataModel) async {
+  Future<void> userAuthToCache(UserAuthModel userDataModel) async {
     sharedPreferences.setString(
       CachedNames.cacheUserData,
       userDataModel.token,

@@ -6,7 +6,7 @@ import '../../../../core/services/base_repository.dart';
 import '../model/user_auth_model.dart';
 
 abstract class UserDataRemoteDataSource {
-  Future<Either<Failure, UserDataModel>> authUser(
+  Future<Either<Failure, UserAuthModel>> authUser(
     String phoneNumber,
     String password,
   );
@@ -15,7 +15,7 @@ abstract class UserDataRemoteDataSource {
 class UserDataRemoteDataSourceImpl extends BaseRepository
     implements UserDataRemoteDataSource {
   @override
-  Future<Either<Failure, UserDataModel>> authUser(
+  Future<Either<Failure, UserAuthModel>> authUser(
     String phoneNumber,
     String password,
   ) async {
@@ -23,10 +23,10 @@ class UserDataRemoteDataSourceImpl extends BaseRepository
       "phoneNumber": phoneNumber,
       "password": password,
     });
-    return result.then<Either<Failure, UserDataModel>>(
+    return result.then<Either<Failure, UserAuthModel>>(
       (either) => either.fold(
-        (l) => Left<Failure, UserDataModel>(l),
-        (r) => Right<Failure, UserDataModel>(UserDataModel.fromJson(r)),
+        (l) => Left<Failure, UserAuthModel>(l),
+        (r) => Right<Failure, UserAuthModel>(UserAuthModel.fromJson(r)),
       ),
     );
   }

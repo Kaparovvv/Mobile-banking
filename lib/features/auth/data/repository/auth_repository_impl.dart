@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:my_family_flutter/core/exceptions/exceptions.dart';
 import 'package:my_family_flutter/features/auth/data/model/user_auth_model.dart';
@@ -31,20 +30,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   Future<Either<Failure, UserAuthEntity>> _authUser(
-    Future<Either<Failure, UserDataModel>> Function() auth,
+    Future<Either<Failure, UserAuthModel>> Function() auth,
   ) async {
     if (await networkInfo.isConnected) {
       final remoteToken = await auth();
       return remoteToken.fold(
         (l) => Left(l),
         (r) {
-          localDataSource.userDataToCache(r);
+          localDataSource.userAuthToCache(r);
           return Right(r);
         },
       );
     } else {
       try {
-        final localToken = await localDataSource.getUserDataFromCache();
+        final localToken = await localDataSource.getUserAuthFromCache();
         return Right(localToken);
       } on CacheException {
         return Left(CacheFailure());

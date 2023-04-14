@@ -17,7 +17,8 @@ import 'package:my_family_flutter/features/profile/data/data_sources/profile_loc
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:my_family_flutter/features/profile/domain/repository/profile_repository.dart';
-import 'package:my_family_flutter/features/profile/domain/usecase/usecase.dart';
+import 'package:my_family_flutter/features/profile/domain/usecase/get_individual_case.dart';
+import 'package:my_family_flutter/features/profile/domain/usecase/get_user_data_case.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -61,7 +62,7 @@ Future<void> init() async {
   // Profile Data Sources
 
   di.registerFactory<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(),
+    () => ProfileRemoteDataSourceImpl(sharedPreferences: di()),
   );
   di.registerFactory<ProfileLocalDataSource>(
     () => ProfileLocalDataSourceImpl(sharedPreferences: di()),
@@ -111,11 +112,18 @@ Future<void> init() async {
   // Profile Bloc
 
   di.registerFactory<ProfileBloc>(
-    () => ProfileBloc(getIndividualCase: di()),
+    () => ProfileBloc(
+      getIndividualCase: di(),
+      getUserDataCase: di(),
+    ),
   );
 
   di.registerFactory<GetIndividualCase>(
-    () => GetIndividualCase(profileRepository: di()),
+    () => GetIndividualCase(repository: di()),
+  );
+
+  di.registerFactory<GetUserDataCase>(
+    () => GetUserDataCase(repository: di()),
   );
 
   di.registerFactory<ProfileRepository>(

@@ -1,7 +1,7 @@
 import '../../domain/entity/user_auth_entity.dart';
 
-class UserDataModel extends UserAuthEntity {
-  const UserDataModel({
+class UserAuthModel extends UserAuthEntity {
+  const UserAuthModel({
     required id,
     required token,
   }) : super(
@@ -9,7 +9,7 @@ class UserDataModel extends UserAuthEntity {
           token: token,
         );
 
-  factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
+  factory UserAuthModel.fromJson(Map<String, dynamic> json) => UserAuthModel(
         id: json['id'],
         token: json["token"],
       );
