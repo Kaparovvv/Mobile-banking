@@ -27,5 +27,9 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       CachedNames.cardNumber,
       userDataModel.cardNumber,
     );
+    sharedPreferences.setDouble(
+      CachedNames.cardBalance,
+      userDataModel.balance,
+    );
   }
 }

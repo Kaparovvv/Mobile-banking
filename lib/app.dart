@@ -48,6 +48,10 @@ class App extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Montserrat',
           scaffoldBackgroundColor: ThemeHelper.grey200,
+          primaryColor: ThemeHelper.color08B89D,
+          progressIndicatorTheme: const ProgressIndicatorThemeData(
+            color: ThemeHelper.color08B89D,
+          ),
           appBarTheme: const AppBarTheme(backgroundColor: ThemeHelper.white),
           useMaterial3: true,
         ),

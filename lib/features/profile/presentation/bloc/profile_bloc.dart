@@ -32,12 +32,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     GetUserData event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(loading: true, loaded: false));
     final result = await getUserDataCase();
 
     result.fold(
-      (l) => emit(state.copyWith(isFailed: true)),
-      (r) => emit(state.copyWith(userData: r, loading: false)),
+      (l) => emit(state.copyWith(isFailed: true, loading: false)),
+      (r) => emit(state.copyWith(
+        userData: r,
+        loading: false,
+        loaded: true,
+      )),
     );
   }
 
@@ -45,12 +49,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     GetIndividual event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(loading: true, loaded: false));
     final result = await getIndividualCase();
 
     result.fold(
-      (l) => emit(state.copyWith(isFailed: true)),
-      (r) => emit(state.copyWith(profileData: r, loading: false)),
+      (l) => emit(state.copyWith(
+        isFailed: true,
+        loading: false,
+      )),
+      (r) => emit(state.copyWith(
+        profileData: r,
+        loading: false,
+        loaded: true,
+      )),
     );
   }
 
@@ -59,7 +70,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     bool? token;
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(loading: true, loaded: false));
 
     await Future.delayed(const Duration(seconds: 2), () async {
       token = await sharedPreferences.clear();

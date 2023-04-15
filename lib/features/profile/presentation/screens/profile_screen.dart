@@ -27,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           return RefreshIndicator(
+            color: ThemeHelper.color08B89D,
             onRefresh: () async {
               context.read<ProfileBloc>().add(const GetUserData());
               context.read<ProfileBloc>().add(const GetIndividual());

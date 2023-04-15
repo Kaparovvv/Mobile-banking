@@ -545,6 +545,7 @@ mixin _$ProfileState {
   IndividualEntity get profileData => throw _privateConstructorUsedError;
   UserDataEntity get userData => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  bool get loaded => throw _privateConstructorUsedError;
   bool get isFailed => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
 
@@ -563,6 +564,7 @@ abstract class $ProfileStateCopyWith<$Res> {
       {IndividualEntity profileData,
       UserDataEntity userData,
       bool loading,
+      bool loaded,
       bool isFailed,
       String message});
 }
@@ -583,6 +585,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? profileData = null,
     Object? userData = null,
     Object? loading = null,
+    Object? loaded = null,
     Object? isFailed = null,
     Object? message = null,
   }) {
@@ -598,6 +601,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
               as bool,
       isFailed: null == isFailed
           ? _value.isFailed
@@ -623,6 +630,7 @@ abstract class _$$_ProfileStateCopyWith<$Res>
       {IndividualEntity profileData,
       UserDataEntity userData,
       bool loading,
+      bool loaded,
       bool isFailed,
       String message});
 }
@@ -641,6 +649,7 @@ class __$$_ProfileStateCopyWithImpl<$Res>
     Object? profileData = null,
     Object? userData = null,
     Object? loading = null,
+    Object? loaded = null,
     Object? isFailed = null,
     Object? message = null,
   }) {
@@ -656,6 +665,10 @@ class __$$_ProfileStateCopyWithImpl<$Res>
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
               as bool,
       isFailed: null == isFailed
           ? _value.isFailed
@@ -676,6 +689,7 @@ class _$_ProfileState extends _ProfileState {
       {required this.profileData,
       required this.userData,
       required this.loading,
+      required this.loaded,
       required this.isFailed,
       required this.message})
       : super._();
@@ -687,13 +701,15 @@ class _$_ProfileState extends _ProfileState {
   @override
   final bool loading;
   @override
+  final bool loaded;
+  @override
   final bool isFailed;
   @override
   final String message;
 
   @override
   String toString() {
-    return 'ProfileState(profileData: $profileData, userData: $userData, loading: $loading, isFailed: $isFailed, message: $message)';
+    return 'ProfileState(profileData: $profileData, userData: $userData, loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message)';
   }
 
   @override
@@ -706,6 +722,7 @@ class _$_ProfileState extends _ProfileState {
             (identical(other.userData, userData) ||
                 other.userData == userData) &&
             (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.loaded, loaded) || other.loaded == loaded) &&
             (identical(other.isFailed, isFailed) ||
                 other.isFailed == isFailed) &&
             (identical(other.message, message) || other.message == message));
@@ -713,7 +730,7 @@ class _$_ProfileState extends _ProfileState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, profileData, userData, loading, isFailed, message);
+      runtimeType, profileData, userData, loading, loaded, isFailed, message);
 
   @JsonKey(ignore: true)
   @override
@@ -727,6 +744,7 @@ abstract class _ProfileState extends ProfileState {
       {required final IndividualEntity profileData,
       required final UserDataEntity userData,
       required final bool loading,
+      required final bool loaded,
       required final bool isFailed,
       required final String message}) = _$_ProfileState;
   _ProfileState._() : super._();
@@ -737,6 +755,8 @@ abstract class _ProfileState extends ProfileState {
   UserDataEntity get userData;
   @override
   bool get loading;
+  @override
+  bool get loaded;
   @override
   bool get isFailed;
   @override

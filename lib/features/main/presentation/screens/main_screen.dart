@@ -22,79 +22,100 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with AutoRouteAware {
   @override
   void initState() {
+    loadUserData();
+    super.initState();
+  }
+
+  loadUserData() {
     context.read<ProfileBloc>().add(const GetUserData());
     context.read<ProfileBloc>().add(const GetIndividual());
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        automaticallyImplyLeading: false,
-        title: Material(
-          child: InkWell(
-            borderRadius: BorderRadius.circular(30),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CachedNetworkImageWidget(
-                  width: context.width * 0.15,
-                  height: context.height * 0.05,
-                  shape: BoxShape.circle,
-                  imageUrl: 'https://i.yapx.cc/EKqLO.jpg',
-                ),
-                const SizedBox(width: 5),
-                const AppBarTitle(
-                  title: 'Thor',
-                ),
-              ],
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: false,
+            automaticallyImplyLeading: false,
+            title: Material(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                child: state.loaded
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CachedNetworkImageWidget(
+                            width: context.width * 0.15,
+                            height: context.height * 0.05,
+                            shape: BoxShape.circle,
+                            imageUrl: 'https://i.yapx.cc/EKqLO.jpg',
+                          ),
+                          const SizedBox(width: 5),
+                          AppBarTitle(
+                            title: state.profileData.firstName,
+                          ),
+                        ],
+                      )
+                    : const SizedBox(),
+                onTap: () {
+                  context.router.push(const ProfileScreenRoute());
+                },
+              ),
             ),
-            onTap: () {
-              context.router.push(const ProfileScreenRoute());
-            },
+            actions: const [
+              NotificationButtonWidget(),
+            ],
           ),
-        ),
-        actions: const [
-          NotificationButtonWidget(),
-        ],
-      ),
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {},
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-            child: Column(
-              children: [
-                BankCardWidget(
-                  bankAccount: di.get<SharedPreferences>().getString(
-                            CachedNames.cardNumber,
-                          ) ??
-                      "",
-                  balance: 245030.67,
+          body: SafeArea(
+            child: RefreshIndicator(
+              color: ThemeHelper.color08B89D,
+              onRefresh: () async => loadUserData(),
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Container(
+                  height: context.height * 0.8,
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                  child: state.loaded
+                      ? Column(
+                          children: [
+                            BankCardWidget(
+                              bankAccount:
+                                  di.get<SharedPreferences>().getString(
+                                            CachedNames.cardNumber,
+                                          ) ??
+                                      "",
+                              balance: di.get<SharedPreferences>().getDouble(
+                                        CachedNames.cardBalance,
+                                      ) ??
+                                  state.userData.balance,
+                            ),
+                            const SizedBox(height: 40),
+                            CustomElevatedButtonWidget(
+                              textButton: TextHelper.publicServices,
+                              iconUrl: IconHelper.publicServices,
+                              onPressed: () => context.router.push(
+                                const PublicServicesScreenRoute(),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            CustomElevatedButtonWidget(
+                              textButton: TextHelper.myDocuments,
+                              iconUrl: IconHelper.myDocument,
+                              onPressed: () => context.router.push(
+                                const DocumentsScreenRoute(),
+                              ),
+                            ),
+                          ],
+                        )
+                      : const Center(child: CircularProgressIndicator()),
                 ),
-                const SizedBox(height: 40),
-                CustomElevatedButtonWidget(
-                  textButton: TextHelper.publicServices,
-                  iconUrl: IconHelper.publicServices,
-                  onPressed: () => context.router.push(
-                    const PublicServicesScreenRoute(),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                CustomElevatedButtonWidget(
-                  textButton: TextHelper.myDocuments,
-                  iconUrl: IconHelper.myDocument,
-                  onPressed: () => context.router.push(
-                    const DocumentsScreenRoute(),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
