@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 
-class NavBarRouter extends StatelessWidget {
+class NavBarRouter extends StatefulWidget {
   const NavBarRouter({super.key});
 
+  @override
+  State<NavBarRouter> createState() => _NavBarRouterState();
+}
+
+class _NavBarRouterState extends State<NavBarRouter> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(

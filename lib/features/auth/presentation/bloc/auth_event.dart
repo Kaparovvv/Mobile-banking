@@ -1,18 +1,11 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthEvent extends Equatable {
-  const AuthEvent();
+@freezed
+class AuthEvent with _$AuthEvent {
+  const factory AuthEvent.logIn({
+    required String phoneNumber,
+    required String password,
+  }) = LogIn;
 
-  @override
-  List<Object> get props => [];
-}
-
-class AuthLogInEvent extends AuthEvent {
-  final String phoneNumber;
-  final String password;
-
-  const AuthLogInEvent({
-    required this.phoneNumber,
-    required this.password,
-  });
+  const factory AuthEvent.logOut() = LogOut;
 }

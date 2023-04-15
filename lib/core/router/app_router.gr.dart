@@ -157,18 +157,12 @@ class AppRouter extends _i15.RootStackRouter {
   @override
   List<_i15.RouteConfig> get routes => [
         _i15.RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: 'navBar',
-          fullMatch: true,
-        ),
-        _i15.RouteConfig(
           AuthScreenRoute.name,
-          path: 'loginScreen',
+          path: '/loginScreen',
         ),
         _i15.RouteConfig(
           NavBarRouterRoute.name,
-          path: 'navBar',
+          path: '/',
           guards: [authGuard],
           children: [
             _i15.RouteConfig(
@@ -185,43 +179,43 @@ class AppRouter extends _i15.RootStackRouter {
         ),
         _i15.RouteConfig(
           ProfileScreenRoute.name,
-          path: 'profile',
+          path: '/profile',
         ),
         _i15.RouteConfig(
           PublicServicesScreenRoute.name,
-          path: 'publicServices',
+          path: '/publicServices',
         ),
         _i15.RouteConfig(
           ServicesForMyFamilyScreenRoute.name,
-          path: 'servicesForMyFamily',
+          path: '/servicesForMyFamily',
         ),
         _i15.RouteConfig(
           RegistrationChildBirthScreenRoute.name,
-          path: 'regisChild',
+          path: '/regisChild',
         ),
         _i15.RouteConfig(
           MarriageRegistrationScreenRoute.name,
-          path: 'marriageRegis',
+          path: '/marriageRegis',
         ),
         _i15.RouteConfig(
           DocumentsScreenRoute.name,
-          path: 'documents',
+          path: '/documents',
         ),
         _i15.RouteConfig(
           DocumentDetailsScreenRoute.name,
-          path: 'documentDetails',
+          path: '/documentDetails',
         ),
         _i15.RouteConfig(
           NotificationScreenRoute.name,
-          path: 'notification',
+          path: '/notification',
         ),
         _i15.RouteConfig(
           NotificationListScreenRoute.name,
-          path: 'notificationList',
+          path: '/notificationList',
         ),
         _i15.RouteConfig(
           ChildInfoScreenRoute.name,
-          path: 'childInfo',
+          path: '/childInfo',
         ),
       ];
 }
@@ -234,7 +228,7 @@ class AuthScreenRoute extends _i15.PageRouteInfo<AuthScreenRouteArgs> {
     void Function(bool)? onLoginResult,
   }) : super(
           AuthScreenRoute.name,
-          path: 'loginScreen',
+          path: '/loginScreen',
           args: AuthScreenRouteArgs(
             key: key,
             onLoginResult: onLoginResult,
@@ -266,7 +260,7 @@ class NavBarRouterRoute extends _i15.PageRouteInfo<void> {
   const NavBarRouterRoute({List<_i15.PageRouteInfo>? children})
       : super(
           NavBarRouterRoute.name,
-          path: 'navBar',
+          path: '/',
           initialChildren: children,
         );
 
@@ -279,7 +273,7 @@ class ProfileScreenRoute extends _i15.PageRouteInfo<void> {
   const ProfileScreenRoute()
       : super(
           ProfileScreenRoute.name,
-          path: 'profile',
+          path: '/profile',
         );
 
   static const String name = 'ProfileScreenRoute';
@@ -291,7 +285,7 @@ class PublicServicesScreenRoute extends _i15.PageRouteInfo<void> {
   const PublicServicesScreenRoute()
       : super(
           PublicServicesScreenRoute.name,
-          path: 'publicServices',
+          path: '/publicServices',
         );
 
   static const String name = 'PublicServicesScreenRoute';
@@ -303,7 +297,7 @@ class ServicesForMyFamilyScreenRoute extends _i15.PageRouteInfo<void> {
   const ServicesForMyFamilyScreenRoute()
       : super(
           ServicesForMyFamilyScreenRoute.name,
-          path: 'servicesForMyFamily',
+          path: '/servicesForMyFamily',
         );
 
   static const String name = 'ServicesForMyFamilyScreenRoute';
@@ -315,7 +309,7 @@ class RegistrationChildBirthScreenRoute extends _i15.PageRouteInfo<void> {
   const RegistrationChildBirthScreenRoute()
       : super(
           RegistrationChildBirthScreenRoute.name,
-          path: 'regisChild',
+          path: '/regisChild',
         );
 
   static const String name = 'RegistrationChildBirthScreenRoute';
@@ -327,7 +321,7 @@ class MarriageRegistrationScreenRoute extends _i15.PageRouteInfo<void> {
   const MarriageRegistrationScreenRoute()
       : super(
           MarriageRegistrationScreenRoute.name,
-          path: 'marriageRegis',
+          path: '/marriageRegis',
         );
 
   static const String name = 'MarriageRegistrationScreenRoute';
@@ -339,7 +333,7 @@ class DocumentsScreenRoute extends _i15.PageRouteInfo<void> {
   const DocumentsScreenRoute()
       : super(
           DocumentsScreenRoute.name,
-          path: 'documents',
+          path: '/documents',
         );
 
   static const String name = 'DocumentsScreenRoute';
@@ -354,7 +348,7 @@ class DocumentDetailsScreenRoute
     required String title,
   }) : super(
           DocumentDetailsScreenRoute.name,
-          path: 'documentDetails',
+          path: '/documentDetails',
           args: DocumentDetailsScreenRouteArgs(
             key: key,
             title: title,
@@ -389,7 +383,7 @@ class NotificationScreenRoute
     required _i18.NotificationEntity notificationData,
   }) : super(
           NotificationScreenRoute.name,
-          path: 'notification',
+          path: '/notification',
           args: NotificationScreenRouteArgs(
             key: key,
             notificationData: notificationData,
@@ -424,7 +418,7 @@ class NotificationListScreenRoute
     required List<_i18.NotificationEntity> notifications,
   }) : super(
           NotificationListScreenRoute.name,
-          path: 'notificationList',
+          path: '/notificationList',
           args: NotificationListScreenRouteArgs(
             key: key,
             notifications: notifications,
@@ -456,7 +450,7 @@ class ChildInfoScreenRoute extends _i15.PageRouteInfo<void> {
   const ChildInfoScreenRoute()
       : super(
           ChildInfoScreenRoute.name,
-          path: 'childInfo',
+          path: '/childInfo',
         );
 
   static const String name = 'ChildInfoScreenRoute';

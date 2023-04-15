@@ -19,50 +19,38 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getUserData,
-    required TResult Function() getIndividual,
-    required TResult Function() logOut,
+    required TResult Function() getProfileData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getUserData,
-    TResult? Function()? getIndividual,
-    TResult? Function()? logOut,
+    TResult? Function()? getProfileData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getUserData,
-    TResult Function()? getIndividual,
-    TResult Function()? logOut,
+    TResult Function()? getProfileData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(GetUserData value) getUserData,
-    required TResult Function(GetIndividual value) getIndividual,
-    required TResult Function(LogoutEvent value) logOut,
+    required TResult Function(GetProfileData value) getProfileData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(GetUserData value)? getUserData,
-    TResult? Function(GetIndividual value)? getIndividual,
-    TResult? Function(LogoutEvent value)? logOut,
+    TResult? Function(GetProfileData value)? getProfileData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(GetUserData value)? getUserData,
-    TResult Function(GetIndividual value)? getIndividual,
-    TResult Function(LogoutEvent value)? logOut,
+    TResult Function(GetProfileData value)? getProfileData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,9 +111,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getUserData,
-    required TResult Function() getIndividual,
-    required TResult Function() logOut,
+    required TResult Function() getProfileData,
   }) {
     return started();
   }
@@ -134,9 +120,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getUserData,
-    TResult? Function()? getIndividual,
-    TResult? Function()? logOut,
+    TResult? Function()? getProfileData,
   }) {
     return started?.call();
   }
@@ -145,9 +129,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getUserData,
-    TResult Function()? getIndividual,
-    TResult Function()? logOut,
+    TResult Function()? getProfileData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -160,9 +142,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(GetUserData value) getUserData,
-    required TResult Function(GetIndividual value) getIndividual,
-    required TResult Function(LogoutEvent value) logOut,
+    required TResult Function(GetProfileData value) getProfileData,
   }) {
     return started(this);
   }
@@ -171,9 +151,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(GetUserData value)? getUserData,
-    TResult? Function(GetIndividual value)? getIndividual,
-    TResult? Function(LogoutEvent value)? logOut,
+    TResult? Function(GetProfileData value)? getProfileData,
   }) {
     return started?.call(this);
   }
@@ -182,9 +160,7 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(GetUserData value)? getUserData,
-    TResult Function(GetIndividual value)? getIndividual,
-    TResult Function(LogoutEvent value)? logOut,
+    TResult Function(GetProfileData value)? getProfileData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -199,35 +175,35 @@ abstract class Started implements ProfileEvent {
 }
 
 /// @nodoc
-abstract class _$$GetUserDataCopyWith<$Res> {
-  factory _$$GetUserDataCopyWith(
-          _$GetUserData value, $Res Function(_$GetUserData) then) =
-      __$$GetUserDataCopyWithImpl<$Res>;
+abstract class _$$GetProfileDataCopyWith<$Res> {
+  factory _$$GetProfileDataCopyWith(
+          _$GetProfileData value, $Res Function(_$GetProfileData) then) =
+      __$$GetProfileDataCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetUserDataCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$GetUserData>
-    implements _$$GetUserDataCopyWith<$Res> {
-  __$$GetUserDataCopyWithImpl(
-      _$GetUserData _value, $Res Function(_$GetUserData) _then)
+class __$$GetProfileDataCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$GetProfileData>
+    implements _$$GetProfileDataCopyWith<$Res> {
+  __$$GetProfileDataCopyWithImpl(
+      _$GetProfileData _value, $Res Function(_$GetProfileData) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GetUserData implements GetUserData {
-  const _$GetUserData();
+class _$GetProfileData implements GetProfileData {
+  const _$GetProfileData();
 
   @override
   String toString() {
-    return 'ProfileEvent.getUserData()';
+    return 'ProfileEvent.getProfileData()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetUserData);
+        (other.runtimeType == runtimeType && other is _$GetProfileData);
   }
 
   @override
@@ -237,35 +213,29 @@ class _$GetUserData implements GetUserData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getUserData,
-    required TResult Function() getIndividual,
-    required TResult Function() logOut,
+    required TResult Function() getProfileData,
   }) {
-    return getUserData();
+    return getProfileData();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getUserData,
-    TResult? Function()? getIndividual,
-    TResult? Function()? logOut,
+    TResult? Function()? getProfileData,
   }) {
-    return getUserData?.call();
+    return getProfileData?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getUserData,
-    TResult Function()? getIndividual,
-    TResult Function()? logOut,
+    TResult Function()? getProfileData,
     required TResult orElse(),
   }) {
-    if (getUserData != null) {
-      return getUserData();
+    if (getProfileData != null) {
+      return getProfileData();
     }
     return orElse();
   }
@@ -274,270 +244,36 @@ class _$GetUserData implements GetUserData {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(GetUserData value) getUserData,
-    required TResult Function(GetIndividual value) getIndividual,
-    required TResult Function(LogoutEvent value) logOut,
+    required TResult Function(GetProfileData value) getProfileData,
   }) {
-    return getUserData(this);
+    return getProfileData(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(GetUserData value)? getUserData,
-    TResult? Function(GetIndividual value)? getIndividual,
-    TResult? Function(LogoutEvent value)? logOut,
+    TResult? Function(GetProfileData value)? getProfileData,
   }) {
-    return getUserData?.call(this);
+    return getProfileData?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(GetUserData value)? getUserData,
-    TResult Function(GetIndividual value)? getIndividual,
-    TResult Function(LogoutEvent value)? logOut,
+    TResult Function(GetProfileData value)? getProfileData,
     required TResult orElse(),
   }) {
-    if (getUserData != null) {
-      return getUserData(this);
+    if (getProfileData != null) {
+      return getProfileData(this);
     }
     return orElse();
   }
 }
 
-abstract class GetUserData implements ProfileEvent {
-  const factory GetUserData() = _$GetUserData;
-}
-
-/// @nodoc
-abstract class _$$GetIndividualCopyWith<$Res> {
-  factory _$$GetIndividualCopyWith(
-          _$GetIndividual value, $Res Function(_$GetIndividual) then) =
-      __$$GetIndividualCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GetIndividualCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$GetIndividual>
-    implements _$$GetIndividualCopyWith<$Res> {
-  __$$GetIndividualCopyWithImpl(
-      _$GetIndividual _value, $Res Function(_$GetIndividual) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$GetIndividual implements GetIndividual {
-  const _$GetIndividual();
-
-  @override
-  String toString() {
-    return 'ProfileEvent.getIndividual()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetIndividual);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getUserData,
-    required TResult Function() getIndividual,
-    required TResult Function() logOut,
-  }) {
-    return getIndividual();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getUserData,
-    TResult? Function()? getIndividual,
-    TResult? Function()? logOut,
-  }) {
-    return getIndividual?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getUserData,
-    TResult Function()? getIndividual,
-    TResult Function()? logOut,
-    required TResult orElse(),
-  }) {
-    if (getIndividual != null) {
-      return getIndividual();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
-    required TResult Function(GetUserData value) getUserData,
-    required TResult Function(GetIndividual value) getIndividual,
-    required TResult Function(LogoutEvent value) logOut,
-  }) {
-    return getIndividual(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
-    TResult? Function(GetUserData value)? getUserData,
-    TResult? Function(GetIndividual value)? getIndividual,
-    TResult? Function(LogoutEvent value)? logOut,
-  }) {
-    return getIndividual?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
-    TResult Function(GetUserData value)? getUserData,
-    TResult Function(GetIndividual value)? getIndividual,
-    TResult Function(LogoutEvent value)? logOut,
-    required TResult orElse(),
-  }) {
-    if (getIndividual != null) {
-      return getIndividual(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetIndividual implements ProfileEvent {
-  const factory GetIndividual() = _$GetIndividual;
-}
-
-/// @nodoc
-abstract class _$$LogoutEventCopyWith<$Res> {
-  factory _$$LogoutEventCopyWith(
-          _$LogoutEvent value, $Res Function(_$LogoutEvent) then) =
-      __$$LogoutEventCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LogoutEventCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$LogoutEvent>
-    implements _$$LogoutEventCopyWith<$Res> {
-  __$$LogoutEventCopyWithImpl(
-      _$LogoutEvent _value, $Res Function(_$LogoutEvent) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LogoutEvent implements LogoutEvent {
-  const _$LogoutEvent();
-
-  @override
-  String toString() {
-    return 'ProfileEvent.logOut()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogoutEvent);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getUserData,
-    required TResult Function() getIndividual,
-    required TResult Function() logOut,
-  }) {
-    return logOut();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getUserData,
-    TResult? Function()? getIndividual,
-    TResult? Function()? logOut,
-  }) {
-    return logOut?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getUserData,
-    TResult Function()? getIndividual,
-    TResult Function()? logOut,
-    required TResult orElse(),
-  }) {
-    if (logOut != null) {
-      return logOut();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
-    required TResult Function(GetUserData value) getUserData,
-    required TResult Function(GetIndividual value) getIndividual,
-    required TResult Function(LogoutEvent value) logOut,
-  }) {
-    return logOut(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
-    TResult? Function(GetUserData value)? getUserData,
-    TResult? Function(GetIndividual value)? getIndividual,
-    TResult? Function(LogoutEvent value)? logOut,
-  }) {
-    return logOut?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
-    TResult Function(GetUserData value)? getUserData,
-    TResult Function(GetIndividual value)? getIndividual,
-    TResult Function(LogoutEvent value)? logOut,
-    required TResult orElse(),
-  }) {
-    if (logOut != null) {
-      return logOut(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LogoutEvent implements ProfileEvent {
-  const factory LogoutEvent() = _$LogoutEvent;
+abstract class GetProfileData implements ProfileEvent {
+  const factory GetProfileData() = _$GetProfileData;
 }
 
 /// @nodoc

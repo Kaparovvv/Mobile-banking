@@ -40,8 +40,9 @@ class _UserDataBoxWidgetState extends State<UserDataBoxWidget> {
                   return Text(
                     "${state.profileData.firstName} ${state.profileData.lastName}",
                     overflow: TextOverflow.fade,
-                    style: TextStyleHelper.f16w500
-                        .copyWith(fontWeight: FontWeight.w800),
+                    style: TextStyleHelper.f16w500.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
                   );
                 },
               ),

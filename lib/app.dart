@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,8 @@ import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'core/constants/cached_names.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
 import 'features/documents/presentation/bloc/documents_bloc.dart';
@@ -37,10 +40,7 @@ class App extends StatelessWidget {
           create: (_) => di.get<RegisterCoupleBloc>(),
         ),
         BlocProvider<NotificationBloc>(
-          create: (_) => di.get<NotificationBloc>()
-            ..add(
-              const GetData(),
-            ),
+          create: (_) => di.get<NotificationBloc>(),
         )
       ],
       child: MaterialApp.router(
@@ -55,7 +55,9 @@ class App extends StatelessWidget {
           appBarTheme: const AppBarTheme(backgroundColor: ThemeHelper.white),
           useMaterial3: true,
         ),
-        routeInformationParser: _appRouter.defaultRouteParser(),
+        routeInformationParser: _appRouter.defaultRouteParser(
+          includePrefixMatches: true,
+        ),
         routerDelegate: _appRouter.delegate(),
         debugShowCheckedModeBanner: false,
       ),
