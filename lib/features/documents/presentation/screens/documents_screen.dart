@@ -35,7 +35,9 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               textButton: TextHelper.passport,
               iconUrl: IconHelper.identityCard,
               onPressed: () {
-                context.read<DocumentsBloc>().add(GetPasportEvent());
+                context.read<DocumentsBloc>().add(
+                      const GetPasportEvent(),
+                    );
                 context.router.push(
                   DocumentDetailsScreenRoute(
                     title: TextHelper.passport,
@@ -48,7 +50,9 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               textButton: TextHelper.driverCard,
               iconUrl: IconHelper.driverCard,
               onPressed: () {
-                context.read<DocumentsBloc>().add(GetDriverLicenseEvent());
+                context
+                    .read<DocumentsBloc>()
+                    .add(const GetDriverLicenseEvent());
                 context.router.push(
                   DocumentDetailsScreenRoute(
                     title: TextHelper.driverCard,

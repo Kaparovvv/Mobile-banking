@@ -405,7 +405,6 @@ abstract class GetDriverLicenseEvent implements DocumentsEvent {
 /// @nodoc
 mixin _$DocumentsState {
   DocumentEntity get passport => throw _privateConstructorUsedError;
-  bool get isPassport => throw _privateConstructorUsedError;
   bool get isDriverLicense => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   bool get loaded => throw _privateConstructorUsedError;
@@ -425,7 +424,6 @@ abstract class $DocumentsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DocumentEntity passport,
-      bool isPassport,
       bool isDriverLicense,
       bool loading,
       bool loaded,
@@ -447,7 +445,6 @@ class _$DocumentsStateCopyWithImpl<$Res, $Val extends DocumentsState>
   @override
   $Res call({
     Object? passport = null,
-    Object? isPassport = null,
     Object? isDriverLicense = null,
     Object? loading = null,
     Object? loaded = null,
@@ -459,10 +456,6 @@ class _$DocumentsStateCopyWithImpl<$Res, $Val extends DocumentsState>
           ? _value.passport
           : passport // ignore: cast_nullable_to_non_nullable
               as DocumentEntity,
-      isPassport: null == isPassport
-          ? _value.isPassport
-          : isPassport // ignore: cast_nullable_to_non_nullable
-              as bool,
       isDriverLicense: null == isDriverLicense
           ? _value.isDriverLicense
           : isDriverLicense // ignore: cast_nullable_to_non_nullable
@@ -497,7 +490,6 @@ abstract class _$$_DocumentsStateCopyWith<$Res>
   @useResult
   $Res call(
       {DocumentEntity passport,
-      bool isPassport,
       bool isDriverLicense,
       bool loading,
       bool loaded,
@@ -517,7 +509,6 @@ class __$$_DocumentsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? passport = null,
-    Object? isPassport = null,
     Object? isDriverLicense = null,
     Object? loading = null,
     Object? loaded = null,
@@ -529,10 +520,6 @@ class __$$_DocumentsStateCopyWithImpl<$Res>
           ? _value.passport
           : passport // ignore: cast_nullable_to_non_nullable
               as DocumentEntity,
-      isPassport: null == isPassport
-          ? _value.isPassport
-          : isPassport // ignore: cast_nullable_to_non_nullable
-              as bool,
       isDriverLicense: null == isDriverLicense
           ? _value.isDriverLicense
           : isDriverLicense // ignore: cast_nullable_to_non_nullable
@@ -562,7 +549,6 @@ class __$$_DocumentsStateCopyWithImpl<$Res>
 class _$_DocumentsState extends _DocumentsState {
   _$_DocumentsState(
       {required this.passport,
-      required this.isPassport,
       required this.isDriverLicense,
       required this.loading,
       required this.loaded,
@@ -572,8 +558,6 @@ class _$_DocumentsState extends _DocumentsState {
 
   @override
   final DocumentEntity passport;
-  @override
-  final bool isPassport;
   @override
   final bool isDriverLicense;
   @override
@@ -587,7 +571,7 @@ class _$_DocumentsState extends _DocumentsState {
 
   @override
   String toString() {
-    return 'DocumentsState(passport: $passport, isPassport: $isPassport, isDriverLicense: $isDriverLicense, loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message)';
+    return 'DocumentsState(passport: $passport, isDriverLicense: $isDriverLicense, loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message)';
   }
 
   @override
@@ -597,8 +581,6 @@ class _$_DocumentsState extends _DocumentsState {
             other is _$_DocumentsState &&
             (identical(other.passport, passport) ||
                 other.passport == passport) &&
-            (identical(other.isPassport, isPassport) ||
-                other.isPassport == isPassport) &&
             (identical(other.isDriverLicense, isDriverLicense) ||
                 other.isDriverLicense == isDriverLicense) &&
             (identical(other.loading, loading) || other.loading == loading) &&
@@ -609,8 +591,8 @@ class _$_DocumentsState extends _DocumentsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, passport, isPassport,
-      isDriverLicense, loading, loaded, isFailed, message);
+  int get hashCode => Object.hash(runtimeType, passport, isDriverLicense,
+      loading, loaded, isFailed, message);
 
   @JsonKey(ignore: true)
   @override
@@ -622,7 +604,6 @@ class _$_DocumentsState extends _DocumentsState {
 abstract class _DocumentsState extends DocumentsState {
   factory _DocumentsState(
       {required final DocumentEntity passport,
-      required final bool isPassport,
       required final bool isDriverLicense,
       required final bool loading,
       required final bool loaded,
@@ -632,8 +613,6 @@ abstract class _DocumentsState extends DocumentsState {
 
   @override
   DocumentEntity get passport;
-  @override
-  bool get isPassport;
   @override
   bool get isDriverLicense;
   @override

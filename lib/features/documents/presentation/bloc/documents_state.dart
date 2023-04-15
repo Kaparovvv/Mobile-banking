@@ -4,7 +4,6 @@ part of 'documents_bloc.dart';
 class DocumentsState with _$DocumentsState {
   factory DocumentsState({
     required DocumentEntity passport,
-    required bool isPassport,
     required bool isDriverLicense,
     required bool loading,
     required bool loaded,
@@ -32,7 +31,6 @@ class DocumentsState with _$DocumentsState {
             maritalStatus: "",
           ),
         ),
-        isPassport: false,
         isDriverLicense: false,
         loading: false,
         loaded: false,

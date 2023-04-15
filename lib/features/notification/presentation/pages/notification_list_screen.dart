@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
-import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/custom_snackbar.dart';
 import 'package:my_family_flutter/features/notification/domain/entity/notification_entity.dart';
 
@@ -39,17 +38,20 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                 }
               },
               builder: (context, state) {
-                return RefreshIndicator(
-                  onRefresh: () async {},
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: state.list.isNotEmpty
-                        ? _listOfNotitfication(
-                            listOfNotification: state.list,
+                return state.loaded
+                    ? RefreshIndicator(
+                        onRefresh: () async => context
+                            .read<NotificationBloc>()
+                            .add(const GetData()),
+                        child: _listOfNotitfication(
+                          listOfNotification: state.list,
+                        ),
+                      )
+                    : state.loading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
                           )
-                        : nothingHereYet(context),
-                  ),
-                );
+                        : nothingHereYet(context);
               },
             ),
           ),
@@ -64,7 +66,6 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
     return ListView.separated(
       itemCount: listOfNotification.length,
       padding: const EdgeInsets.all(20),
-      shrinkWrap: true,
       itemBuilder: (context, index) {
         var notification = listOfNotification[index];
         return listOfNotification.isNotEmpty

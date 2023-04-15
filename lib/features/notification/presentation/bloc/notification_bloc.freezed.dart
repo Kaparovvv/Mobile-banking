@@ -278,6 +278,8 @@ abstract class GetData implements NotificationEvent {
 mixin _$NotificationState {
   List<NotificationEntity> get list => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+  bool get loaded => throw _privateConstructorUsedError;
   bool get isFailed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -291,7 +293,12 @@ abstract class $NotificationStateCopyWith<$Res> {
           NotificationState value, $Res Function(NotificationState) then) =
       _$NotificationStateCopyWithImpl<$Res, NotificationState>;
   @useResult
-  $Res call({List<NotificationEntity> list, String message, bool isFailed});
+  $Res call(
+      {List<NotificationEntity> list,
+      String message,
+      bool loading,
+      bool loaded,
+      bool isFailed});
 }
 
 /// @nodoc
@@ -309,6 +316,8 @@ class _$NotificationStateCopyWithImpl<$Res, $Val extends NotificationState>
   $Res call({
     Object? list = null,
     Object? message = null,
+    Object? loading = null,
+    Object? loaded = null,
     Object? isFailed = null,
   }) {
     return _then(_value.copyWith(
@@ -320,6 +329,14 @@ class _$NotificationStateCopyWithImpl<$Res, $Val extends NotificationState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFailed: null == isFailed
           ? _value.isFailed
           : isFailed // ignore: cast_nullable_to_non_nullable
@@ -336,7 +353,12 @@ abstract class _$$_NotificationStateCopyWith<$Res>
       __$$_NotificationStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<NotificationEntity> list, String message, bool isFailed});
+  $Res call(
+      {List<NotificationEntity> list,
+      String message,
+      bool loading,
+      bool loaded,
+      bool isFailed});
 }
 
 /// @nodoc
@@ -352,6 +374,8 @@ class __$$_NotificationStateCopyWithImpl<$Res>
   $Res call({
     Object? list = null,
     Object? message = null,
+    Object? loading = null,
+    Object? loaded = null,
     Object? isFailed = null,
   }) {
     return _then(_$_NotificationState(
@@ -363,6 +387,14 @@ class __$$_NotificationStateCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       isFailed: null == isFailed
           ? _value.isFailed
           : isFailed // ignore: cast_nullable_to_non_nullable
@@ -377,6 +409,8 @@ class _$_NotificationState extends _NotificationState {
   _$_NotificationState(
       {required final List<NotificationEntity> list,
       required this.message,
+      required this.loading,
+      required this.loaded,
       required this.isFailed})
       : _list = list,
         super._();
@@ -392,11 +426,15 @@ class _$_NotificationState extends _NotificationState {
   @override
   final String message;
   @override
+  final bool loading;
+  @override
+  final bool loaded;
+  @override
   final bool isFailed;
 
   @override
   String toString() {
-    return 'NotificationState(list: $list, message: $message, isFailed: $isFailed)';
+    return 'NotificationState(list: $list, message: $message, loading: $loading, loaded: $loaded, isFailed: $isFailed)';
   }
 
   @override
@@ -406,13 +444,20 @@ class _$_NotificationState extends _NotificationState {
             other is _$_NotificationState &&
             const DeepCollectionEquality().equals(other._list, _list) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.loaded, loaded) || other.loaded == loaded) &&
             (identical(other.isFailed, isFailed) ||
                 other.isFailed == isFailed));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_list), message, isFailed);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_list),
+      message,
+      loading,
+      loaded,
+      isFailed);
 
   @JsonKey(ignore: true)
   @override
@@ -426,6 +471,8 @@ abstract class _NotificationState extends NotificationState {
   factory _NotificationState(
       {required final List<NotificationEntity> list,
       required final String message,
+      required final bool loading,
+      required final bool loaded,
       required final bool isFailed}) = _$_NotificationState;
   _NotificationState._() : super._();
 
@@ -433,6 +480,10 @@ abstract class _NotificationState extends NotificationState {
   List<NotificationEntity> get list;
   @override
   String get message;
+  @override
+  bool get loading;
+  @override
+  bool get loaded;
   @override
   bool get isFailed;
   @override

@@ -25,8 +25,9 @@ class NotificationScreen extends StatelessWidget {
             children: [
               Text(
                 DateFormat("dd.MM.yyyy").format(notificationData.date),
-                style:
-                    TextStyleHelper.f16w500.copyWith(color: ThemeHelper.grey),
+                style: TextStyleHelper.f16w500.copyWith(
+                  color: ThemeHelper.grey,
+                ),
               ),
               const SizedBox(height: 10),
               Text(
