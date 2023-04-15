@@ -43,7 +43,7 @@ class BankCardWidget extends StatelessWidget {
             ),
           ),
           Text(
-            TextFormated().bankAccount(bankAccount),
+            TextFormated.bankAccount(bankAccount),
             style: TextStyleHelper.f18w500.copyWith(
               color: ThemeHelper.white,
               fontWeight: FontWeight.w900,
