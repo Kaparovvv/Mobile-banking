@@ -58,6 +58,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   customTextRow(
                                     context: context,
+                                    iconUrl: IconHelper.familyStatus,
+                                    value: state.profileData.maritalStatus,
+                                  ),
+                                  const Divider(),
+                                  customTextRow(
+                                    context: context,
                                     iconUrl: IconHelper.call,
                                     value: state.profileData.phoneNumber,
                                   ),
@@ -66,12 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context: context,
                                     iconUrl: IconHelper.identityCard,
                                     value: state.profileData.iin,
-                                  ),
-                                  const Divider(),
-                                  customTextRow(
-                                    context: context,
-                                    iconUrl: IconHelper.familyStatus,
-                                    value: state.profileData.maritalStatus,
                                   ),
                                   const Divider(),
                                   customTextRow(
