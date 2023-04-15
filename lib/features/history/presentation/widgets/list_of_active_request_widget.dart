@@ -26,6 +26,7 @@ class _ListOfActiveRequestWidgetState extends State<ListOfActiveRequestWidget> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: ThemeHelper.color08B89D,
       onRefresh: () async => _requestBloc.add(GetActiveRequestEvent()),
       child: BlocConsumer<RequestBloc, RequestState>(
         bloc: _requestBloc,

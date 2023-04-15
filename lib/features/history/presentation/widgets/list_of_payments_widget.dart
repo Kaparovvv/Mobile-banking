@@ -28,6 +28,7 @@ class _ListOfPaymentsWidgetState extends State<ListOfPaymentsWidget> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: ThemeHelper.color08B89D,
       onRefresh: () async => _paymentsBloc.add(GetPaymentsEvent()),
       child: BlocConsumer<PaymentsBloc, PaymentsState>(
         bloc: _paymentsBloc,

@@ -70,6 +70,7 @@ class _MainScreenState extends State<MainScreen> with AutoRouteAware {
           ),
           body: SafeArea(
             child: RefreshIndicator(
+              color: ThemeHelper.color08B89D,
               onRefresh: () async => loadUserData(),
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -85,7 +86,10 @@ class _MainScreenState extends State<MainScreen> with AutoRouteAware {
                                             CachedNames.cardNumber,
                                           ) ??
                                       "",
-                              balance: 245030.67,
+                              balance: di.get<SharedPreferences>().getDouble(
+                                        CachedNames.cardBalance,
+                                      ) ??
+                                  state.userData.balance,
                             ),
                             const SizedBox(height: 40),
                             CustomElevatedButtonWidget(

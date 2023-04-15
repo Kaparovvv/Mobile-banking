@@ -40,6 +40,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
               builder: (context, state) {
                 return state.loaded
                     ? RefreshIndicator(
+                        color: ThemeHelper.color08B89D,
                         onRefresh: () async => context
                             .read<NotificationBloc>()
                             .add(const GetData()),

@@ -27,6 +27,7 @@ class _ListOfArchiveRequestWidgetState
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: ThemeHelper.color08B89D,
       onRefresh: () async => _requestBloc.add(GetArchiveRequestEvent()),
       child: BlocConsumer<RequestBloc, RequestState>(
         bloc: _requestBloc,

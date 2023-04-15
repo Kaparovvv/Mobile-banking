@@ -19,8 +19,8 @@ class CustomOutlinedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
+        side: const BorderSide(color: ThemeHelper.black, width: 0.5),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: theme ?? ThemeHelper.color414141),
           borderRadius: BorderRadius.circular(15),
         ),
         padding: EdgeInsets.only(
@@ -38,7 +38,6 @@ class CustomOutlinedButtonWidget extends StatelessWidget {
           icon != null
               ? Icon(
                   icon,
-                  color: ThemeHelper.black,
                   size: 20,
                 )
               : const SizedBox(),

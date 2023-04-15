@@ -3,4 +3,5 @@ class CachedNames {
   static const String cacheUserID = 'CACHER_USER_ID';
   static const String cacheUserIin = 'CACHER_USER_IIN';
   static const String cardNumber = 'CACHER_USER_CARD_NUMBER';
+  static const String cardBalance = 'CACHER_USER_BALACE';
 }
