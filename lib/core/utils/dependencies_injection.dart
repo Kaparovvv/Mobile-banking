@@ -25,7 +25,7 @@ import 'package:my_family_flutter/features/profile/domain/usecase/get_individual
 import 'package:my_family_flutter/features/profile/domain/usecase/get_user_data_case.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../features/auth/data/data_sources/user_token_local_data_source.dart';
 import '../../features/auth/data/data_sources/user_token_remote_data_source.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';
@@ -37,16 +37,20 @@ import '../services/network_info.dart';
 final GetIt di = GetIt.instance;
 
 Future<void> init() async {
-  di.registerLazySingleton(() => Connectivity());
+  di.registerLazySingleton<Connectivity>(() => Connectivity());
   di.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(connectivity: di<Connectivity>()),
   );
 
-  di.registerLazySingleton(() => Dio());
-  di.registerLazySingleton(() => APIClient());
+  di.registerLazySingleton<Dio>(() => Dio());
+  di.registerLazySingleton<APIClient>(() => APIClient());
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  di.registerLazySingleton(() => sharedPreferences);
+  di.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  di.registerLazySingleton(() => const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      ));
 
   //User Token Data Sources
 

@@ -70,13 +70,7 @@ class _MainScreenState extends State<MainScreen> {
           body: SafeArea(
             child: RefreshIndicator(
               color: ThemeHelper.color08B89D,
-              onRefresh: () async {
-                log(di.get<SharedPreferences>().getString(
-                          CachedNames.cacheUserID,
-                        ) ??
-                    "NO");
-                loadUserData();
-              },
+              onRefresh: () async => loadUserData(),
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Container(
