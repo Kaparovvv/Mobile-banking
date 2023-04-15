@@ -107,7 +107,7 @@ class _ListOfPaymentsWidgetState extends State<ListOfPaymentsWidget> {
               SizedBox(
                 width: context.width * 0.48,
                 child: Text(
-                  TextFormated().recepientAccount(payment.recepientAccount),
+                  TextFormated.recepientAccount(payment.recepientAccount),
                   style: TextStyleHelper.f14w600,
                   overflow: TextOverflow.ellipsis,
                 ),

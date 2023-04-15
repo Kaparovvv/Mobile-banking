@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
+import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/bank_card_widget.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/widgets/cached_network_image_widget.dart';
 import '../widgets/notification_button_widget.dart';
 
@@ -18,10 +21,10 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with AutoRouteAware {
   @override
-  void didChangeDependencies() {
-    context.read<ProfileBloc>().add(GetUserData());
-    context.read<ProfileBloc>().add(GetIndividual());
-    super.didChangeDependencies();
+  void initState() {
+    context.read<ProfileBloc>().add(const GetUserData());
+    context.read<ProfileBloc>().add(const GetIndividual());
+    super.initState();
   }
 
   @override
@@ -49,8 +52,6 @@ class _MainScreenState extends State<MainScreen> with AutoRouteAware {
               ],
             ),
             onTap: () {
-              context.read<ProfileBloc>().add(GetUserData());
-              context.read<ProfileBloc>().add(GetIndividual());
               context.router.push(const ProfileScreenRoute());
             },
           ),
@@ -66,8 +67,11 @@ class _MainScreenState extends State<MainScreen> with AutoRouteAware {
             padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
             child: Column(
               children: [
-                const BankCardWidget(
-                  bankAccount: '2647485679374989',
+                BankCardWidget(
+                  bankAccount: di.get<SharedPreferences>().getString(
+                            CachedNames.cardNumber,
+                          ) ??
+                      "",
                   balance: 245030.67,
                 ),
                 const SizedBox(height: 40),
