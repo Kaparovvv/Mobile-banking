@@ -29,8 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return RefreshIndicator(
             color: ThemeHelper.color08B89D,
             onRefresh: () async {
-              context.read<ProfileBloc>().add(const GetUserData());
-              context.read<ProfileBloc>().add(const GetIndividual());
+              context.read<ProfileBloc>().add(const GetProfileData());
             },
             child: state.loading
                 ? const Center(child: CircularProgressIndicator())
@@ -39,8 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: SizedBox(
                       height: context.height,
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 30),
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 30,
+                        ),
                         child: Column(
                           children: [
                             const UserDataBoxWidget(),
@@ -58,6 +60,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   customTextRow(
                                     context: context,
+                                    iconUrl: IconHelper.familyStatus,
+                                    value: state.profileData.maritalStatus,
+                                  ),
+                                  const Divider(),
+                                  customTextRow(
+                                    context: context,
                                     iconUrl: IconHelper.call,
                                     value: state.profileData.phoneNumber,
                                   ),
@@ -66,12 +74,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context: context,
                                     iconUrl: IconHelper.identityCard,
                                     value: state.profileData.iin,
-                                  ),
-                                  const Divider(),
-                                  customTextRow(
-                                    context: context,
-                                    iconUrl: IconHelper.familyStatus,
-                                    value: state.profileData.maritalStatus,
                                   ),
                                   const Divider(),
                                   customTextRow(
@@ -110,10 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       ),
     );
-  }
-
-  String _getFullName(IndividualEntity date) {
-    return "${date.firstName} ${date.lastName} ${date.middleName}";
   }
 
   Row customTextRow({

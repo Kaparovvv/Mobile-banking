@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:my_family_flutter/core/services/api_client.dart';
-import 'package:my_family_flutter/features/documents/data/data_sources/document_local_data_source.dart';
 import 'package:my_family_flutter/features/documents/data/data_sources/document_remote_data_source.dart';
 import 'package:my_family_flutter/features/documents/data/repository/document_repository_impl.dart';
 import 'package:my_family_flutter/features/documents/domain/repository/document_repository.dart';
@@ -88,7 +87,7 @@ Future<void> init() async {
   /// Blocs
 
   di.registerFactory<AuthBloc>(
-    () => AuthBloc(authUser: di()),
+    () => AuthBloc(authUser: di(), sharedPreferences: di()),
   );
 
   di.registerFactory<AuthUser>(

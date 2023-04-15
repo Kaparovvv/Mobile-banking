@@ -1,23 +1,20 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthState extends Equatable {
-  const AuthState();
+@freezed
+class AuthState with _$AuthState {
+  factory AuthState({
+    required bool loading,
+    required bool isFailed,
+    required bool authenticated,
+    required String message,
+  }) = _AuthState;
 
-  @override
-  List<Object> get props => [];
-}
+  const AuthState._();
 
-class AuthInitial extends AuthState {}
-
-class AuthLoadingState extends AuthState {}
-
-class AuthLoadedState extends AuthState {}
-
-class AuthErrorState extends AuthState {
-  final String message;
-
-  const AuthErrorState({required this.message});
-
-  @override
-  List<Object> get props => [];
+  factory AuthState.initial() => AuthState(
+        loading: false,
+        isFailed: false,
+        authenticated: false,
+        message: "",
+      );
 }

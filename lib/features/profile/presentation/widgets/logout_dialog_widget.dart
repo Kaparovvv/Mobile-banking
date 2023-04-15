@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/loading_overlay_widget.dart';
-
+import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import '../../../../core/exports/exports.dart';
-import '../../../../core/router/app_router.gr.dart';
 import '../../../../core/widgets/custom_outlined_button_widget.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
-import '../bloc/profile_bloc.dart';
 
 class LogoutDialogWidget extends StatefulWidget {
   final void Function(bool isLoggedIn)? onLoginResult;
@@ -19,18 +18,16 @@ class LogoutDialogWidget extends StatefulWidget {
 
 class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BlocConsumer<ProfileBloc, ProfileState>(
+        BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
-            if (state.loading) {
-              context.router.replaceAll([AuthScreenRoute()]);
+            if (!state.authenticated) {
+              context.router.pushAndPopUntil(
+                AuthScreenRoute(),
+                predicate: ((route) => route.isFirst),
+              );
             }
             if (state.isFailed) {
               context.router.pop();
@@ -70,9 +67,11 @@ class _LogoutDialogWidgetState extends State<LogoutDialogWidget> {
                       CustomOutlinedButtonWidget(
                         theme: ThemeHelper.red,
                         textButton: TextHelper.exit.toUpperCase(),
-                        onPressed: () => context.read<ProfileBloc>().add(
-                              const LogoutEvent(),
-                            ),
+                        onPressed: () {
+                          context.read<AuthBloc>().add(
+                                const LogOut(),
+                              );
+                        },
                       ),
                     ],
                   )

@@ -1,9 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
+import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
+import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/exports/exports.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
 import '../bloc/auth_bloc.dart';
@@ -23,11 +28,8 @@ class _AuthScreenState extends State<AuthScreen> {
   late TextEditingController phoneController;
   late TextEditingController passwordController;
 
-  late AuthBloc _authBloc;
-
   @override
   void initState() {
-    _authBloc = BlocProvider.of(context, listen: false);
     phoneController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
@@ -74,10 +76,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      BlocConsumer(
-                        bloc: _authBloc,
+                      BlocConsumer<AuthBloc, AuthState>(
                         builder: (context, state) {
-                          if (state is AuthLoadingState) {
+                          if (state.loading) {
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
@@ -86,24 +87,26 @@ class _AuthScreenState extends State<AuthScreen> {
                             textButton: TextHelper.login.toUpperCase(),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                _authBloc.add(
-                                  AuthLogInEvent(
-                                    phoneNumber: phoneController.text
-                                        .replaceAll(RegExp(r'\D'), "")
-                                        .replaceFirst(r'7', '8'),
-                                    password: passwordController.text,
-                                  ),
-                                );
+                                context.read<AuthBloc>().add(
+                                      LogIn(
+                                        phoneNumber: phoneController.text
+                                            .replaceAll(RegExp(r'\D'), "")
+                                            .replaceFirst(r'7', '8'),
+                                        password: passwordController.text,
+                                      ),
+                                    );
                               }
                             },
                           );
                         },
                         listener: (context, state) {
-                          if (state is AuthLoadedState) {
+                          if (state.authenticated) {
                             widget.onLoginResult?.call(true);
-                            context.router.replace(const NavBarRouterRoute());
+                            context.router.replace(
+                              const NavBarRouterRoute(),
+                            );
                           }
-                          if (state is AuthErrorState) {
+                          if (state.isFailed) {
                             showCustomSnackBar(context, state.message);
                           }
                         },

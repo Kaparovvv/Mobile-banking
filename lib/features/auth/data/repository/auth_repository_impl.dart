@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:my_family_flutter/core/exceptions/exceptions.dart';
 import 'package:my_family_flutter/features/auth/data/model/user_auth_model.dart';
@@ -37,6 +39,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return remoteToken.fold(
         (l) => Left(l),
         (r) {
+          log(r.toString());
           localDataSource.userAuthToCache(r);
           return Right(r);
         },

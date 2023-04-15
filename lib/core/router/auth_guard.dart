@@ -8,12 +8,13 @@ import 'app_router.gr.dart';
 class AuthGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    var token =
-        di.get<SharedPreferences>().getString(CachedNames.cacheUserData);
+    var token = di.get<SharedPreferences>().getString(
+          CachedNames.cacheUserData,
+        );
     if (token != null) {
       resolver.next(true);
     } else {
-      router.push(
+      router.replace(
         AuthScreenRoute(
           onLoginResult: (success) {
             resolver.next(success);
