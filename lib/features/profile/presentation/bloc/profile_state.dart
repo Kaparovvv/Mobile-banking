@@ -6,6 +6,7 @@ class ProfileState with _$ProfileState {
     required IndividualEntity profileData,
     required UserDataEntity userData,
     required bool loading,
+    required bool loaded,
     required bool isFailed,
     required String message,
   }) = _ProfileState;
@@ -36,6 +37,7 @@ class ProfileState with _$ProfileState {
           email: "",
         ),
         loading: false,
+        loaded: false,
         isFailed: false,
         message: "",
       );

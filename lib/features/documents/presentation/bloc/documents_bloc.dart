@@ -22,7 +22,7 @@ class DocumentsBloc extends Bloc<DocumentsEvent, DocumentsState> {
     GetPasportEvent event,
     Emitter<DocumentsState> emit,
   ) async {
-    emit(state.copyWith(loading: true, isDriverLicense: false));
+    emit(state.copyWith(loading: true, isDriverLicense: false, loaded: false));
 
     final result = await getDocument(
       const GetDocumentParams(documentType: DocumentType.PASSPORT),
@@ -48,7 +48,7 @@ class DocumentsBloc extends Bloc<DocumentsEvent, DocumentsState> {
     GetDriverLicenseEvent event,
     Emitter<DocumentsState> emit,
   ) async {
-    emit(state.copyWith(loading: true, isDriverLicense: true));
+    emit(state.copyWith(loading: true, isDriverLicense: true, loaded: false));
 
     final result = await getDocument(
       const GetDocumentParams(documentType: DocumentType.DRIVER_LICENSE),
