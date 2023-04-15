@@ -168,9 +168,8 @@ class _MarriageRegistrationScreenState
                                             city: selectedRegion as String,
                                             office: selectedRegistryOffice
                                                 as String,
-                                            partnerIin: _partnersIndenNumber
-                                                .text
-                                                .replaceAll(' ', ''),
+                                            partnerIin:
+                                                _partnersIndenNumber.text,
                                             isUserPay: true,
                                           ),
                                         ),

@@ -1,33 +1,46 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_document.dart';
+import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 
 part 'documents_event.dart';
 part 'documents_state.dart';
+part 'documents_bloc.freezed.dart';
 
 class DocumentsBloc extends Bloc<DocumentsEvent, DocumentsState> {
-  final GetDocument getDocument;
-  DocumentsBloc({required this.getDocument}) : super(DocumentsInitial()) {
+  DocumentsBloc({
+    required this.getDocument,
+  }) : super(DocumentsState.initial()) {
     on<GetPasportEvent>((event, emit) => getPassport(event, emit));
     on<GetDriverLicenseEvent>((event, emit) => getDriverLicense(event, emit));
   }
+
+  final GetDocument getDocument;
 
   Future<void> getPassport(
     GetPasportEvent event,
     Emitter<DocumentsState> emit,
   ) async {
-    emit(LoadingDocumentState());
+    emit(state.copyWith(loading: true, isDriverLicense: false));
+
     final result = await getDocument(
       const GetDocumentParams(documentType: DocumentType.PASSPORT),
     );
+
     result.fold(
-      (l) {
-        emit(const ErrorDocumentState(
-          message: 'Не удалось получить данные',
-        ));
-      },
-      (r) => emit(LoadedPasportState(passport: r)),
+      (l) => emit(state.copyWith(
+        isFailed: true,
+        message: 'Не удалось получить данные',
+        isDriverLicense: false,
+        loading: false,
+      )),
+      (r) => emit(state.copyWith(
+        passport: r,
+        isDriverLicense: false,
+        loaded: true,
+        loading: false,
+      )),
     );
   }
 
@@ -35,17 +48,25 @@ class DocumentsBloc extends Bloc<DocumentsEvent, DocumentsState> {
     GetDriverLicenseEvent event,
     Emitter<DocumentsState> emit,
   ) async {
-    emit(LoadingDocumentState());
+    emit(state.copyWith(loading: true, isDriverLicense: true));
+
     final result = await getDocument(
       const GetDocumentParams(documentType: DocumentType.DRIVER_LICENSE),
     );
+
     result.fold(
-      (l) {
-        emit(const ErrorDocumentState(
-          message: 'Не удалось получить данные',
-        ));
-      },
-      (r) => emit(LoadedDriverLicenseState(driverLicense: r)),
+      (l) => emit(state.copyWith(
+        isFailed: true,
+        message: 'Не удалось получить данные',
+        isDriverLicense: true,
+        loading: false,
+      )),
+      (r) => emit(state.copyWith(
+        passport: r,
+        loaded: true,
+        isDriverLicense: true,
+        loading: false,
+      )),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/widgets/app_bar_title.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
+import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/details_content.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/image_content.dart';
 import '../bloc/documents_bloc.dart';
@@ -50,88 +52,100 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: state is LoadingDocumentState
+            child: state.loading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Column(
-                    children: [
-                      Flexible(
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          height: 80,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: TabBarButton(
-                                  title: "Документ",
-                                  selected: tabController.index == 0,
-                                  onTap: () => setState(
-                                      () => tabController.animateTo(0)),
+                : state.loaded
+                    ? RefreshIndicator(
+                        onRefresh: () async {
+                          if (state.isDriverLicense) {
+                            context.read<DocumentsBloc>().add(
+                                  const GetDriverLicenseEvent(),
+                                );
+                          } else {
+                            context.read<DocumentsBloc>().add(
+                                  const GetPasportEvent(),
+                                );
+                          }
+                        },
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: SizedBox(
+                            height: context.height * 0.85,
+                            child: Column(
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(20),
+                                    height: 80,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: TabBarButton(
+                                            title: "Документ",
+                                            selected: tabController.index == 0,
+                                            onTap: () => setState(() =>
+                                                tabController.animateTo(0)),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Expanded(
+                                          child: TabBarButton(
+                                            title: "Реквизиты",
+                                            selected: tabController.index == 1,
+                                            onTap: () => setState(() =>
+                                                tabController.animateTo(1)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 5),
-                              Expanded(
-                                child: TabBarButton(
-                                  title: "Реквизиты",
-                                  selected: tabController.index == 1,
-                                  onTap: () => setState(
-                                      () => tabController.animateTo(1)),
+                                const Divider(height: 0.5),
+                                tabBarView(state.passport),
+                                CustomOutlinedButtonWidget(
+                                  onPressed: () {},
+                                  textButton: "Отправить документ",
+                                  icon: Icons.ios_share,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const Divider(height: 0.5),
-                      tabBarView(state),
-                      CustomOutlinedButtonWidget(
-                        onPressed: () {},
-                        textButton: "Отправить документ",
-                        icon: Icons.ios_share,
-                      ),
-                    ],
-                  ),
+                      )
+                    : const Center(child: Text("Reload")),
           ),
         );
       },
     );
   }
 
-  Flexible tabBarView(DocumentsState state) {
+  Flexible tabBarView(DocumentEntity document) {
     return Flexible(
       flex: 3,
-      child: state is LoadingDocumentState
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : DefaultTabController(
-              length: 2,
-              child: TabBarView(
-                controller: tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: ImageContent(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: state is LoadedPasportState
-                        ? DetailsContent(document: state.passport)
-                        : state is LoadedDriverLicenseState
-                            ? DetailsContent(document: state.driverLicense)
-                            : const Center(
-                                child: Text("Empty"),
-                              ),
-                  ),
-                ],
-              ),
+      child: DefaultTabController(
+        length: 2,
+        child: TabBarView(
+          controller: tabController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: ImageContent(),
             ),
+            Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: DetailsContent(document: document)),
+          ],
+        ),
+      ),
     );
   }
 }

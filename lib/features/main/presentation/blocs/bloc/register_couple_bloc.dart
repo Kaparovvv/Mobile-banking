@@ -21,7 +21,7 @@ class RegisterCoupleBloc
     Emitter<RegisterCoupleState> emit,
   ) async {
     final result = await registerCoupleCase(RegisterCoupleParams(
-      partnerIin: event.params.partnerIin,
+      partnerIin: event.params.partnerIin.replaceAll(' ', ''),
       city: event.params.city,
       office: event.params.office,
       isUserPay: event.params.isUserPay,
