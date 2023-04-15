@@ -46,8 +46,12 @@ class _MainScreenState extends State<MainScreen> with AutoRouteAware {
                   imageUrl: 'https://i.yapx.cc/EKqLO.jpg',
                 ),
                 const SizedBox(width: 5),
-                const AppBarTitle(
-                  title: 'Thor',
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) {
+                    return AppBarTitle(
+                      title: state.profileData.firstName,
+                    );
+                  },
                 ),
               ],
             ),
