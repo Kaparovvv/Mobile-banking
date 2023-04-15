@@ -45,7 +45,7 @@ class ValidatesHelper {
 
   static identityNumberValidate(String value, String valueType) {
     if (value.isNotEmpty) {
-      if (RegExp(".{12,}").hasMatch(value)) {
+      if (RegExp(".{14,}").hasMatch(value)) {
         return null;
       } else {
         return 'Введите корректный ИНН';
