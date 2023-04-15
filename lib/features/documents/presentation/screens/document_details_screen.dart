@@ -50,7 +50,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: state is LoadingDocumentState
+            child: state.loading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -103,7 +103,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
   Flexible tabBarView(DocumentsState state) {
     return Flexible(
       flex: 3,
-      child: state is LoadingDocumentState
+      child: state.loading
           ? const Center(
               child: CircularProgressIndicator(),
             )
@@ -121,13 +121,9 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: state is LoadedPasportState
+                    child: state.loaded
                         ? DetailsContent(document: state.passport)
-                        : state is LoadedDriverLicenseState
-                            ? DetailsContent(document: state.driverLicense)
-                            : const Center(
-                                child: Text("Empty"),
-                              ),
+                        : const Center(child: Text("Empty")),
                   ),
                 ],
               ),

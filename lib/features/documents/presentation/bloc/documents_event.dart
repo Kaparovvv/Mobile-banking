@@ -1,12 +1,8 @@
 part of 'documents_bloc.dart';
 
-abstract class DocumentsEvent extends Equatable {
-  const DocumentsEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class DocumentsEvent with _$DocumentsEvent {
+  const factory DocumentsEvent.started() = Started;
+  const factory DocumentsEvent.getPassport() = GetPasportEvent;
+  const factory DocumentsEvent.getDriverLicense() = GetDriverLicenseEvent;
 }
-
-class GetPasportEvent extends DocumentsEvent {}
-
-class GetDriverLicenseEvent extends DocumentsEvent {}

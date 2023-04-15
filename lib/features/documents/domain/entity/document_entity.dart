@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 import 'package:my_family_flutter/features/profile/data/models/individual_model.dart';
+import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 
 class DocumentEntity extends Equatable {
   final String id;
@@ -14,7 +15,7 @@ class DocumentEntity extends Equatable {
   final String? licenseNumber;
   final String? issuingAuthority;
   final String? driverLicenseCategory;
-  final IndividualModel individual;
+  final IndividualEntity individual;
 
   const DocumentEntity({
     required this.id,
