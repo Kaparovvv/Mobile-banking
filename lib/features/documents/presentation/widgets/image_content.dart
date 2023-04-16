@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_family_flutter/features/documents/data/models/document_model.dart';
-
-import '../../../../core/widgets/cached_network_image_widget.dart';
-import '../../domain/entity/document_entity.dart';
 
 class ImageContent extends StatelessWidget {
   const ImageContent({super.key});
