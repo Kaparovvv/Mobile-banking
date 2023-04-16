@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
-import 'package:my_family_flutter/core/widgets/app_bar_title.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/details_content.dart';
