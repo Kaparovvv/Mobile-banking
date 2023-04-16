@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/constants/urls.dart';

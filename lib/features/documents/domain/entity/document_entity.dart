@@ -1,9 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
-import 'package:my_family_flutter/features/profile/data/models/individual_model.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 
 class DocumentEntity extends Equatable {

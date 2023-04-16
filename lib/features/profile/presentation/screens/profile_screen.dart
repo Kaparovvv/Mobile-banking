@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
-import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/widgets/logout_dialog_widget.dart';
 

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/features/notification/domain/entity/notification_entity.dart';
 import 'package:my_family_flutter/features/notification/domain/usecase/notification_case.dart';
 
