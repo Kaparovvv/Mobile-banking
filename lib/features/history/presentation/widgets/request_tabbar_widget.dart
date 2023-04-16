@@ -24,16 +24,16 @@ class RequestTabBarWidget extends StatelessWidget {
   }
 
   static const List<Widget> requestViews = [
-    ListOfArchiveRequestWidget(),
     ListOfActiveRequestWidget(),
+    ListOfArchiveRequestWidget(),
   ];
 
   static List<Widget> requestTabs = [
     Tab(
-      text: TextHelper.archive.toUpperCase(),
+      text: TextHelper.active.toUpperCase(),
     ),
     Tab(
-      text: TextHelper.active.toUpperCase(),
+      text: TextHelper.archive.toUpperCase(),
     ),
   ];
 }
