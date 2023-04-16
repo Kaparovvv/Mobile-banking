@@ -38,21 +38,23 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                 }
               },
               builder: (context, state) {
-                return state.loaded
-                    ? RefreshIndicator(
-                        color: ThemeHelper.color08B89D,
-                        onRefresh: () async => context
-                            .read<NotificationBloc>()
-                            .add(const GetData()),
-                        child: _listOfNotitfication(
-                          listOfNotification: state.list,
-                        ),
-                      )
-                    : state.loading
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : nothingHereYet(context);
+                return RefreshIndicator(
+                  color: ThemeHelper.color08B89D,
+                  onRefresh: () async =>
+                      context.read<NotificationBloc>().add(const GetData()),
+                  child: state.loading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : state.loaded
+                          ? _listOfNotitfication(
+                              listOfNotification: state.list,
+                            )
+                          : SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: nothingHereYet(context),
+                            ),
+                );
               },
             ),
           ),

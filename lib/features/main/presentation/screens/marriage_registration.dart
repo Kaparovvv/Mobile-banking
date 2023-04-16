@@ -7,7 +7,7 @@ import 'package:my_family_flutter/core/widgets/button_with_background_widget.dar
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/core/widgets/icon_background_widget.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
-import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
 import '../../../../core/exports/exports.dart';
 import '../../../../core/widgets/custom_textfield_widget.dart';
@@ -55,7 +55,7 @@ class _MarriageRegistrationScreenState
     context.read<RegisterCoupleBloc>().add(const Started());
     return BlocConsumer<RegisterCoupleBloc, RegisterCoupleState>(
       listener: (context, state) {
-        if (state is Registered) {
+        if (state.registered) {
           _showDialog(
             context,
             DialogApplicationWidgetParams(
@@ -65,7 +65,7 @@ class _MarriageRegistrationScreenState
             ),
           );
         }
-        if (state is Failed) {
+        if (state.isFailed) {
           _showDialog(
             context,
             DialogApplicationWidgetParams(
@@ -86,105 +86,113 @@ class _MarriageRegistrationScreenState
                 title: TextHelper.marriageRegis,
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: IconBackgroundWidget(
-                          width: context.width * 0.5,
-                          height: context.height * 0.2,
-                          padding: const EdgeInsets.all(35),
-                          iconUrl: IconHelper.marriage,
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      const Text(
-                        TextHelper.enterTheFollowingData,
-                        style: TextStyleHelper.f18w500,
-                      ),
-                      const SizedBox(height: 40),
-                      CustomTextFieldWidget(
-                        label: TextHelper.partnersIIN,
-                        controller: _partnersIndenNumber,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        inputFormatters: [Masks.identificationNumber],
-                        validate: (value) =>
-                            ValidatesHelper.identityNumberValidate(
-                          value!,
-                          TextHelper.partnersIIN,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      CustomDropDownWidget(
-                        listOfItem: listOfRegion,
-                        hintText: TextHelper.chooseSity,
-                        validator: (dynamic value) =>
-                            value == null ? TextHelper.chooseSity : null,
-                        callback: ((item) => setState(
-                              () => selectedRegion = item,
-                            )),
-                      ),
-                      selectedRegion != null
-                          ? Column(
-                              children: [
-                                const SizedBox(height: 40),
-                                CustomDropDownWidget(
-                                  listOfItem: listOfOffice,
-                                  hintText: TextHelper.chooseOffice,
-                                  validator: (dynamic value) => value == null
-                                      ? TextHelper.chooseOffice
-                                      : null,
-                                  callback: ((item) => setState(
-                                        () => selectedRegistryOffice = item,
-                                      )),
+            body: state.loading
+                ? const Center(child: CircularProgressIndicator())
+                : Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: IconBackgroundWidget(
+                                width: context.width * 0.5,
+                                height: context.height * 0.2,
+                                padding: const EdgeInsets.all(35),
+                                iconUrl: IconHelper.marriage,
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            const Text(
+                              TextHelper.enterTheFollowingData,
+                              style: TextStyleHelper.f18w500,
+                            ),
+                            const SizedBox(height: 40),
+                            CustomTextFieldWidget(
+                              label: TextHelper.partnersIIN,
+                              controller: _partnersIndenNumber,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
+                              inputFormatters: [Masks.identificationNumber],
+                              validate: (value) =>
+                                  ValidatesHelper.identityNumberValidate(
+                                value!,
+                                TextHelper.partnersIIN,
+                              ),
+                            ),
+                            const SizedBox(height: 40),
+                            CustomDropDownWidget(
+                              listOfItem: listOfRegion,
+                              hintText: TextHelper.chooseSity,
+                              validator: (dynamic value) =>
+                                  value == null ? TextHelper.chooseSity : null,
+                              callback: ((item) => setState(
+                                    () => selectedRegion = item,
+                                  )),
+                            ),
+                            selectedRegion != null
+                                ? Column(
+                                    children: [
+                                      const SizedBox(height: 40),
+                                      CustomDropDownWidget(
+                                        listOfItem: listOfOffice,
+                                        hintText: TextHelper.chooseOffice,
+                                        validator: (dynamic value) =>
+                                            value == null
+                                                ? TextHelper.chooseOffice
+                                                : null,
+                                        callback: ((item) => setState(
+                                              () =>
+                                                  selectedRegistryOffice = item,
+                                            )),
+                                      ),
+                                    ],
+                                  )
+                                : const SizedBox(),
+                            _whoIsPayWidget(),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 40),
+                                child: CustomElevatedButtonWidget(
+                                  title: TextHelper.submitAnApplication
+                                      .toUpperCase(),
+                                  enabled: isUserPay != true,
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate() &&
+                                        isUserPay != true) {
+                                      if (_partnersIndenNumber
+                                              .text.isNotEmpty &&
+                                          selectedRegion != null &&
+                                          selectedRegistryOffice != null) {
+                                        context.read<RegisterCoupleBloc>().add(
+                                              RegisterCoupleEvent.register(
+                                                RegisterCoupleParams(
+                                                  city:
+                                                      selectedRegion as String,
+                                                  office: selectedRegistryOffice
+                                                      as String,
+                                                  partnerIin:
+                                                      _partnersIndenNumber.text,
+                                                  isUserPay: true,
+                                                ),
+                                              ),
+                                            );
+                                      }
+                                    }
+                                  },
                                 ),
-                              ],
-                            )
-                          : const SizedBox(),
-                      _whoIsPayWidget(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: CustomElevatedButtonWidget(
-                            title: TextHelper.submitAnApplication.toUpperCase(),
-                            enabled: isUserPay != true,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate() &&
-                                  isUserPay != true) {
-                                if (_partnersIndenNumber.text.isNotEmpty &&
-                                    selectedRegion != null &&
-                                    selectedRegistryOffice != null) {
-                                  context.read<RegisterCoupleBloc>().add(
-                                        RegisterCoupleEvent.register(
-                                          RegisterCoupleParams(
-                                            city: selectedRegion as String,
-                                            office: selectedRegistryOffice
-                                                as String,
-                                            partnerIin:
-                                                _partnersIndenNumber.text,
-                                            isUserPay: true,
-                                          ),
-                                        ),
-                                      );
-                                }
-                              }
-                            },
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
           ),
         );
       },

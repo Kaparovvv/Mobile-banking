@@ -13,9 +13,4 @@ class UserAuthModel extends UserAuthEntity {
         id: json['id'],
         token: json["token"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "token": token,
-      };
 }

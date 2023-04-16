@@ -1,17 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'core/constants/cached_names.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
 import 'features/documents/presentation/bloc/documents_bloc.dart';
-import 'features/main/presentation/blocs/bloc/register_couple_bloc.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 class App extends StatelessWidget {
@@ -41,7 +39,10 @@ class App extends StatelessWidget {
         ),
         BlocProvider<NotificationBloc>(
           create: (_) => di.get<NotificationBloc>(),
-        )
+        ),
+        BlocProvider<RegisterBabyBloc>(
+          create: (_) => di.get<RegisterBabyBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'My Family',

@@ -10,8 +10,10 @@ import 'package:my_family_flutter/features/documents/presentation/bloc/documents
 import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
 import 'package:my_family_flutter/features/main/data/repository/public_services_repository_impl.dart';
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/register_baby_case.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
-import 'package:my_family_flutter/features/main/presentation/blocs/bloc/register_couple_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/notification/data/datasources/notification_remote_data_source.dart';
 import 'package:my_family_flutter/features/notification/data/repository/notification_repository_impl.dart';
 import 'package:my_family_flutter/features/notification/domain/repository/notification_repository.dart';
@@ -25,7 +27,7 @@ import 'package:my_family_flutter/features/profile/domain/usecase/get_individual
 import 'package:my_family_flutter/features/profile/domain/usecase/get_user_data_case.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../features/auth/data/data_sources/user_token_local_data_source.dart';
 import '../../features/auth/data/data_sources/user_token_remote_data_source.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';
@@ -37,16 +39,20 @@ import '../services/network_info.dart';
 final GetIt di = GetIt.instance;
 
 Future<void> init() async {
-  di.registerLazySingleton(() => Connectivity());
+  di.registerLazySingleton<Connectivity>(() => Connectivity());
   di.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(connectivity: di<Connectivity>()),
   );
 
-  di.registerLazySingleton(() => Dio());
-  di.registerLazySingleton(() => APIClient());
+  di.registerLazySingleton<Dio>(() => Dio());
+  di.registerLazySingleton<APIClient>(() => APIClient());
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  di.registerLazySingleton(() => sharedPreferences);
+  di.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  di.registerLazySingleton(() => const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      ));
 
   //User Token Data Sources
 
@@ -160,6 +166,16 @@ Future<void> init() async {
       remoteDataSource: di(),
       networkInfo: di(),
     ),
+  );
+
+  // Register Baby Bloc
+
+  di.registerFactory<RegisterBabyBloc>(
+    () => RegisterBabyBloc(registerBabyCase: di()),
+  );
+
+  di.registerFactory<RegisterBabyCase>(
+    () => RegisterBabyCase(repository: di()),
   );
 
   // Notification Bloc

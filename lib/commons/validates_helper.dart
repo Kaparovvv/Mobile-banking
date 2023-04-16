@@ -31,6 +31,16 @@ class ValidatesHelper {
     }
   }
 
+  static nameValidate(String value, String valueType) {
+    if (value.isEmpty) {
+      return 'Введите $valueType, пожалуйста';
+    } else if (!RegExp("^[a-zA-Z]*\$").hasMatch(value)) {
+      return "Некорректно";
+    } else {
+      return null;
+    }
+  }
+
   static phoneNumber(String value, String valueType) {
     final formattedValue =
         value.replaceAll(RegExp(r'\D'), "").replaceFirst(r'7', '8');

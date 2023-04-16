@@ -27,6 +27,7 @@ class TextHelper {
   static const String applicationUnsuccess = 'Не удалось отправить заявку';
   static const String passport = 'Удостоверение личности';
   static const String driverCard = 'Водительские права';
+  static const String close = 'Закрыть';
   static const String back = 'назад';
   static const String exit = 'выйти';
   static const String payments = 'Платежи';
@@ -43,5 +44,14 @@ class TextHelper {
   static const String userBalance = 'Ваш баланс:';
   static const String dontEnoughFundsance = 'У вас недостаточно средств';
   static const String notification = 'Уведомления';
-  static const String returnToMainScreen = 'на главный экран';
+  static const String returnToMainScreen = 'на главную';
+  static const String returnToHistoryScreen = 'на историю';
+  static const String firstName = 'Имя';
+  static const String lastName = 'Фамилия';
+  static const String middleName = 'Отчество';
+  static const String iin = 'ИИН';
+  static const String successRegisterBaby =
+      "Заявление успешно подано. Можете отследить статус заявки в странице “Истории гос. услуг”";
+  static const String errorRegisterBaby =
+      "Произошла какая-то ошибка. Повторите операцию позже";
 }

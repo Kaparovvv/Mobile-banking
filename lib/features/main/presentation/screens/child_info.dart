@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
+import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
 
 class ChildInfoScreen extends StatefulWidget {
@@ -19,31 +22,40 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
   Object? selectedRegion;
   List<String> listOfRegion = <String>['ЗАГС 1', 'ЗАГС 2', 'ЗАГС 3'];
 
-  late List<TextEditingController> _fieldControllers;
-
-  final List<String> _fieldNames = [
-    "Имя",
-    "Фамилия",
-    "Отчество",
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _fieldControllers = List.generate(3, (i) => TextEditingController());
-  }
-
-  void _showDialog(BuildContext context) {
+  void _showErrorDialog(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
+      builder: (context) => DialogApplicationWidget(
+        params: DialogApplicationWidgetParams(
+          statusIcon: IconHelper.error,
+          content: TextHelper.errorRegisterBaby,
+          buttonTitle: TextHelper.close,
+        ),
+        onPressed: () {
+          context.read<RegisterBabyBloc>().add(const ResetFailed());
+          context.router.pop();
+        },
+      ),
+    );
+  }
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
       builder: (context) => DialogApplicationWidget(
         params: DialogApplicationWidgetParams(
           statusIcon: IconHelper.done,
-          content:
-              "Заявление успешно подано. Можете отследить статус заявки в странице “Истории гос. услуг”",
-          buttonTitle: TextHelper.returnToMainScreen,
+          content: TextHelper.successRegisterBaby,
+          buttonTitle: TextHelper.returnToHistoryScreen,
         ),
-        onPressed: () => context.router.popUntilRoot(),
+        onPressed: () {
+          context.router.pushAndPopUntil(
+            const HistoryScreenRoute(),
+            predicate: ((route) => route.isFirst),
+          );
+        },
       ),
     );
   }
@@ -58,66 +70,111 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
             title: "Сведения о ребенке",
           ),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Заполните поля:",
-                  style: TextStyleHelper.f14w700,
-                ),
-                for (int i = 0; i < 3; i++) ...[
-                  const SizedBox(height: 15),
-                  CustomTextFieldWidget(
-                    controller: _fieldControllers[i],
-                    label: _fieldNames[i],
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validate: (value) => ValidatesHelper.titleValidate(
-                      value ?? "",
-                      _fieldNames[i],
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 30),
-                const Text(
-                  "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
-                  style: TextStyleHelper.f14w700,
-                ),
-                const SizedBox(height: 15),
-                CustomDropDownWidget(
-                  listOfItem: listOfRegion,
-                  hintText: "Выберите отдел ЗАГСа",
-                  validator: (dynamic value) =>
-                      value == null ? TextHelper.chooseSity : null,
-                  callback: ((item) => setState(
-                        () => selectedRegion = item,
-                      )),
-                ),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: double.maxFinite,
-                  height: 45,
-                  child: CustomElevatedButtonWidget(
-                    onPressed: () {
-                      _showDialog(context);
+        body: BlocConsumer<RegisterBabyBloc, RegisterBabyState>(
+          listener: (context, state) {
+            if (state.isFailed) {
+              _showErrorDialog(context);
+            }
+            if (state.registered) {
+              _showSuccessDialog(context);
+            }
+          },
+          builder: (context, state) {
+            return state.loading
+                ? const Center(child: CircularProgressIndicator())
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      _formKey.currentState!.reset();
+                      context
+                          .read<RegisterBabyBloc>()
+                          .add(const ResetChildInfo());
                     },
-                    title: 'Подать заявку',
-                  ),
-                ),
-              ],
-            ),
-          ),
+                    child: SizedBox(
+                      height: context.height * 0.8,
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.all(20),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Заполните поля:",
+                                style: TextStyleHelper.f14w700,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFieldWidget(
+                                label: TextHelper.firstName,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validate: (value) =>
+                                    ValidatesHelper.nameValidate(
+                                  value ?? "",
+                                  TextHelper.firstName,
+                                ),
+                                onChanged: (nextValue) => context
+                                    .read<RegisterBabyBloc>()
+                                    .add(ParamsChanged(
+                                      state.params
+                                          .copyWith(firstName: nextValue),
+                                    )),
+                              ),
+                              const SizedBox(height: 15),
+                              CustomTextFieldWidget(
+                                label: TextHelper.lastName,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validate: (value) =>
+                                    ValidatesHelper.nameValidate(
+                                  value ?? "",
+                                  TextHelper.lastName,
+                                ),
+                                onChanged: (nextValue) => context
+                                    .read<RegisterBabyBloc>()
+                                    .add(ParamsChanged(
+                                      state.params
+                                          .copyWith(lastname: nextValue),
+                                    )),
+                              ),
+                              const SizedBox(height: 30),
+                              const Text(
+                                "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
+                                style: TextStyleHelper.f14w700,
+                              ),
+                              const SizedBox(height: 15),
+                              CustomDropDownWidget(
+                                listOfItem: listOfRegion,
+                                hintText: "Выберите отдел ЗАГСа",
+                                validator: (dynamic value) => value == null
+                                    ? TextHelper.chooseSity
+                                    : null,
+                                callback: ((item) => setState(
+                                      () => selectedRegion = item,
+                                    )),
+                              ),
+                              const SizedBox(height: 40),
+                              SizedBox(
+                                width: double.maxFinite,
+                                height: 45,
+                                child: CustomElevatedButtonWidget(
+                                  onPressed: () {
+                                    context
+                                        .read<RegisterBabyBloc>()
+                                        .add(const Register());
+                                  },
+                                  title: 'Подать заявку',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+          },
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _fieldControllers.map((c) => c.dispose());
-    super.dispose();
   }
 }

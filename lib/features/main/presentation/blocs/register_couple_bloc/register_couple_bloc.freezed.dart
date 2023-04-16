@@ -308,49 +308,12 @@ abstract class Register implements RegisterCoupleEvent {
 
 /// @nodoc
 mixin _$RegisterCoupleState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() registered,
-    required TResult Function() failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? registered,
-    TResult? Function()? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? registered,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Registered value) registered,
-    required TResult Function(Failed value) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Registered value)? registered,
-    TResult? Function(Failed value)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Registered value)? registered,
-    TResult Function(Failed value)? failed,
-    required TResult orElse(),
-  }) =>
+  bool get registered => throw _privateConstructorUsedError;
+  bool get isFailed => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RegisterCoupleStateCopyWith<RegisterCoupleState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -359,6 +322,8 @@ abstract class $RegisterCoupleStateCopyWith<$Res> {
   factory $RegisterCoupleStateCopyWith(
           RegisterCoupleState value, $Res Function(RegisterCoupleState) then) =
       _$RegisterCoupleStateCopyWithImpl<$Res, RegisterCoupleState>;
+  @useResult
+  $Res call({bool registered, bool isFailed, bool loading});
 }
 
 /// @nodoc
@@ -370,324 +335,131 @@ class _$RegisterCoupleStateCopyWithImpl<$Res, $Val extends RegisterCoupleState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? registered = null,
+    Object? isFailed = null,
+    Object? loading = null,
+  }) {
+    return _then(_value.copyWith(
+      registered: null == registered
+          ? _value.registered
+          : registered // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailed: null == isFailed
+          ? _value.isFailed
+          : isFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$_RegisterCoupleStateCopyWith<$Res>
+    implements $RegisterCoupleStateCopyWith<$Res> {
+  factory _$$_RegisterCoupleStateCopyWith(_$_RegisterCoupleState value,
+          $Res Function(_$_RegisterCoupleState) then) =
+      __$$_RegisterCoupleStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool registered, bool isFailed, bool loading});
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$RegisterCoupleStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$_RegisterCoupleStateCopyWithImpl<$Res>
+    extends _$RegisterCoupleStateCopyWithImpl<$Res, _$_RegisterCoupleState>
+    implements _$$_RegisterCoupleStateCopyWith<$Res> {
+  __$$_RegisterCoupleStateCopyWithImpl(_$_RegisterCoupleState _value,
+      $Res Function(_$_RegisterCoupleState) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? registered = null,
+    Object? isFailed = null,
+    Object? loading = null,
+  }) {
+    return _then(_$_RegisterCoupleState(
+      registered: null == registered
+          ? _value.registered
+          : registered // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFailed: null == isFailed
+          ? _value.isFailed
+          : isFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$_RegisterCoupleState extends _RegisterCoupleState {
+  _$_RegisterCoupleState(
+      {required this.registered, required this.isFailed, required this.loading})
+      : super._();
+
+  @override
+  final bool registered;
+  @override
+  final bool isFailed;
+  @override
+  final bool loading;
 
   @override
   String toString() {
-    return 'RegisterCoupleState.initial()';
+    return 'RegisterCoupleState(registered: $registered, isFailed: $isFailed, loading: $loading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType &&
+            other is _$_RegisterCoupleState &&
+            (identical(other.registered, registered) ||
+                other.registered == registered) &&
+            (identical(other.isFailed, isFailed) ||
+                other.isFailed == isFailed) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, registered, isFailed, loading);
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() registered,
-    required TResult Function() failed,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? registered,
-    TResult? Function()? failed,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? registered,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Registered value) registered,
-    required TResult Function(Failed value) failed,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Registered value)? registered,
-    TResult? Function(Failed value)? failed,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Registered value)? registered,
-    TResult Function(Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  @pragma('vm:prefer-inline')
+  _$$_RegisterCoupleStateCopyWith<_$_RegisterCoupleState> get copyWith =>
+      __$$_RegisterCoupleStateCopyWithImpl<_$_RegisterCoupleState>(
+          this, _$identity);
 }
 
-abstract class Initial implements RegisterCoupleState {
-  const factory Initial() = _$Initial;
-}
-
-/// @nodoc
-abstract class _$$RegisteredCopyWith<$Res> {
-  factory _$$RegisteredCopyWith(
-          _$Registered value, $Res Function(_$Registered) then) =
-      __$$RegisteredCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$RegisteredCopyWithImpl<$Res>
-    extends _$RegisterCoupleStateCopyWithImpl<$Res, _$Registered>
-    implements _$$RegisteredCopyWith<$Res> {
-  __$$RegisteredCopyWithImpl(
-      _$Registered _value, $Res Function(_$Registered) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Registered implements Registered {
-  const _$Registered();
+abstract class _RegisterCoupleState extends RegisterCoupleState {
+  factory _RegisterCoupleState(
+      {required final bool registered,
+      required final bool isFailed,
+      required final bool loading}) = _$_RegisterCoupleState;
+  _RegisterCoupleState._() : super._();
 
   @override
-  String toString() {
-    return 'RegisterCoupleState.registered()';
-  }
-
+  bool get registered;
   @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Registered);
-  }
-
+  bool get isFailed;
   @override
-  int get hashCode => runtimeType.hashCode;
-
+  bool get loading;
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() registered,
-    required TResult Function() failed,
-  }) {
-    return registered();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? registered,
-    TResult? Function()? failed,
-  }) {
-    return registered?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? registered,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (registered != null) {
-      return registered();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Registered value) registered,
-    required TResult Function(Failed value) failed,
-  }) {
-    return registered(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Registered value)? registered,
-    TResult? Function(Failed value)? failed,
-  }) {
-    return registered?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Registered value)? registered,
-    TResult Function(Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (registered != null) {
-      return registered(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Registered implements RegisterCoupleState {
-  const factory Registered() = _$Registered;
-}
-
-/// @nodoc
-abstract class _$$FailedCopyWith<$Res> {
-  factory _$$FailedCopyWith(_$Failed value, $Res Function(_$Failed) then) =
-      __$$FailedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FailedCopyWithImpl<$Res>
-    extends _$RegisterCoupleStateCopyWithImpl<$Res, _$Failed>
-    implements _$$FailedCopyWith<$Res> {
-  __$$FailedCopyWithImpl(_$Failed _value, $Res Function(_$Failed) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Failed implements Failed {
-  const _$Failed();
-
-  @override
-  String toString() {
-    return 'RegisterCoupleState.failed()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Failed);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() registered,
-    required TResult Function() failed,
-  }) {
-    return failed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? registered,
-    TResult? Function()? failed,
-  }) {
-    return failed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? registered,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Registered value) registered,
-    required TResult Function(Failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Registered value)? registered,
-    TResult? Function(Failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Registered value)? registered,
-    TResult Function(Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Failed implements RegisterCoupleState {
-  const factory Failed() = _$Failed;
+  @JsonKey(ignore: true)
+  _$$_RegisterCoupleStateCopyWith<_$_RegisterCoupleState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
