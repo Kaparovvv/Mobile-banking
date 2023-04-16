@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
-import 'package:my_family_flutter/features/documents/presentation/widgets/details_content.dart';
+import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/documents/presentation/widgets/document_content.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/image_content.dart';
-import '../bloc/documents_bloc.dart';
 import '../widgets/tab_bar_button.dart';
 
 class DocumentDetailsScreen extends StatefulWidget {
@@ -138,10 +138,11 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
               child: ImageContent(),
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: DetailsContent(document: document)),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: DocumentContent(document: document),
+            ),
           ],
         ),
       ),

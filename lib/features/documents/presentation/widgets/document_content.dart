@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'detail_item.dart';
 
-class DetailsContent extends StatelessWidget {
+class DocumentContent extends StatelessWidget {
   final DocumentEntity document;
-  const DetailsContent({
+  const DocumentContent({
     super.key,
     required this.document,
   });

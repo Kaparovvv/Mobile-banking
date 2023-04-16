@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/core/router/nav_bar_router.dart';
+import 'package:my_family_flutter/features/documents/presentation/screens/certificate_details_screen.dart';
 import 'package:my_family_flutter/features/documents/presentation/screens/document_details_screen.dart';
 import 'package:my_family_flutter/features/documents/presentation/screens/documents_screen.dart';
 import 'package:my_family_flutter/features/history/presentation/screens/history_screen.dart';
@@ -36,6 +37,7 @@ import '../../features/notification/presentation/pages/notification_list_screen.
     AutoRoute(path: '/marriageRegis', page: MarriageRegistrationScreen),
     AutoRoute(path: '/documents', page: DocumentsScreen),
     AutoRoute(path: '/documentDetails', page: DocumentDetailsScreen),
+    AutoRoute(path: '/certificateDetails', page: CertificateDetailsScreen),
     AutoRoute(path: '/notification', page: NotificationScreen),
     AutoRoute(path: '/notificationList', page: NotificationListScreen),
     AutoRoute(path: '/childInfo', page: ChildInfoScreen),

@@ -5,8 +5,10 @@ import 'package:my_family_flutter/core/services/api_client.dart';
 import 'package:my_family_flutter/features/documents/data/data_sources/document_remote_data_source.dart';
 import 'package:my_family_flutter/features/documents/data/repository/document_repository_impl.dart';
 import 'package:my_family_flutter/features/documents/domain/repository/document_repository.dart';
+import 'package:my_family_flutter/features/documents/domain/usecase/get_baby_birth_cartificate.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_document.dart';
-import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/documents/presentation/bloc/certificate_bloc/certificate_bloc.dart';
+import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
 import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
 import 'package:my_family_flutter/features/main/data/repository/public_services_repository_impl.dart';
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
@@ -193,5 +195,15 @@ Future<void> init() async {
       remoteDataSource: di(),
       networkInfo: di(),
     ),
+  );
+
+  // Baby Birth Certificate Bloc
+
+  di.registerFactory<CertificateBloc>(
+    () => CertificateBloc(getBabyBirthCertificate: di()),
+  );
+
+  di.registerFactory<GetBabyBirthCertificate>(
+    () => GetBabyBirthCertificate(repository: di()),
   );
 }

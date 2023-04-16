@@ -8,4 +8,6 @@ class URLs {
   static const String notificationList =
       '/api/government-requests/notifications/user-id';
   static const String registerBaby = '/api/government-requests/register-baby';
+  static const String babyBirthCertificate =
+      '/api/government-requests/baby-birth-certificate';
 }

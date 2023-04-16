@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
-import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/documents/presentation/bloc/certificate_bloc/certificate_bloc.dart';
+import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
 import '../../../../core/exports/exports.dart';
 
 class DocumentsScreen extends StatefulWidget {
@@ -56,6 +57,19 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                 context.router.push(
                   DocumentDetailsScreenRoute(
                     title: TextHelper.driverCard,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            CustomElevatedButtonWidget(
+              textButton: TextHelper.babyCertificate,
+              iconUrl: IconHelper.driverCard,
+              onPressed: () {
+                context.read<CertificateBloc>().add(const CertificateFetched());
+                context.router.push(
+                  CertificateDetailsScreenRoute(
+                    title: TextHelper.babyCertificate,
                   ),
                 );
               },
