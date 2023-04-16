@@ -25,8 +25,11 @@ class TextHelper {
   static const String whoPaysTheFee = 'Кто оплачивает пошлину: 3 063 тенге';
   static const String applicationSuccess = 'Ваша заявка успешно отправлено';
   static const String applicationUnsuccess = 'Не удалось отправить заявку';
+  static const String noDataFetching = 'Данные не существует';
   static const String passport = 'Удостоверение личности';
   static const String driverCard = 'Водительские права';
+  static const String babyCertificate = 'Baby';
+  static const String marriageCertificate = 'Marriage';
   static const String close = 'Закрыть';
   static const String back = 'назад';
   static const String exit = 'выйти';
