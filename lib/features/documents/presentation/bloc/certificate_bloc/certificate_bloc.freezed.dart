@@ -20,37 +20,47 @@ mixin _$CertificateEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() babyCertificateFetched,
+    required TResult Function() marriageCertificateFetched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? babyCertificateFetched,
+    TResult? Function()? marriageCertificateFetched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? babyCertificateFetched,
+    TResult Function()? marriageCertificateFetched,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(CertificateFetched value) babyCertificateFetched,
+    required TResult Function(BabyCertificateFetched value)
+        babyCertificateFetched,
+    required TResult Function(MarriageCertificateFetched value)
+        marriageCertificateFetched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(CertificateFetched value)? babyCertificateFetched,
+    TResult? Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult? Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(CertificateFetched value)? babyCertificateFetched,
+    TResult Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,6 +122,7 @@ class _$Started implements Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() babyCertificateFetched,
+    required TResult Function() marriageCertificateFetched,
   }) {
     return started();
   }
@@ -121,6 +132,7 @@ class _$Started implements Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? babyCertificateFetched,
+    TResult? Function()? marriageCertificateFetched,
   }) {
     return started?.call();
   }
@@ -130,6 +142,7 @@ class _$Started implements Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? babyCertificateFetched,
+    TResult Function()? marriageCertificateFetched,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -142,7 +155,10 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(CertificateFetched value) babyCertificateFetched,
+    required TResult Function(BabyCertificateFetched value)
+        babyCertificateFetched,
+    required TResult Function(MarriageCertificateFetched value)
+        marriageCertificateFetched,
   }) {
     return started(this);
   }
@@ -151,7 +167,9 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(CertificateFetched value)? babyCertificateFetched,
+    TResult? Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult? Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
   }) {
     return started?.call(this);
   }
@@ -160,7 +178,9 @@ class _$Started implements Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(CertificateFetched value)? babyCertificateFetched,
+    TResult Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -175,25 +195,25 @@ abstract class Started implements CertificateEvent {
 }
 
 /// @nodoc
-abstract class _$$CertificateFetchedCopyWith<$Res> {
-  factory _$$CertificateFetchedCopyWith(_$CertificateFetched value,
-          $Res Function(_$CertificateFetched) then) =
-      __$$CertificateFetchedCopyWithImpl<$Res>;
+abstract class _$$BabyCertificateFetchedCopyWith<$Res> {
+  factory _$$BabyCertificateFetchedCopyWith(_$BabyCertificateFetched value,
+          $Res Function(_$BabyCertificateFetched) then) =
+      __$$BabyCertificateFetchedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CertificateFetchedCopyWithImpl<$Res>
-    extends _$CertificateEventCopyWithImpl<$Res, _$CertificateFetched>
-    implements _$$CertificateFetchedCopyWith<$Res> {
-  __$$CertificateFetchedCopyWithImpl(
-      _$CertificateFetched _value, $Res Function(_$CertificateFetched) _then)
+class __$$BabyCertificateFetchedCopyWithImpl<$Res>
+    extends _$CertificateEventCopyWithImpl<$Res, _$BabyCertificateFetched>
+    implements _$$BabyCertificateFetchedCopyWith<$Res> {
+  __$$BabyCertificateFetchedCopyWithImpl(_$BabyCertificateFetched _value,
+      $Res Function(_$BabyCertificateFetched) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CertificateFetched implements CertificateFetched {
-  const _$CertificateFetched();
+class _$BabyCertificateFetched implements BabyCertificateFetched {
+  const _$BabyCertificateFetched();
 
   @override
   String toString() {
@@ -203,7 +223,7 @@ class _$CertificateFetched implements CertificateFetched {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CertificateFetched);
+        (other.runtimeType == runtimeType && other is _$BabyCertificateFetched);
   }
 
   @override
@@ -214,6 +234,7 @@ class _$CertificateFetched implements CertificateFetched {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() babyCertificateFetched,
+    required TResult Function() marriageCertificateFetched,
   }) {
     return babyCertificateFetched();
   }
@@ -223,6 +244,7 @@ class _$CertificateFetched implements CertificateFetched {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? babyCertificateFetched,
+    TResult? Function()? marriageCertificateFetched,
   }) {
     return babyCertificateFetched?.call();
   }
@@ -232,6 +254,7 @@ class _$CertificateFetched implements CertificateFetched {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? babyCertificateFetched,
+    TResult Function()? marriageCertificateFetched,
     required TResult orElse(),
   }) {
     if (babyCertificateFetched != null) {
@@ -244,7 +267,10 @@ class _$CertificateFetched implements CertificateFetched {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
-    required TResult Function(CertificateFetched value) babyCertificateFetched,
+    required TResult Function(BabyCertificateFetched value)
+        babyCertificateFetched,
+    required TResult Function(MarriageCertificateFetched value)
+        marriageCertificateFetched,
   }) {
     return babyCertificateFetched(this);
   }
@@ -253,7 +279,9 @@ class _$CertificateFetched implements CertificateFetched {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
-    TResult? Function(CertificateFetched value)? babyCertificateFetched,
+    TResult? Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult? Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
   }) {
     return babyCertificateFetched?.call(this);
   }
@@ -262,7 +290,9 @@ class _$CertificateFetched implements CertificateFetched {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
-    TResult Function(CertificateFetched value)? babyCertificateFetched,
+    TResult Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
     required TResult orElse(),
   }) {
     if (babyCertificateFetched != null) {
@@ -272,14 +302,132 @@ class _$CertificateFetched implements CertificateFetched {
   }
 }
 
-abstract class CertificateFetched implements CertificateEvent {
-  const factory CertificateFetched() = _$CertificateFetched;
+abstract class BabyCertificateFetched implements CertificateEvent {
+  const factory BabyCertificateFetched() = _$BabyCertificateFetched;
+}
+
+/// @nodoc
+abstract class _$$MarriageCertificateFetchedCopyWith<$Res> {
+  factory _$$MarriageCertificateFetchedCopyWith(
+          _$MarriageCertificateFetched value,
+          $Res Function(_$MarriageCertificateFetched) then) =
+      __$$MarriageCertificateFetchedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MarriageCertificateFetchedCopyWithImpl<$Res>
+    extends _$CertificateEventCopyWithImpl<$Res, _$MarriageCertificateFetched>
+    implements _$$MarriageCertificateFetchedCopyWith<$Res> {
+  __$$MarriageCertificateFetchedCopyWithImpl(
+      _$MarriageCertificateFetched _value,
+      $Res Function(_$MarriageCertificateFetched) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MarriageCertificateFetched implements MarriageCertificateFetched {
+  const _$MarriageCertificateFetched();
+
+  @override
+  String toString() {
+    return 'CertificateEvent.marriageCertificateFetched()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarriageCertificateFetched);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() babyCertificateFetched,
+    required TResult Function() marriageCertificateFetched,
+  }) {
+    return marriageCertificateFetched();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? babyCertificateFetched,
+    TResult? Function()? marriageCertificateFetched,
+  }) {
+    return marriageCertificateFetched?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? babyCertificateFetched,
+    TResult Function()? marriageCertificateFetched,
+    required TResult orElse(),
+  }) {
+    if (marriageCertificateFetched != null) {
+      return marriageCertificateFetched();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Started value) started,
+    required TResult Function(BabyCertificateFetched value)
+        babyCertificateFetched,
+    required TResult Function(MarriageCertificateFetched value)
+        marriageCertificateFetched,
+  }) {
+    return marriageCertificateFetched(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Started value)? started,
+    TResult? Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult? Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
+  }) {
+    return marriageCertificateFetched?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Started value)? started,
+    TResult Function(BabyCertificateFetched value)? babyCertificateFetched,
+    TResult Function(MarriageCertificateFetched value)?
+        marriageCertificateFetched,
+    required TResult orElse(),
+  }) {
+    if (marriageCertificateFetched != null) {
+      return marriageCertificateFetched(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarriageCertificateFetched implements CertificateEvent {
+  const factory MarriageCertificateFetched() = _$MarriageCertificateFetched;
 }
 
 /// @nodoc
 mixin _$CertificateState {
-  BabyBirthCertificateEntity get certificate =>
+  BabyBirthCertificateEntity get babyCertificate =>
       throw _privateConstructorUsedError;
+  MarriageCertificateEntity get marriageCertificate =>
+      throw _privateConstructorUsedError;
+  bool get isBabyCertificate => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   bool get loaded => throw _privateConstructorUsedError;
   bool get isFailed => throw _privateConstructorUsedError;
@@ -297,7 +445,9 @@ abstract class $CertificateStateCopyWith<$Res> {
       _$CertificateStateCopyWithImpl<$Res, CertificateState>;
   @useResult
   $Res call(
-      {BabyBirthCertificateEntity certificate,
+      {BabyBirthCertificateEntity babyCertificate,
+      MarriageCertificateEntity marriageCertificate,
+      bool isBabyCertificate,
       bool loading,
       bool loaded,
       bool isFailed,
@@ -317,17 +467,27 @@ class _$CertificateStateCopyWithImpl<$Res, $Val extends CertificateState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? certificate = null,
+    Object? babyCertificate = null,
+    Object? marriageCertificate = null,
+    Object? isBabyCertificate = null,
     Object? loading = null,
     Object? loaded = null,
     Object? isFailed = null,
     Object? message = null,
   }) {
     return _then(_value.copyWith(
-      certificate: null == certificate
-          ? _value.certificate
-          : certificate // ignore: cast_nullable_to_non_nullable
+      babyCertificate: null == babyCertificate
+          ? _value.babyCertificate
+          : babyCertificate // ignore: cast_nullable_to_non_nullable
               as BabyBirthCertificateEntity,
+      marriageCertificate: null == marriageCertificate
+          ? _value.marriageCertificate
+          : marriageCertificate // ignore: cast_nullable_to_non_nullable
+              as MarriageCertificateEntity,
+      isBabyCertificate: null == isBabyCertificate
+          ? _value.isBabyCertificate
+          : isBabyCertificate // ignore: cast_nullable_to_non_nullable
+              as bool,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -357,7 +517,9 @@ abstract class _$$_CertificateStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {BabyBirthCertificateEntity certificate,
+      {BabyBirthCertificateEntity babyCertificate,
+      MarriageCertificateEntity marriageCertificate,
+      bool isBabyCertificate,
       bool loading,
       bool loaded,
       bool isFailed,
@@ -375,17 +537,27 @@ class __$$_CertificateStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? certificate = null,
+    Object? babyCertificate = null,
+    Object? marriageCertificate = null,
+    Object? isBabyCertificate = null,
     Object? loading = null,
     Object? loaded = null,
     Object? isFailed = null,
     Object? message = null,
   }) {
     return _then(_$_CertificateState(
-      certificate: null == certificate
-          ? _value.certificate
-          : certificate // ignore: cast_nullable_to_non_nullable
+      babyCertificate: null == babyCertificate
+          ? _value.babyCertificate
+          : babyCertificate // ignore: cast_nullable_to_non_nullable
               as BabyBirthCertificateEntity,
+      marriageCertificate: null == marriageCertificate
+          ? _value.marriageCertificate
+          : marriageCertificate // ignore: cast_nullable_to_non_nullable
+              as MarriageCertificateEntity,
+      isBabyCertificate: null == isBabyCertificate
+          ? _value.isBabyCertificate
+          : isBabyCertificate // ignore: cast_nullable_to_non_nullable
+              as bool,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -410,7 +582,9 @@ class __$$_CertificateStateCopyWithImpl<$Res>
 
 class _$_CertificateState extends _CertificateState {
   _$_CertificateState(
-      {required this.certificate,
+      {required this.babyCertificate,
+      required this.marriageCertificate,
+      required this.isBabyCertificate,
       required this.loading,
       required this.loaded,
       required this.isFailed,
@@ -418,7 +592,11 @@ class _$_CertificateState extends _CertificateState {
       : super._();
 
   @override
-  final BabyBirthCertificateEntity certificate;
+  final BabyBirthCertificateEntity babyCertificate;
+  @override
+  final MarriageCertificateEntity marriageCertificate;
+  @override
+  final bool isBabyCertificate;
   @override
   final bool loading;
   @override
@@ -430,7 +608,7 @@ class _$_CertificateState extends _CertificateState {
 
   @override
   String toString() {
-    return 'CertificateState(certificate: $certificate, loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message)';
+    return 'CertificateState(babyCertificate: $babyCertificate, marriageCertificate: $marriageCertificate, isBabyCertificate: $isBabyCertificate, loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message)';
   }
 
   @override
@@ -438,8 +616,12 @@ class _$_CertificateState extends _CertificateState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CertificateState &&
-            (identical(other.certificate, certificate) ||
-                other.certificate == certificate) &&
+            (identical(other.babyCertificate, babyCertificate) ||
+                other.babyCertificate == babyCertificate) &&
+            (identical(other.marriageCertificate, marriageCertificate) ||
+                other.marriageCertificate == marriageCertificate) &&
+            (identical(other.isBabyCertificate, isBabyCertificate) ||
+                other.isBabyCertificate == isBabyCertificate) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.loaded, loaded) || other.loaded == loaded) &&
             (identical(other.isFailed, isFailed) ||
@@ -448,8 +630,15 @@ class _$_CertificateState extends _CertificateState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, certificate, loading, loaded, isFailed, message);
+  int get hashCode => Object.hash(
+      runtimeType,
+      babyCertificate,
+      marriageCertificate,
+      isBabyCertificate,
+      loading,
+      loaded,
+      isFailed,
+      message);
 
   @JsonKey(ignore: true)
   @override
@@ -460,7 +649,9 @@ class _$_CertificateState extends _CertificateState {
 
 abstract class _CertificateState extends CertificateState {
   factory _CertificateState(
-      {required final BabyBirthCertificateEntity certificate,
+      {required final BabyBirthCertificateEntity babyCertificate,
+      required final MarriageCertificateEntity marriageCertificate,
+      required final bool isBabyCertificate,
       required final bool loading,
       required final bool loaded,
       required final bool isFailed,
@@ -468,7 +659,11 @@ abstract class _CertificateState extends CertificateState {
   _CertificateState._() : super._();
 
   @override
-  BabyBirthCertificateEntity get certificate;
+  BabyBirthCertificateEntity get babyCertificate;
+  @override
+  MarriageCertificateEntity get marriageCertificate;
+  @override
+  bool get isBabyCertificate;
   @override
   bool get loading;
   @override

@@ -72,7 +72,28 @@ class DocumentRemoteDataSourceImpl extends BaseRepository
   }
 
   @override
-  Future<Either<Failure, MarriageCertificateModel>> getMarriageCertificate() {
-    throw UnimplementedError(); // ?
+  Future<Either<Failure, MarriageCertificateModel>>
+      getMarriageCertificate() async {
+    if (await networkInfo.isConnected) {
+      final userID = sharedPreferences.getString(
+            CachedNames.cacheUserID,
+          ) ??
+          "";
+
+      final result = call(
+        RestMethod.get,
+        "${URLs.marriageCertificate}/$userID",
+      );
+      return result.then<Either<Failure, MarriageCertificateModel>>(
+        (either) => either.fold(
+          (l) => Left<Failure, MarriageCertificateModel>(l),
+          (r) => Right<Failure, MarriageCertificateModel>(
+            MarriageCertificateModel.fromJson(r),
+          ),
+        ),
+      );
+    } else {
+      return Left(CacheFailure());
+    }
   }
 }

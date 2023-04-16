@@ -20,4 +20,8 @@ class IconHelper {
   static const String bell = 'assets/icons/bell.png';
   static const String empty = 'assets/icons/empty.png';
   static const String familyStatus = 'assets/icons/family_status.png';
+  static const String babyBirthCertificate =
+      'assets/icons/baby_birth_certificate.png';
+  static const String marriageCertificate =
+      'assets/icons/marriage_certificate.png';
 }

@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/commons/dialog_helper.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/certificate_bloc/certificate_bloc.dart';
-import 'package:my_family_flutter/features/documents/presentation/widgets/certificate_content.dart';
+import 'package:my_family_flutter/features/documents/presentation/widgets/baby_certificate_content.dart';
+import 'package:my_family_flutter/features/documents/presentation/widgets/marriage_certificate_content.dart';
 
 class CertificateDetailsScreen extends StatefulWidget {
   final String title;
@@ -22,29 +24,22 @@ class CertificateDetailsScreen extends StatefulWidget {
 }
 
 class _CertificateDetailsScreenState extends State<CertificateDetailsScreen> {
-  _showErrorDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => DialogApplicationWidget(
-        params: DialogApplicationWidgetParams(
-          statusIcon: IconHelper.error,
-          content: TextHelper.noDataFetching,
-          buttonTitle: TextHelper.back,
-        ),
-        onPressed: () => context.router.popUntil(
-          (route) => route.settings.name == DocumentsScreenRoute.name,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CertificateBloc, CertificateState>(
       listener: (context, state) {
         if (state.isFailed) {
-          _showErrorDialog(context);
+          DialogHelper.showErrorDialog(
+            context,
+            DialogApplicationWidgetParams(
+              statusIcon: IconHelper.error,
+              content: state.message,
+              buttonTitle: TextHelper.back,
+            ),
+            () => context.router.popUntil(
+              (route) => route.settings.name == DocumentsScreenRoute.name,
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -60,28 +55,42 @@ class _CertificateDetailsScreenState extends State<CertificateDetailsScreen> {
                   )
                 : RefreshIndicator(
                     onRefresh: () async {
-                      context.read<CertificateBloc>().add(
-                            const CertificateFetched(),
-                          );
+                      if (state.isBabyCertificate) {
+                        context.read<CertificateBloc>().add(
+                              const BabyCertificateFetched(),
+                            );
+                      } else {
+                        context.read<CertificateBloc>().add(
+                              const MarriageCertificateFetched(),
+                            );
+                      }
                     },
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(20),
                       child: SizedBox(
-                        height: context.height * 0.85,
                         child: state.loaded
                             ? Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  CertificateContent(
-                                    certificate: state.certificate,
-                                  ),
+                                  state.isBabyCertificate
+                                      ? BabyCertificateContent(
+                                          certificate: state.babyCertificate,
+                                        )
+                                      : MarriageCertificateContent(
+                                          certificate:
+                                              state.marriageCertificate,
+                                        ),
+                                  const SizedBox(height: 20),
                                   CustomOutlinedButtonWidget(
                                     onPressed: () {},
                                     textButton: "Отправить документ",
                                     icon: Icons.ios_share,
                                   ),
+                                  const SizedBox(height: 20),
                                 ],
                               )
-                            : Center(child: Text(state.message)),
+                            : const Center(child: Text("")),
                       ),
                     ),
                   ),

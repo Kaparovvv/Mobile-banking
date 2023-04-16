@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/baby_birth_certificate_entity.dart';
-import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'detail_item.dart';
 
-class CertificateContent extends StatelessWidget {
+class BabyCertificateContent extends StatelessWidget {
   final BabyBirthCertificateEntity certificate;
-  const CertificateContent({
+  const BabyCertificateContent({
     super.key,
     required this.certificate,
   });
