@@ -28,8 +28,8 @@ class TextHelper {
   static const String noDataFetching = 'Данные не существует';
   static const String passport = 'Удостоверение личности';
   static const String driverCard = 'Водительские права';
-  static const String babyCertificate = 'Baby';
-  static const String marriageCertificate = 'Marriage';
+  static const String babyCertificate = 'Свидетельство о рождении';
+  static const String marriageCertificate = 'Свидетельство о заключении брака';
   static const String close = 'Закрыть';
   static const String back = 'назад';
   static const String exit = 'выйти';

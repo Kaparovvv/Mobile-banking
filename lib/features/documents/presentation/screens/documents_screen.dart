@@ -64,12 +64,29 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
             const SizedBox(height: 20),
             CustomElevatedButtonWidget(
               textButton: TextHelper.babyCertificate,
-              iconUrl: IconHelper.driverCard,
+              iconUrl: IconHelper.babyBirthCertificate,
               onPressed: () {
-                context.read<CertificateBloc>().add(const CertificateFetched());
+                context.read<CertificateBloc>().add(
+                      const BabyCertificateFetched(),
+                    );
                 context.router.push(
                   CertificateDetailsScreenRoute(
                     title: TextHelper.babyCertificate,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            CustomElevatedButtonWidget(
+              textButton: TextHelper.marriageCertificate,
+              iconUrl: IconHelper.marriageCertificate,
+              onPressed: () {
+                context.read<CertificateBloc>().add(
+                      const MarriageCertificateFetched(),
+                    );
+                context.router.push(
+                  CertificateDetailsScreenRoute(
+                    title: TextHelper.marriageCertificate,
                   ),
                 );
               },

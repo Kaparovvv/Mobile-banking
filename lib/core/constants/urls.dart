@@ -10,4 +10,6 @@ class URLs {
   static const String registerBaby = '/api/government-requests/register-baby';
   static const String babyBirthCertificate =
       '/api/government-requests/baby-birth-certificate';
+  static const String marriageCertificate =
+      '/api/government-requests/marriage-certificate';
 }

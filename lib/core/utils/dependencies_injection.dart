@@ -7,6 +7,7 @@ import 'package:my_family_flutter/features/documents/data/repository/document_re
 import 'package:my_family_flutter/features/documents/domain/repository/document_repository.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_baby_birth_cartificate.dart';
 import 'package:my_family_flutter/features/documents/domain/usecase/get_document.dart';
+import 'package:my_family_flutter/features/documents/domain/usecase/get_marriage_certificate.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/certificate_bloc/certificate_bloc.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
 import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
@@ -200,10 +201,17 @@ Future<void> init() async {
   // Baby Birth Certificate Bloc
 
   di.registerFactory<CertificateBloc>(
-    () => CertificateBloc(getBabyBirthCertificate: di()),
+    () => CertificateBloc(
+      getBabyBirthCertificate: di(),
+      getMarriageCertificate: di(),
+    ),
   );
 
-  di.registerFactory<GetBabyBirthCertificate>(
-    () => GetBabyBirthCertificate(repository: di()),
+  di.registerFactory<GetBabyBirthCertificateCase>(
+    () => GetBabyBirthCertificateCase(repository: di()),
+  );
+
+  di.registerFactory<GetMarriageCertificateCase>(
+    () => GetMarriageCertificateCase(repository: di()),
   );
 }

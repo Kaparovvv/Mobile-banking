@@ -50,6 +50,8 @@ flutter:
     - assets/icons/my_document.png
     - assets/icons/my_family.png
     - assets/icons/public_services.png
+    - assets/icons/baby_birth_certificate.png
+    - assets/icons/marriage_certificate.png
 
   fonts:
     - family: Montserrat
