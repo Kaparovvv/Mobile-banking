@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
 import 'core/exports/exports.dart';
 import 'core/utils/dependencies_injection.dart';
 import 'features/documents/presentation/bloc/documents_bloc.dart';
-import 'features/main/presentation/blocs/bloc/register_couple_bloc.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 class App extends StatelessWidget {
@@ -37,11 +38,11 @@ class App extends StatelessWidget {
           create: (_) => di.get<RegisterCoupleBloc>(),
         ),
         BlocProvider<NotificationBloc>(
-          create: (_) => di.get<NotificationBloc>()
-            ..add(
-              const GetData(),
-            ),
-        )
+          create: (_) => di.get<NotificationBloc>(),
+        ),
+        BlocProvider<RegisterBabyBloc>(
+          create: (_) => di.get<RegisterBabyBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'My Family',
@@ -55,7 +56,9 @@ class App extends StatelessWidget {
           appBarTheme: const AppBarTheme(backgroundColor: ThemeHelper.white),
           useMaterial3: true,
         ),
-        routeInformationParser: _appRouter.defaultRouteParser(),
+        routeInformationParser: _appRouter.defaultRouteParser(
+          includePrefixMatches: true,
+        ),
         routerDelegate: _appRouter.delegate(),
         debugShowCheckedModeBanner: false,
       ),

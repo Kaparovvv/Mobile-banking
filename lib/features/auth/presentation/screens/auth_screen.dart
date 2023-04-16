@@ -23,11 +23,8 @@ class _AuthScreenState extends State<AuthScreen> {
   late TextEditingController phoneController;
   late TextEditingController passwordController;
 
-  late AuthBloc _authBloc;
-
   @override
   void initState() {
-    _authBloc = BlocProvider.of(context, listen: false);
     phoneController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
@@ -74,10 +71,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      BlocConsumer(
-                        bloc: _authBloc,
+                      BlocConsumer<AuthBloc, AuthState>(
                         builder: (context, state) {
-                          if (state is AuthLoadingState) {
+                          if (state.loading) {
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
@@ -86,24 +82,26 @@ class _AuthScreenState extends State<AuthScreen> {
                             textButton: TextHelper.login.toUpperCase(),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                _authBloc.add(
-                                  AuthLogInEvent(
-                                    phoneNumber: phoneController.text
-                                        .replaceAll(RegExp(r'\D'), "")
-                                        .replaceFirst(r'7', '8'),
-                                    password: passwordController.text,
-                                  ),
-                                );
+                                context.read<AuthBloc>().add(
+                                      LogIn(
+                                        phoneNumber: phoneController.text
+                                            .replaceAll(RegExp(r'\D'), "")
+                                            .replaceFirst(r'7', '8'),
+                                        password: passwordController.text,
+                                      ),
+                                    );
                               }
                             },
                           );
                         },
                         listener: (context, state) {
-                          if (state is AuthLoadedState) {
+                          if (state.authenticated) {
                             widget.onLoginResult?.call(true);
-                            context.router.replace(const NavBarRouterRoute());
+                            context.router.replace(
+                              const NavBarRouterRoute(),
+                            );
                           }
-                          if (state is AuthErrorState) {
+                          if (state.isFailed) {
                             showCustomSnackBar(context, state.message);
                           }
                         },

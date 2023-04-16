@@ -16,7 +16,7 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
   UserDataLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<UserAuthModel> getUserAuthFromCache() {
+  Future<UserAuthModel> getUserAuthFromCache() async {
     final userData = sharedPreferences.getString(
       CachedNames.cacheUserData,
     );
@@ -32,11 +32,11 @@ class UserDataLocalDataSourceImpl implements UserDataLocalDataSource {
 
   @override
   Future<void> userAuthToCache(UserAuthModel userDataModel) async {
-    sharedPreferences.setString(
+    await sharedPreferences.setString(
       CachedNames.cacheUserData,
       userDataModel.token,
     );
-    sharedPreferences.setString(
+    await sharedPreferences.setString(
       CachedNames.cacheUserID,
       userDataModel.id,
     );

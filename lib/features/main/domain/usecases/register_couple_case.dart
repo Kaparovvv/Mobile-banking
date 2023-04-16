@@ -3,17 +3,17 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/usecases/usecases.dart';
-import 'package:my_family_flutter/features/main/domain/entity/register_couple_response.dart';
+import 'package:my_family_flutter/features/main/domain/entity/gov_request_response_entity.dart';
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
 
 class RegisterCoupleCase
-    extends UseCase<RegisterCoupleResponseEntity, RegisterCoupleParams> {
+    extends UseCase<GovRequestResponseEntity, RegisterCoupleParams> {
   final PublicServicesRepository repository;
 
   RegisterCoupleCase({required this.repository});
 
   @override
-  Future<Either<Failure, RegisterCoupleResponseEntity>> call(
+  Future<Either<Failure, GovRequestResponseEntity>> call(
       RegisterCoupleParams params) async {
     return await repository.registerCouple(
       params.partnerIin,

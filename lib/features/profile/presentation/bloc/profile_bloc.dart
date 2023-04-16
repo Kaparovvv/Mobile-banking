@@ -23,68 +23,53 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.getUserDataCase,
     required this.sharedPreferences,
   }) : super(ProfileState.initial()) {
-    on<GetIndividual>((event, emit) => getIndividual(event, emit));
-    on<GetUserData>((event, emit) => getUserData(event, emit));
-    on<LogoutEvent>((event, emit) => logOut(event, emit));
+    on<GetProfileData>((event, emit) async => await getData(event, emit));
   }
 
-  Future<void> getUserData(
-    GetUserData event,
+  Future<void> getData(
+    GetProfileData event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(loading: true, loaded: false));
+    var currentState = ProfileState.initial().copyWith(loading: true);
+    emit(currentState);
+    currentState = await getUserData(currentState);
+    currentState = await getIndividualData(currentState);
+    emit(currentState);
+  }
+
+  Future<ProfileState> getUserData(ProfileState currentState) async {
     final result = await getUserDataCase();
 
-    result.fold(
-      (l) => emit(state.copyWith(isFailed: true, loading: false)),
-      (r) => emit(state.copyWith(
+    return result.fold(
+      (l) => currentState.copyWith(
+        isFailed: true,
+        loaded: false,
+        loading: false,
+      ),
+      (r) => currentState.copyWith(
         userData: r,
         loading: false,
         loaded: true,
-      )),
+        message: 'User data data fetched',
+      ),
     );
   }
 
-  Future<void> getIndividual(
-    GetIndividual event,
-    Emitter<ProfileState> emit,
-  ) async {
-    emit(state.copyWith(loading: true, loaded: false));
+  Future<ProfileState> getIndividualData(ProfileState currentState) async {
     final result = await getIndividualCase();
 
-    result.fold(
-      (l) => emit(state.copyWith(
+    return result.fold(
+      (l) => currentState.copyWith(
         isFailed: true,
         loading: false,
-      )),
-      (r) => emit(state.copyWith(
+        loaded: false,
+      ),
+      (r) => currentState.copyWith(
         profileData: r,
         loading: false,
         loaded: true,
-      )),
+        message: "Individual data fetched",
+      ),
     );
-  }
-
-  Future<void> logOut(
-    LogoutEvent event,
-    Emitter<ProfileState> emit,
-  ) async {
-    bool? token;
-    emit(state.copyWith(loading: true, loaded: false));
-
-    await Future.delayed(const Duration(seconds: 2), () async {
-      token = await sharedPreferences.clear();
-      var token2 = sharedPreferences.getString(
-        CachedNames.cacheUserData,
-      );
-      log('2 ====== $token2');
-    });
-    log('2 ===== $token');
-    token == true
-        ? emit(ProfileState.initial())
-        : emit(state.copyWith(
-            isFailed: true,
-            message: 'Не удалось выйти из аккаунта',
-          ));
   }
 }

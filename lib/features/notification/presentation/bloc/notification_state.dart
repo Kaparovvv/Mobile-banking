@@ -33,9 +33,9 @@ class NotificationState with _$NotificationState {
         loaded: true,
         isFailed: false,
       );
-  factory NotificationState.error() => NotificationState(
+  factory NotificationState.error(String message) => NotificationState(
         list: [],
-        message: "Error",
+        message: message,
         loading: false,
         loaded: false,
         isFailed: true,

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/features/notification/domain/entity/notification_entity.dart';
 import 'package:my_family_flutter/features/notification/domain/usecase/notification_case.dart';
 
@@ -23,9 +24,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     emit(NotificationState.loading());
     final result = await notificationCase();
     result.fold(
-      (l) => emit(NotificationState.error()),
-      (r) => emit(NotificationState.loaded().copyWith(
+      (l) => emit(NotificationState.error(
+        l.exception.message,
+      )),
+      (r) => emit(state.copyWith(
         list: r.notification,
+        loaded: r.notification.isNotEmpty,
+        loading: false,
       )),
     );
   }

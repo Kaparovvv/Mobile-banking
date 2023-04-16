@@ -23,11 +23,11 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
 
   @override
   Future<void> userDataToCache(UserDataModel userDataModel) async {
-    sharedPreferences.setString(
+    await sharedPreferences.setString(
       CachedNames.cardNumber,
       userDataModel.cardNumber,
     );
-    sharedPreferences.setDouble(
+    await sharedPreferences.setDouble(
       CachedNames.cardBalance,
       userDataModel.balance,
     );

@@ -11,8 +11,8 @@ class RegisterCoupleBloc
   final RegisterCoupleCase registerCoupleCase;
   RegisterCoupleBloc({
     required this.registerCoupleCase,
-  }) : super(const RegisterCoupleState.initial()) {
-    on<Started>((event, emit) => emit(const Initial()));
+  }) : super(RegisterCoupleState.initial()) {
+    on<Started>((event, emit) => emit(RegisterCoupleState.initial()));
     on<Register>((event, emit) => register(event, emit));
   }
 
@@ -20,15 +20,18 @@ class RegisterCoupleBloc
     Register event,
     Emitter<RegisterCoupleState> emit,
   ) async {
+    emit(state.copyWith(loading: true, registered: false, isFailed: false));
+
     final result = await registerCoupleCase(RegisterCoupleParams(
       partnerIin: event.params.partnerIin.replaceAll(' ', ''),
       city: event.params.city,
       office: event.params.office,
       isUserPay: event.params.isUserPay,
     ));
+
     result.fold(
-      (l) => emit(const RegisterCoupleState.failed()),
-      (r) => emit(const RegisterCoupleState.registered()),
+      (l) => emit(state.copyWith(loading: false, isFailed: true)),
+      (r) => emit(state.copyWith(loading: false, registered: true)),
     );
   }
 }

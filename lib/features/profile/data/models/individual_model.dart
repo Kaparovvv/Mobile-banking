@@ -41,18 +41,4 @@ class IndividualModel extends IndividualEntity {
         iin: json["iin"],
         homeCity: json["homeCity"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "firstName": firstName,
-        "lastName": lastName,
-        "middleName": middleName,
-        "birthDate": birthDate,
-        "phoneNumber": phoneNumber,
-        "photo": photo,
-        "nationality": nationality,
-        "maritalStatus": maritalStatus,
-        "iin": iin,
-        "homeCity": homeCity,
-      };
 }
