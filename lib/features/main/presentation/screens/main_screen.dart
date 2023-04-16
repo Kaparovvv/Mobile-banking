@@ -9,6 +9,7 @@ import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/utils/dependencies_injection.dart';
 import 'package:my_family_flutter/core/widgets/custom_elevated_button_widget.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/bank_card_widget.dart';
+import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/widgets/cached_network_image_widget.dart';
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
 
   loadUserData() {
     context.read<ProfileBloc>().add(const GetProfileData());
+    context.read<NotificationBloc>().add(const GetData());
   }
 
   @override

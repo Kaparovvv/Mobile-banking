@@ -57,6 +57,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       maxLines: widget.maxLines ?? 1,
       enabled: widget.enabled,
       autofocus: widget.autoFocus,
+      autocorrect: false,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: widget.textInputAction,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
@@ -64,7 +65,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
         hintText: widget.hintText ?? '',
-        hintStyle: TextStyleHelper.f13w600,
+        hintStyle: TextStyleHelper.f13w400,
         labelText: widget.label ?? '',
         labelStyle: TextStyleHelper.f13w600,
         constraints: widget.constraints ?? const BoxConstraints(),

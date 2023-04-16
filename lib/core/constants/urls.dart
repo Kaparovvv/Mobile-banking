@@ -7,4 +7,5 @@ class URLs {
   static const String userInfo = '/api/users/user-id';
   static const String notificationList =
       '/api/government-requests/notifications/user-id';
+  static const String registerBaby = '/api/government-requests/register-baby';
 }

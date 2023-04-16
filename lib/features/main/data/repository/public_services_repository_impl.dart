@@ -5,8 +5,9 @@ import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/services/network_info.dart';
 import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
 import 'package:my_family_flutter/features/main/data/models/register_couple_response_model.dart';
-import 'package:my_family_flutter/features/main/domain/entity/register_couple_response.dart';
+import 'package:my_family_flutter/features/main/domain/entity/gov_request_response_entity.dart';
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/register_baby_case.dart';
 
 class PublicServicesRepositoryImpl extends PublicServicesRepository {
   final PublicServicesRemoteDataSource remoteDataSource;
@@ -18,7 +19,7 @@ class PublicServicesRepositoryImpl extends PublicServicesRepository {
   });
 
   @override
-  Future<Either<Failure, RegisterCoupleResponseEntity>> registerCouple(
+  Future<Either<Failure, GovRequestResponseEntity>> registerCouple(
     String partnerIin,
     String city,
     String office,
@@ -34,18 +35,37 @@ class PublicServicesRepositoryImpl extends PublicServicesRepository {
     );
   }
 
-  Future<Either<Failure, RegisterCoupleResponseEntity>> _registerCouple(
-    Future<Either<Failure, RegisterCoupleResponseModel>> Function() register,
+  @override
+  Future<Either<Failure, GovRequestResponseEntity>> registerBaby(
+    RegisterBabyParams params,
+  ) async {
+    return await _registerBaby(() => remoteDataSource.registerBaby(params));
+  }
+
+  Future<Either<Failure, GovRequestResponseEntity>> _registerCouple(
+    Future<Either<Failure, GovRequestResponseModel>> Function() register,
   ) async {
     if (await networkInfo.isConnected) {
-      print("============CONNECTED============");
       final result = await register();
       return result.fold(
         (l) => Left(l),
         (r) => Right(r),
       );
     } else {
-      print("============NOOOOOO============");
+      return Left(CacheFailure());
+    }
+  }
+
+  Future<Either<Failure, GovRequestResponseEntity>> _registerBaby(
+    Future<Either<Failure, GovRequestResponseModel>> Function() register,
+  ) async {
+    if (await networkInfo.isConnected) {
+      final result = await register();
+      return result.fold(
+        (l) => Left(l),
+        (r) => Right(r),
+      );
+    } else {
       return Left(CacheFailure());
     }
   }

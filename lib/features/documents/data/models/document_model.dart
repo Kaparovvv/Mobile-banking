@@ -37,16 +37,4 @@ class DocumentModel extends DocumentEntity {
           json["individual"] as Map<String, dynamic>,
         ),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "documentType": documentType,
-        "issueDate": issueDate,
-        "expirationDate": expirationDate,
-        "passportSeries": passportSeries,
-        "licenseNumber": licenseNumber,
-        "issuingAuthority": issuingAuthority,
-        "driverLicenseCategory": driverLicenseCategory,
-        "individual": individual,
-      };
 }

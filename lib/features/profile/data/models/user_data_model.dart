@@ -28,14 +28,4 @@ class UserDataModel extends UserDataEntity {
         balance: json["balance"],
         email: json["email"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "firstName": firstName,
-        "lastName": lastName,
-        "status": status,
-        "iin": iin,
-        "cardNumber": cardNumber,
-        "balance": balance,
-        "email": email,
-      };
 }
