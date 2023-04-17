@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/get_cities_case.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
@@ -65,6 +67,11 @@ class _RegistrationChildBirthScreenState
                         child: CustomElevatedButtonWidget(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              context
+                                  .read<CitiesBloc>()
+                                  .add(const CitiesFetched(
+                                    CitiesRequestType.BABY_BIRTH,
+                                  ));
                               context.router.push(const ChildInfoScreenRoute());
                             }
                           },

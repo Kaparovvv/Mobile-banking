@@ -3,6 +3,7 @@ import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/constants/urls.dart';
 import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/services/base_repository.dart';
+import 'package:my_family_flutter/features/main/data/models/cities_model.dart';
 import 'package:my_family_flutter/features/main/data/models/register_couple_response_model.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_baby_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,10 @@ abstract class PublicServicesRemoteDataSource {
 
   Future<Either<Failure, GovRequestResponseModel>> registerBaby(
     RegisterBabyParams params,
+  );
+
+  Future<Either<Failure, CitiesModel>> getCities(
+    String requestType,
   );
 }
 
@@ -36,8 +41,8 @@ class PublicServicesRemoteDataSourceImpl extends BaseRepository
     final userIin = sharedPreferences.getString(
       CachedNames.cacheUserIin,
     );
-    final cardNumber = sharedPreferences.getString(
-      CachedNames.cardNumber,
+    final cardId = sharedPreferences.getString(
+      CachedNames.cardID,
     );
 
     final result = call(
@@ -49,7 +54,7 @@ class PublicServicesRemoteDataSourceImpl extends BaseRepository
         "city": city,
         "office": office,
         "isUserPay": isUserPay,
-        "cardNumber": cardNumber,
+        "cardId": cardId,
       },
     );
 
@@ -99,6 +104,28 @@ class PublicServicesRemoteDataSourceImpl extends BaseRepository
         (l) => Left<Failure, GovRequestResponseModel>(l),
         (r) => Right<Failure, GovRequestResponseModel>(
           GovRequestResponseModel.fromJson(r),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Future<Either<Failure, CitiesModel>> getCities(
+    String requestType,
+  ) async {
+    final result = call(
+      RestMethod.get,
+      URLs.cities,
+      parametres: {
+        "request_type": requestType,
+      },
+    );
+
+    return result.then<Either<Failure, CitiesModel>>(
+      (either) => either.fold(
+        (l) => Left<Failure, CitiesModel>(l),
+        (r) => Right<Failure, CitiesModel>(
+          CitiesModel.fromJson(r),
         ),
       ),
     );

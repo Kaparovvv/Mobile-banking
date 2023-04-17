@@ -6,7 +6,10 @@ import 'package:my_family_flutter/core/widgets/button_with_background_widget.dar
 
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/core/widgets/icon_background_widget.dart';
+import 'package:my_family_flutter/features/main/domain/entity/city_entity.dart';
+import 'package:my_family_flutter/features/main/domain/entity/office_entity.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
 import '../../../../core/exports/exports.dart';
@@ -29,6 +32,10 @@ class _MarriageRegistrationScreenState
   Object? selectedRegion;
   Object? selectedRegistryOffice;
   dynamic isUserPay;
+
+  dynamic selectedCity;
+  dynamic officeList;
+  dynamic selectedOffice;
 
   @override
   void initState() {
@@ -117,7 +124,7 @@ class _MarriageRegistrationScreenState
                               controller: _partnersIndenNumber,
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.done,
-                              inputFormatters: [Masks.identificationNumber],
+                              // inputFormatters: [Masks.identificationNumber],
                               validate: (value) =>
                                   ValidatesHelper.identityNumberValidate(
                                 value!,
@@ -125,34 +132,35 @@ class _MarriageRegistrationScreenState
                               ),
                             ),
                             const SizedBox(height: 40),
-                            CustomDropDownWidget(
-                              listOfItem: listOfRegion,
-                              hintText: TextHelper.chooseSity,
-                              validator: (dynamic value) =>
-                                  value == null ? TextHelper.chooseSity : null,
-                              callback: ((item) => setState(
-                                    () => selectedRegion = item,
-                                  )),
-                            ),
-                            selectedRegion != null
-                                ? Column(
-                                    children: [
-                                      const SizedBox(height: 40),
-                                      CustomDropDownWidget(
-                                        listOfItem: listOfOffice,
-                                        hintText: TextHelper.chooseOffice,
-                                        validator: (dynamic value) =>
-                                            value == null
-                                                ? TextHelper.chooseOffice
-                                                : null,
-                                        callback: ((item) => setState(
-                                              () =>
-                                                  selectedRegistryOffice = item,
-                                            )),
-                                      ),
-                                    ],
-                                  )
-                                : const SizedBox(),
+                            // CustomDropDownWidget(
+                            //   listOfItem: listOfRegion,
+                            //   hintText: TextHelper.chooseSity,
+                            //   validator: (dynamic value) =>
+                            //       value == null ? TextHelper.chooseSity : null,
+                            //   callback: ((item) => setState(
+                            //         () => selectedRegion = item,
+                            //       )),
+                            // ),
+                            // selectedRegion != null
+                            //     ? Column(
+                            //         children: [
+                            //           const SizedBox(height: 40),
+                            //           CustomDropDownWidget(
+                            //             listOfItem: listOfOffice,
+                            //             hintText: TextHelper.chooseOffice,
+                            //             validator: (dynamic value) =>
+                            //                 value == null
+                            //                     ? TextHelper.chooseOffice
+                            //                     : null,
+                            //             callback: ((item) => setState(
+                            //                   () =>
+                            //                       selectedRegistryOffice = item,
+                            //                 )),
+                            //           ),
+                            //         ],
+                            //       )
+                            //     : const SizedBox(),
+                            _selectCityAndOffice(state),
                             _whoIsPayWidget(),
                             Align(
                               alignment: Alignment.center,
@@ -167,15 +175,14 @@ class _MarriageRegistrationScreenState
                                         isUserPay != true) {
                                       if (_partnersIndenNumber
                                               .text.isNotEmpty &&
-                                          selectedRegion != null &&
-                                          selectedRegistryOffice != null) {
+                                          selectedCity != null &&
+                                          selectedOffice != null) {
                                         context.read<RegisterCoupleBloc>().add(
                                               RegisterCoupleEvent.register(
                                                 RegisterCoupleParams(
-                                                  city:
-                                                      selectedRegion as String,
-                                                  office: selectedRegistryOffice
-                                                      as String,
+                                                  city: selectedCity as String,
+                                                  office:
+                                                      selectedOffice as String,
                                                   partnerIin:
                                                       _partnersIndenNumber.text,
                                                   isUserPay: true,
@@ -188,6 +195,7 @@ class _MarriageRegistrationScreenState
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 50),
                           ],
                         ),
                       ),
@@ -195,6 +203,56 @@ class _MarriageRegistrationScreenState
                   ),
           ),
         );
+      },
+    );
+  }
+
+  BlocBuilder<CitiesBloc, CitiesState> _selectCityAndOffice(
+      RegisterCoupleState state) {
+    return BlocBuilder<CitiesBloc, CitiesState>(
+      builder: (context, cityState) {
+        return state.isFailed
+            ? const Text("Failed")
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    TextHelper.chooseSity,
+                    style: TextStyleHelper.f14w700,
+                  ),
+                  const SizedBox(height: 15),
+                  CustomDropDownWidget(
+                    listOfItem:
+                        cityState.loaded ? cityState.cityList.cityList : [],
+                    hintText: TextHelper.chooseSity,
+                    validator: (dynamic value) =>
+                        value == null ? TextHelper.chooseSity : null,
+                    callback: ((item) {
+                      setState(() {
+                        selectedCity = item.name;
+                        officeList = item.officeList;
+                      });
+                    }),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    TextHelper.chooseOffice,
+                    style: TextStyleHelper.f14w700,
+                  ),
+                  const SizedBox(height: 15),
+                  CustomDropDownWidget(
+                    listOfItem: officeList ?? [],
+                    hintText: TextHelper.chooseOffice,
+                    validator: (dynamic value) =>
+                        value == null ? TextHelper.chooseSity : null,
+                    callback: ((item) {
+                      setState(() {
+                        selectedOffice = item.name;
+                      });
+                    }),
+                  ),
+                ],
+              );
       },
     );
   }
@@ -207,8 +265,8 @@ class _MarriageRegistrationScreenState
 
   Widget _whoIsPayWidget() {
     return _partnersIndenNumber.text.isNotEmpty &&
-            selectedRegion != null &&
-            selectedRegistryOffice != null
+            selectedCity != null &&
+            selectedOffice != null
         ? Padding(
             padding: const EdgeInsets.only(top: 40),
             child: WhoPayTheFeeWidget(
@@ -242,9 +300,10 @@ class _MarriageRegistrationScreenState
   void _showDialog(BuildContext context, DialogApplicationWidgetParams params) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) => DialogApplicationWidget(
         params: params,
-        onPressed: () => context.router.replace(const NavBarRouterRoute()),
+        onPressed: () => context.router.popUntilRoot(),
       ),
     );
   }

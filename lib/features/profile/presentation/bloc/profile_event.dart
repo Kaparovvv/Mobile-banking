@@ -4,4 +4,5 @@ part of 'profile_bloc.dart';
 class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.started() = Started;
   const factory ProfileEvent.getProfileData() = GetProfileData;
+  const factory ProfileEvent.getCardData() = GetCardData;
 }

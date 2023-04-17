@@ -6,6 +6,7 @@ import 'package:my_family_flutter/core/router/auth_guard.dart';
 import 'package:my_family_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/certificate_bloc/certificate_bloc.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/notification/presentation/bloc/notification_bloc.dart';
@@ -46,6 +47,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CertificateBloc>(
           create: (_) => di.get<CertificateBloc>(),
+        ),
+        BlocProvider<CitiesBloc>(
+          create: (_) => di.get<CitiesBloc>(),
         ),
       ],
       child: MaterialApp.router(

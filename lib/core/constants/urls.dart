@@ -12,4 +12,6 @@ class URLs {
       '/api/government-requests/baby-birth-certificate';
   static const String marriageCertificate =
       '/api/government-requests/marriage-certificate';
+  static const String cities = '/api/government-requests/cities';
+  static const String cards = '/api/cards/';
 }

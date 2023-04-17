@@ -23,7 +23,7 @@ class RegisterBabyState with _$RegisterBabyState {
           middleName: "",
           city: "",
           office: "",
-          country: "",
+          country: "Казахстан",
           birthDate: DateTime.now(),
           motherIin: "",
           fatherIin: "",

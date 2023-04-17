@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class GovRequestResponseEntity extends Equatable {
   final String requestId;
-  final int sum;
+  final double sum;
   final String type;
   final DateTime date;
 

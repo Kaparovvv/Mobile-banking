@@ -4,8 +4,10 @@ import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/services/network_info.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_local_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
+import 'package:my_family_flutter/features/profile/data/models/cards_model.dart';
 import 'package:my_family_flutter/features/profile/data/models/individual_model.dart';
 import 'package:my_family_flutter/features/profile/data/models/user_data_model.dart';
+import 'package:my_family_flutter/features/profile/domain/entity/cars_entity.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/user_data_entity.dart';
 import 'package:my_family_flutter/features/profile/domain/repository/profile_repository.dart';
@@ -57,6 +59,28 @@ class ProfileRepositoryImpl implements ProfileRepository {
         (l) => Left(l),
         (r) {
           localDataSource.userDataToCache(r);
+          return Right(r);
+        },
+      );
+    } else {
+      return Left(CacheFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, CardListEntity>> getCardData() async {
+    return await _getCardData(() => remoteDataSource.getCardData());
+  }
+
+  Future<Either<Failure, CardListEntity>> _getCardData(
+    Future<Either<Failure, CardListModel>> Function() get,
+  ) async {
+    if (await networkInfo.isConnected) {
+      final remote = await get();
+      return remote.fold(
+        (l) => Left(l),
+        (r) {
+          localDataSource.cardDataToCache(r);
           return Right(r);
         },
       );

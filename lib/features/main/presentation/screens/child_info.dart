@@ -6,6 +6,9 @@ import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
 import 'package:my_family_flutter/core/widgets/custom_textfield_widget.dart';
 import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
+import 'package:my_family_flutter/features/main/domain/entity/city_entity.dart';
+import 'package:my_family_flutter/features/main/domain/entity/office_entity.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/widgets/custom_drop_down_widget.dart';
 
@@ -19,8 +22,7 @@ class ChildInfoScreen extends StatefulWidget {
 class _ChildInfoScreenState extends State<ChildInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Object? selectedRegion;
-  List<String> listOfRegion = <String>['ЗАГС 1', 'ЗАГС 2', 'ЗАГС 3'];
+  dynamic selectedCity;
 
   void _showErrorDialog(BuildContext context) {
     showDialog(
@@ -82,99 +84,148 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
           builder: (context, state) {
             return state.loading
                 ? const Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
-                    onRefresh: () async {
-                      _formKey.currentState!.reset();
-                      context
-                          .read<RegisterBabyBloc>()
-                          .add(const ResetChildInfo());
-                    },
-                    child: SizedBox(
-                      height: context.height * 0.8,
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(20),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Заполните поля:",
-                                style: TextStyleHelper.f14w700,
-                              ),
-                              const SizedBox(height: 15),
-                              CustomTextFieldWidget(
-                                label: TextHelper.firstName,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validate: (value) =>
-                                    ValidatesHelper.nameValidate(
-                                  value ?? "",
-                                  TextHelper.firstName,
-                                ),
-                                onChanged: (nextValue) => context
-                                    .read<RegisterBabyBloc>()
-                                    .add(ParamsChanged(
-                                      state.params
-                                          .copyWith(firstName: nextValue),
-                                    )),
-                              ),
-                              const SizedBox(height: 15),
-                              CustomTextFieldWidget(
-                                label: TextHelper.lastName,
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validate: (value) =>
-                                    ValidatesHelper.nameValidate(
-                                  value ?? "",
-                                  TextHelper.lastName,
-                                ),
-                                onChanged: (nextValue) => context
-                                    .read<RegisterBabyBloc>()
-                                    .add(ParamsChanged(
-                                      state.params
-                                          .copyWith(lastname: nextValue),
-                                    )),
-                              ),
-                              const SizedBox(height: 30),
-                              const Text(
-                                "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
-                                style: TextStyleHelper.f14w700,
-                              ),
-                              const SizedBox(height: 15),
-                              CustomDropDownWidget(
-                                listOfItem: listOfRegion,
-                                hintText: "Выберите отдел ЗАГСа",
-                                validator: (dynamic value) => value == null
-                                    ? TextHelper.chooseSity
-                                    : null,
-                                callback: ((item) => setState(
-                                      () => selectedRegion = item,
-                                    )),
-                              ),
-                              const SizedBox(height: 40),
-                              SizedBox(
-                                width: double.maxFinite,
-                                height: 45,
-                                child: CustomElevatedButtonWidget(
-                                  onPressed: () {
-                                    context
-                                        .read<RegisterBabyBloc>()
-                                        .add(const Register());
-                                  },
-                                  title: 'Подать заявку',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+                : whenLoaded(context, state);
           },
         ),
       ),
+    );
+  }
+
+  RefreshIndicator whenLoaded(BuildContext context, RegisterBabyState state) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        _formKey.currentState!.reset();
+        context.read<RegisterBabyBloc>().add(const ResetChildInfo());
+      },
+      child: SizedBox(
+        height: context.height * 0.8,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Заполните поля:",
+                  style: TextStyleHelper.f14w700,
+                ),
+                const SizedBox(height: 15),
+                CustomTextFieldWidget(
+                  label: TextHelper.firstName,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validate: (value) => ValidatesHelper.nameValidate(
+                    value ?? "",
+                    TextHelper.firstName,
+                  ),
+                  onChanged: (nextValue) =>
+                      context.read<RegisterBabyBloc>().add(ParamsChanged(
+                            state.params.copyWith(firstName: nextValue),
+                          )),
+                ),
+                const SizedBox(height: 15),
+                CustomTextFieldWidget(
+                  label: TextHelper.lastName,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validate: (value) => ValidatesHelper.nameValidate(
+                    value ?? "",
+                    TextHelper.lastName,
+                  ),
+                  onChanged: (nextValue) =>
+                      context.read<RegisterBabyBloc>().add(ParamsChanged(
+                            state.params.copyWith(lastname: nextValue),
+                          )),
+                ),
+                const SizedBox(height: 15),
+                CustomTextFieldWidget(
+                  label: TextHelper.middleName,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validate: (value) => ValidatesHelper.nameValidate(
+                    value ?? "",
+                    TextHelper.middleName,
+                  ),
+                  onChanged: (nextValue) =>
+                      context.read<RegisterBabyBloc>().add(ParamsChanged(
+                            state.params.copyWith(middleName: nextValue),
+                          )),
+                ),
+                const SizedBox(height: 30),
+                _selectCityAndOffice(state),
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: double.maxFinite,
+                  height: 45,
+                  child: CustomElevatedButtonWidget(
+                    onPressed: () {
+                      context.read<RegisterBabyBloc>().add(const Register());
+                    },
+                    title: 'Подать заявку',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  BlocBuilder<CitiesBloc, CitiesState> _selectCityAndOffice(
+      RegisterBabyState state) {
+    return BlocBuilder<CitiesBloc, CitiesState>(
+      builder: (context, cityState) {
+        return state.isFailed
+            ? const Text("Failed")
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    TextHelper.chooseSity,
+                    style: TextStyleHelper.f14w700,
+                  ),
+                  const SizedBox(height: 15),
+                  CustomDropDownWidget(
+                    listOfItem:
+                        cityState.loaded ? cityState.cityList.cityList : [],
+                    hintText: "Выберите регион",
+                    validator: (dynamic value) =>
+                        value == null ? TextHelper.chooseSity : null,
+                    callback: ((item) {
+                      setState(
+                        () => selectedCity = item.officeList,
+                      );
+                      context.read<RegisterBabyBloc>().add(
+                            ParamsChanged(
+                              state.params.copyWith(
+                                  middleName: (item as CityEntity).name),
+                            ),
+                          );
+                    }),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Выбери отдел ЗАГСа для получение свидетельства о рождении ребенка:",
+                    style: TextStyleHelper.f14w700,
+                  ),
+                  const SizedBox(height: 15),
+                  CustomDropDownWidget(
+                    listOfItem: selectedCity ?? [],
+                    hintText: "Выберите отдел ЗАГСа",
+                    validator: (dynamic value) =>
+                        value == null ? TextHelper.chooseSity : null,
+                    callback: ((item) {
+                      context.read<RegisterBabyBloc>().add(
+                            ParamsChanged(
+                              state.params.copyWith(
+                                  middleName: (item as OfficeEntity).name),
+                            ),
+                          );
+                    }),
+                  ),
+                ],
+              );
+      },
     );
   }
 }

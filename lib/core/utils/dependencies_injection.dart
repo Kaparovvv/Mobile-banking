@@ -13,8 +13,10 @@ import 'package:my_family_flutter/features/documents/presentation/bloc/documents
 import 'package:my_family_flutter/features/main/data/data_sources/public_services_remote_data_sources.dart';
 import 'package:my_family_flutter/features/main/data/repository/public_services_repository_impl.dart';
 import 'package:my_family_flutter/features/main/domain/repository/public_services_repository.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/get_cities_case.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_baby_case.dart';
 import 'package:my_family_flutter/features/main/domain/usecases/register_couple_case.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_baby/register_baby_bloc.dart';
 import 'package:my_family_flutter/features/main/presentation/blocs/register_couple_bloc/register_couple_bloc.dart';
 import 'package:my_family_flutter/features/notification/data/datasources/notification_remote_data_source.dart';
@@ -26,6 +28,7 @@ import 'package:my_family_flutter/features/profile/data/data_sources/profile_loc
 import 'package:my_family_flutter/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:my_family_flutter/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:my_family_flutter/features/profile/domain/repository/profile_repository.dart';
+import 'package:my_family_flutter/features/profile/domain/usecase/get_card_data_case.dart';
 import 'package:my_family_flutter/features/profile/domain/usecase/get_individual_case.dart';
 import 'package:my_family_flutter/features/profile/domain/usecase/get_user_data_case.dart';
 import 'package:my_family_flutter/features/profile/presentation/bloc/profile_bloc.dart';
@@ -134,6 +137,7 @@ Future<void> init() async {
     () => ProfileBloc(
       getIndividualCase: di(),
       getUserDataCase: di(),
+      getCardDataCase: di(),
       sharedPreferences: di(),
     ),
   );
@@ -144,6 +148,10 @@ Future<void> init() async {
 
   di.registerFactory<GetUserDataCase>(
     () => GetUserDataCase(repository: di()),
+  );
+
+  di.registerFactory<GetCardDataCase>(
+    () => GetCardDataCase(repository: di()),
   );
 
   di.registerFactory<ProfileRepository>(
@@ -213,5 +221,15 @@ Future<void> init() async {
 
   di.registerFactory<GetMarriageCertificateCase>(
     () => GetMarriageCertificateCase(repository: di()),
+  );
+
+  // Cities Bloc
+
+  di.registerFactory<CitiesBloc>(
+    () => CitiesBloc(getCitiesCase: di()),
+  );
+
+  di.registerFactory<GetCitiesCase>(
+    () => GetCitiesCase(repository: di()),
   );
 }
