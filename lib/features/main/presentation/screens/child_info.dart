@@ -161,7 +161,6 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                 CustomDropDownWidget(
                   listOfItem: genders,
                   hintText: "Пол",
-                  isStringList: true,
                   validator: (dynamic value) => value == null ? "Пол" : null,
                   callback: ((item) {
                     context.read<RegisterBabyBloc>().add(
@@ -237,19 +236,17 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                   ),
                   const SizedBox(height: 15),
                   CustomDropDownWidget(
-                    listOfItem:
-                        cityState.loaded ? cityState.cityList.cityList : [],
+                    listOfItem: cityState.loaded ? cityState.cityList : [],
                     hintText: "Выберите регион",
                     validator: (dynamic value) =>
                         value == null ? TextHelper.chooseSity : null,
                     callback: ((item) {
                       setState(
-                        () => selectedCity = item.officeList,
+                        () => selectedCity = item,
                       );
                       context.read<RegisterBabyBloc>().add(
                             ParamsChanged(
-                              state.params.copyWith(
-                                  middleName: (item as CityEntity).name),
+                              state.params.copyWith(city: item),
                             ),
                           );
                     }),
@@ -261,15 +258,17 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                   ),
                   const SizedBox(height: 15),
                   CustomDropDownWidget(
-                    listOfItem: selectedCity ?? [],
+                    listOfItem: selectedCity != null
+                        ? cityState.officeList[
+                            cityState.cityList.indexOf(selectedCity)]
+                        : [],
                     hintText: "Выберите отдел ЗАГСа",
                     validator: (dynamic value) =>
                         value == null ? TextHelper.chooseSity : null,
                     callback: ((item) {
                       context.read<RegisterBabyBloc>().add(
                             ParamsChanged(
-                              state.params.copyWith(
-                                  middleName: (item as OfficeEntity).name),
+                              state.params.copyWith(office: item),
                             ),
                           );
                     }),

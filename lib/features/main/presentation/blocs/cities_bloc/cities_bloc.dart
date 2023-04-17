@@ -30,11 +30,16 @@ class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
         isFailed: true,
         message: TextHelper.noDataFetching,
       )),
-      (r) => emit(state.copyWith(
-        loading: false,
-        loaded: true,
-        cityList: r,
-      )),
+      (r) {
+        emit(state.copyWith(
+          loading: false,
+          loaded: true,
+          cityList: r.cityList.map((e) => e.name).toList(),
+          officeList: r.cityList
+              .map((e) => e.officeList.map((e) => e.name).toList())
+              .toList(),
+        ));
+      },
     );
   }
 }

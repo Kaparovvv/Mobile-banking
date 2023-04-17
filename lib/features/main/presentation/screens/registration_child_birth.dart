@@ -54,11 +54,9 @@ class _RegistrationChildBirthScreenState
                         "Сведения о матери:",
                         style: TextStyleHelper.f14w700,
                       ),
-                      // MOTHER first name
                       motherFields(context, state),
                       const SizedBox(height: 30),
                       _fatherFields(),
-                      // FATHER first name
                       fatherFields(context, state),
                       const SizedBox(height: 40),
                       SizedBox(

@@ -20,21 +20,18 @@ mixin _$ProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getProfileData,
-    required TResult Function() getCardData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getProfileData,
-    TResult? Function()? getCardData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getProfileData,
-    TResult Function()? getCardData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +39,18 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(GetProfileData value) getProfileData,
-    required TResult Function(GetCardData value) getCardData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(GetProfileData value)? getProfileData,
-    TResult? Function(GetCardData value)? getCardData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(GetProfileData value)? getProfileData,
-    TResult Function(GetCardData value)? getCardData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +112,6 @@ class _$Started implements Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getProfileData,
-    required TResult Function() getCardData,
   }) {
     return started();
   }
@@ -128,7 +121,6 @@ class _$Started implements Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getProfileData,
-    TResult? Function()? getCardData,
   }) {
     return started?.call();
   }
@@ -138,7 +130,6 @@ class _$Started implements Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getProfileData,
-    TResult Function()? getCardData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -152,7 +143,6 @@ class _$Started implements Started {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(GetProfileData value) getProfileData,
-    required TResult Function(GetCardData value) getCardData,
   }) {
     return started(this);
   }
@@ -162,7 +152,6 @@ class _$Started implements Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(GetProfileData value)? getProfileData,
-    TResult? Function(GetCardData value)? getCardData,
   }) {
     return started?.call(this);
   }
@@ -172,7 +161,6 @@ class _$Started implements Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(GetProfileData value)? getProfileData,
-    TResult Function(GetCardData value)? getCardData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -226,7 +214,6 @@ class _$GetProfileData implements GetProfileData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getProfileData,
-    required TResult Function() getCardData,
   }) {
     return getProfileData();
   }
@@ -236,7 +223,6 @@ class _$GetProfileData implements GetProfileData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getProfileData,
-    TResult? Function()? getCardData,
   }) {
     return getProfileData?.call();
   }
@@ -246,7 +232,6 @@ class _$GetProfileData implements GetProfileData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getProfileData,
-    TResult Function()? getCardData,
     required TResult orElse(),
   }) {
     if (getProfileData != null) {
@@ -260,7 +245,6 @@ class _$GetProfileData implements GetProfileData {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(GetProfileData value) getProfileData,
-    required TResult Function(GetCardData value) getCardData,
   }) {
     return getProfileData(this);
   }
@@ -270,7 +254,6 @@ class _$GetProfileData implements GetProfileData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(GetProfileData value)? getProfileData,
-    TResult? Function(GetCardData value)? getCardData,
   }) {
     return getProfileData?.call(this);
   }
@@ -280,7 +263,6 @@ class _$GetProfileData implements GetProfileData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(GetProfileData value)? getProfileData,
-    TResult Function(GetCardData value)? getCardData,
     required TResult orElse(),
   }) {
     if (getProfileData != null) {
@@ -292,114 +274,6 @@ class _$GetProfileData implements GetProfileData {
 
 abstract class GetProfileData implements ProfileEvent {
   const factory GetProfileData() = _$GetProfileData;
-}
-
-/// @nodoc
-abstract class _$$GetCardDataCopyWith<$Res> {
-  factory _$$GetCardDataCopyWith(
-          _$GetCardData value, $Res Function(_$GetCardData) then) =
-      __$$GetCardDataCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GetCardDataCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$GetCardData>
-    implements _$$GetCardDataCopyWith<$Res> {
-  __$$GetCardDataCopyWithImpl(
-      _$GetCardData _value, $Res Function(_$GetCardData) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$GetCardData implements GetCardData {
-  const _$GetCardData();
-
-  @override
-  String toString() {
-    return 'ProfileEvent.getCardData()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetCardData);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() getProfileData,
-    required TResult Function() getCardData,
-  }) {
-    return getCardData();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? getProfileData,
-    TResult? Function()? getCardData,
-  }) {
-    return getCardData?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? getProfileData,
-    TResult Function()? getCardData,
-    required TResult orElse(),
-  }) {
-    if (getCardData != null) {
-      return getCardData();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Started value) started,
-    required TResult Function(GetProfileData value) getProfileData,
-    required TResult Function(GetCardData value) getCardData,
-  }) {
-    return getCardData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Started value)? started,
-    TResult? Function(GetProfileData value)? getProfileData,
-    TResult? Function(GetCardData value)? getCardData,
-  }) {
-    return getCardData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Started value)? started,
-    TResult Function(GetProfileData value)? getProfileData,
-    TResult Function(GetCardData value)? getCardData,
-    required TResult orElse(),
-  }) {
-    if (getCardData != null) {
-      return getCardData(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetCardData implements ProfileEvent {
-  const factory GetCardData() = _$GetCardData;
 }
 
 /// @nodoc

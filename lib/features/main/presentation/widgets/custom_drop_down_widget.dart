@@ -9,7 +9,6 @@ class CustomDropDownWidget extends StatefulWidget {
   final String hintText;
   final ItemCallback callback;
   final String? Function(dynamic)? validator;
-  final bool isStringList;
 
   const CustomDropDownWidget({
     super.key,
@@ -17,7 +16,6 @@ class CustomDropDownWidget extends StatefulWidget {
     required this.hintText,
     required this.callback,
     required this.validator,
-    this.isStringList = false,
   });
 
   @override
@@ -50,7 +48,7 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
           return DropdownMenuItem<dynamic>(
             value: value,
             child: Text(
-              (widget.isStringList ? value : value.name).toString(),
+              value.toString(),
               style: TextStyleHelper.f14w600,
             ),
           );

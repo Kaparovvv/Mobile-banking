@@ -7,7 +7,8 @@ class CitiesState with _$CitiesState {
     required bool loaded,
     required bool isFailed,
     required String message,
-    required CitiesEntity cityList,
+    required List<String> cityList,
+    required List<List<String>> officeList,
   }) = _CitiesState;
 
   const CitiesState._();
@@ -17,9 +18,7 @@ class CitiesState with _$CitiesState {
         loading: false,
         isFailed: false,
         message: "",
-        cityList: const CitiesEntity(
-          sum: 0,
-          cityList: [],
-        ),
+        cityList: [],
+        officeList: [],
       );
 }
