@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/individual_entity.dart';
 import 'package:my_family_flutter/features/profile/domain/entity/user_data_entity.dart';
+import 'package:my_family_flutter/features/profile/domain/usecase/get_card_data_case.dart';
 import 'package:my_family_flutter/features/profile/domain/usecase/get_individual_case.dart';
 import 'package:my_family_flutter/features/profile/domain/usecase/get_user_data_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,11 +14,13 @@ part 'profile_bloc.freezed.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetIndividualCase getIndividualCase;
   final GetUserDataCase getUserDataCase;
+  final GetCardDataCase getCardDataCase;
   final SharedPreferences sharedPreferences;
 
   ProfileBloc({
     required this.getIndividualCase,
     required this.getUserDataCase,
+    required this.getCardDataCase,
     required this.sharedPreferences,
   }) : super(ProfileState.initial()) {
     on<GetProfileData>((event, emit) async => await getData(event, emit));
@@ -31,6 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(currentState);
     currentState = await getUserData(currentState);
     currentState = await getIndividualData(currentState);
+    getCardDataCase();
     emit(currentState);
   }
 

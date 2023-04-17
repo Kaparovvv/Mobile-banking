@@ -3,6 +3,7 @@ import 'package:my_family_flutter/core/constants/cached_names.dart';
 import 'package:my_family_flutter/core/constants/urls.dart';
 import 'package:my_family_flutter/core/exceptions/failure.dart';
 import 'package:my_family_flutter/core/services/base_repository.dart';
+import 'package:my_family_flutter/features/profile/data/models/cards_model.dart';
 import 'package:my_family_flutter/features/profile/data/models/individual_model.dart';
 import 'package:my_family_flutter/features/profile/data/models/user_data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class ProfileRemoteDataSource {
   Future<Either<Failure, IndividualModel>> getIndividual();
   Future<Either<Failure, UserDataModel>> getUserData();
+  Future<Either<Failure, CardListModel>> getCardData();
 }
 
 class ProfileRemoteDataSourceImpl extends BaseRepository
@@ -43,6 +45,18 @@ class ProfileRemoteDataSourceImpl extends BaseRepository
       (either) => either.fold(
         (l) => Left<Failure, UserDataModel>(l),
         (r) => Right<Failure, UserDataModel>(UserDataModel.fromJson(r)),
+      ),
+    );
+  }
+
+  @override
+  Future<Either<Failure, CardListModel>> getCardData() async {
+    final userId = sharedPreferences.getString(CachedNames.cacheUserID);
+    final result = call(RestMethod.get, "${URLs.cards}/$userId");
+    return result.then<Either<Failure, CardListModel>>(
+      (either) => either.fold(
+        (l) => Left<Failure, CardListModel>(l),
+        (r) => Right<Failure, CardListModel>(CardListModel.fromJson(r)),
       ),
     );
   }

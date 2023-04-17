@@ -16,7 +16,7 @@ class GovRequestResponseModel extends GovRequestResponseEntity {
   factory GovRequestResponseModel.fromJson(Map<String, dynamic> json) =>
       GovRequestResponseModel(
         requestId: json['requestId'] as String,
-        sum: json["sum"] as int,
+        sum: json["sum"] as double,
         type: json['type'] as String,
         date: DateTime.parse(json["date"] as String),
       );

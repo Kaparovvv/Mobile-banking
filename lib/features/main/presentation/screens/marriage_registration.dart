@@ -124,7 +124,7 @@ class _MarriageRegistrationScreenState
                               controller: _partnersIndenNumber,
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.done,
-                              inputFormatters: [Masks.identificationNumber],
+                              // inputFormatters: [Masks.identificationNumber],
                               validate: (value) =>
                                   ValidatesHelper.identityNumberValidate(
                                 value!,
@@ -303,7 +303,7 @@ class _MarriageRegistrationScreenState
       barrierDismissible: false,
       builder: (context) => DialogApplicationWidget(
         params: params,
-        onPressed: () => context.router.replace(const NavBarRouterRoute()),
+        onPressed: () => context.router.popUntilRoot(),
       ),
     );
   }

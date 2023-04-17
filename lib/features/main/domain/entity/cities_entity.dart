@@ -15,6 +15,6 @@ class CitiesEntity extends Equatable {
   @override
   List<Object?> get props => [
         sum,
-        cityList.map((e) => e),
+        cityList,
       ];
 }

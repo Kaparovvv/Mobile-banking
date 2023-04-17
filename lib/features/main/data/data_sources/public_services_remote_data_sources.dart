@@ -41,8 +41,8 @@ class PublicServicesRemoteDataSourceImpl extends BaseRepository
     final userIin = sharedPreferences.getString(
       CachedNames.cacheUserIin,
     );
-    final cardNumber = sharedPreferences.getString(
-      CachedNames.cardNumber,
+    final cardId = sharedPreferences.getString(
+      CachedNames.cardID,
     );
 
     final result = call(
@@ -54,7 +54,7 @@ class PublicServicesRemoteDataSourceImpl extends BaseRepository
         "city": city,
         "office": office,
         "isUserPay": isUserPay,
-        "cardId": cardNumber,
+        "cardId": cardId,
       },
     );
 

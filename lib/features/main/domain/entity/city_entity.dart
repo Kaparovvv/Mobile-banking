@@ -18,6 +18,6 @@ class CityEntity extends Equatable {
   List<Object?> get props => [
         id,
         name,
-        officeList.map((e) => e),
+        officeList,
       ];
 }
