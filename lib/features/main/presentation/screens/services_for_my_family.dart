@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/features/main/domain/usecases/get_cities_case.dart';
+import 'package:my_family_flutter/features/main/presentation/blocs/cities_bloc/cities_bloc.dart';
 
 import '../../../../core/exports/exports.dart';
 import '../../../../core/router/app_router.gr.dart';
@@ -23,17 +26,28 @@ class ServicesForMyFamilyScreen extends StatelessWidget {
             CustomElevatedButtonWidget(
               textButton: TextHelper.marriageRegis,
               iconUrl: IconHelper.marriage,
-              onPressed: () => context.router.push(
-                const MarriageRegistrationScreenRoute(),
-              ),
+              onPressed: () {
+                context.read<CitiesBloc>().add(const CitiesFetched(
+                      CitiesRequestType.MARRIAGE,
+                    ));
+                context.router.push(
+                  const MarriageRegistrationScreenRoute(),
+                );
+              },
             ),
             const SizedBox(height: 20),
             CustomElevatedButtonWidget(
               textButton: TextHelper.regisChild,
               iconUrl: IconHelper.child,
-              onPressed: () => context.router.push(
-                const RegistrationChildBirthScreenRoute(),
-              ),
+              onPressed: () {
+                // context.read<CitiesBloc>().add(const CitiesFetched(
+                //       CitiesRequestType.BABY_BIRTH,
+                //     ));
+                // context.router.push(const ChildInfoScreenRoute());
+                context.router.push(
+                  const RegistrationChildBirthScreenRoute(),
+                );
+              },
             ),
           ],
         ),

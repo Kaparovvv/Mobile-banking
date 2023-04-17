@@ -34,8 +34,6 @@ class ValidatesHelper {
   static nameValidate(String value, String valueType) {
     if (value.isEmpty) {
       return 'Введите $valueType, пожалуйста';
-    } else if (!RegExp("^[a-zA-Z]*\$").hasMatch(value)) {
-      return "Некорректно";
     } else {
       return null;
     }
