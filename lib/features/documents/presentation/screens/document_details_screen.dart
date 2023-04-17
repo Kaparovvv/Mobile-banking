@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_family_flutter/commons/dialog_helper.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
+import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/custom_outlined_button_widget.dart';
+import 'package:my_family_flutter/core/widgets/dialog_application_widget.dart';
 import 'package:my_family_flutter/features/documents/domain/entity/document_entity.dart';
 import 'package:my_family_flutter/features/documents/presentation/bloc/documents_bloc/documents_bloc.dart';
 import 'package:my_family_flutter/features/documents/presentation/widgets/document_content.dart';
@@ -43,7 +47,21 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen>
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DocumentsBloc, DocumentsState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state.isFailed) {
+          DialogHelper.showErrorDialog(
+            context,
+            DialogApplicationWidgetParams(
+              statusIcon: IconHelper.error,
+              content: state.message,
+              buttonTitle: TextHelper.back,
+            ),
+            () => context.router.popUntil(
+              (route) => route.settings.name == DocumentsScreenRoute.name,
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
