@@ -315,7 +315,8 @@ mixin _$CitiesState {
   bool get loaded => throw _privateConstructorUsedError;
   bool get isFailed => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  CitiesEntity get cityList => throw _privateConstructorUsedError;
+  List<String> get cityList => throw _privateConstructorUsedError;
+  List<List<String>> get officeList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CitiesStateCopyWith<CitiesState> get copyWith =>
@@ -333,7 +334,8 @@ abstract class $CitiesStateCopyWith<$Res> {
       bool loaded,
       bool isFailed,
       String message,
-      CitiesEntity cityList});
+      List<String> cityList,
+      List<List<String>> officeList});
 }
 
 /// @nodoc
@@ -354,6 +356,7 @@ class _$CitiesStateCopyWithImpl<$Res, $Val extends CitiesState>
     Object? isFailed = null,
     Object? message = null,
     Object? cityList = null,
+    Object? officeList = null,
   }) {
     return _then(_value.copyWith(
       loading: null == loading
@@ -375,7 +378,11 @@ class _$CitiesStateCopyWithImpl<$Res, $Val extends CitiesState>
       cityList: null == cityList
           ? _value.cityList
           : cityList // ignore: cast_nullable_to_non_nullable
-              as CitiesEntity,
+              as List<String>,
+      officeList: null == officeList
+          ? _value.officeList
+          : officeList // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
     ) as $Val);
   }
 }
@@ -393,7 +400,8 @@ abstract class _$$_CitiesStateCopyWith<$Res>
       bool loaded,
       bool isFailed,
       String message,
-      CitiesEntity cityList});
+      List<String> cityList,
+      List<List<String>> officeList});
 }
 
 /// @nodoc
@@ -412,6 +420,7 @@ class __$$_CitiesStateCopyWithImpl<$Res>
     Object? isFailed = null,
     Object? message = null,
     Object? cityList = null,
+    Object? officeList = null,
   }) {
     return _then(_$_CitiesState(
       loading: null == loading
@@ -431,9 +440,13 @@ class __$$_CitiesStateCopyWithImpl<$Res>
           : message // ignore: cast_nullable_to_non_nullable
               as String,
       cityList: null == cityList
-          ? _value.cityList
+          ? _value._cityList
           : cityList // ignore: cast_nullable_to_non_nullable
-              as CitiesEntity,
+              as List<String>,
+      officeList: null == officeList
+          ? _value._officeList
+          : officeList // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
     ));
   }
 }
@@ -446,8 +459,11 @@ class _$_CitiesState extends _CitiesState {
       required this.loaded,
       required this.isFailed,
       required this.message,
-      required this.cityList})
-      : super._();
+      required final List<String> cityList,
+      required final List<List<String>> officeList})
+      : _cityList = cityList,
+        _officeList = officeList,
+        super._();
 
   @override
   final bool loading;
@@ -457,12 +473,25 @@ class _$_CitiesState extends _CitiesState {
   final bool isFailed;
   @override
   final String message;
+  final List<String> _cityList;
   @override
-  final CitiesEntity cityList;
+  List<String> get cityList {
+    if (_cityList is EqualUnmodifiableListView) return _cityList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cityList);
+  }
+
+  final List<List<String>> _officeList;
+  @override
+  List<List<String>> get officeList {
+    if (_officeList is EqualUnmodifiableListView) return _officeList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_officeList);
+  }
 
   @override
   String toString() {
-    return 'CitiesState(loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message, cityList: $cityList)';
+    return 'CitiesState(loading: $loading, loaded: $loaded, isFailed: $isFailed, message: $message, cityList: $cityList, officeList: $officeList)';
   }
 
   @override
@@ -475,13 +504,20 @@ class _$_CitiesState extends _CitiesState {
             (identical(other.isFailed, isFailed) ||
                 other.isFailed == isFailed) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.cityList, cityList) ||
-                other.cityList == cityList));
+            const DeepCollectionEquality().equals(other._cityList, _cityList) &&
+            const DeepCollectionEquality()
+                .equals(other._officeList, _officeList));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, loading, loaded, isFailed, message, cityList);
+  int get hashCode => Object.hash(
+      runtimeType,
+      loading,
+      loaded,
+      isFailed,
+      message,
+      const DeepCollectionEquality().hash(_cityList),
+      const DeepCollectionEquality().hash(_officeList));
 
   @JsonKey(ignore: true)
   @override
@@ -496,7 +532,8 @@ abstract class _CitiesState extends CitiesState {
       required final bool loaded,
       required final bool isFailed,
       required final String message,
-      required final CitiesEntity cityList}) = _$_CitiesState;
+      required final List<String> cityList,
+      required final List<List<String>> officeList}) = _$_CitiesState;
   _CitiesState._() : super._();
 
   @override
@@ -508,7 +545,9 @@ abstract class _CitiesState extends CitiesState {
   @override
   String get message;
   @override
-  CitiesEntity get cityList;
+  List<String> get cityList;
+  @override
+  List<List<String>> get officeList;
   @override
   @JsonKey(ignore: true)
   _$$_CitiesStateCopyWith<_$_CitiesState> get copyWith =>

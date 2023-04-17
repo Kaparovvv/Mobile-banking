@@ -40,13 +40,9 @@ class ServicesForMyFamilyScreen extends StatelessWidget {
               textButton: TextHelper.regisChild,
               iconUrl: IconHelper.child,
               onPressed: () {
-                context.read<CitiesBloc>().add(const CitiesFetched(
-                      CitiesRequestType.BABY_BIRTH,
-                    ));
-                context.router.push(const ChildInfoScreenRoute());
-                // context.router.push(
-                //   const RegistrationChildBirthScreenRoute(),
-                // );
+                context.router.push(
+                  const RegistrationChildBirthScreenRoute(),
+                );
               },
             ),
           ],

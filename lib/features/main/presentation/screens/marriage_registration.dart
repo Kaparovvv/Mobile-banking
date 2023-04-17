@@ -222,15 +222,13 @@ class _MarriageRegistrationScreenState
                   ),
                   const SizedBox(height: 15),
                   CustomDropDownWidget(
-                    listOfItem:
-                        cityState.loaded ? cityState.cityList.cityList : [],
+                    listOfItem: cityState.loaded ? cityState.cityList : [],
                     hintText: TextHelper.chooseSity,
                     validator: (dynamic value) =>
                         value == null ? TextHelper.chooseSity : null,
                     callback: ((item) {
                       setState(() {
-                        selectedCity = item.name;
-                        officeList = item.officeList;
+                        selectedCity = item;
                       });
                     }),
                   ),
@@ -241,13 +239,16 @@ class _MarriageRegistrationScreenState
                   ),
                   const SizedBox(height: 15),
                   CustomDropDownWidget(
-                    listOfItem: officeList ?? [],
+                    listOfItem: selectedCity != null
+                        ? cityState.officeList[
+                            cityState.cityList.indexOf(selectedCity)]
+                        : [],
                     hintText: TextHelper.chooseOffice,
                     validator: (dynamic value) =>
                         value == null ? TextHelper.chooseSity : null,
                     callback: ((item) {
                       setState(() {
-                        selectedOffice = item.name;
+                        selectedOffice = item;
                       });
                     }),
                   ),
