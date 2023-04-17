@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:my_family_flutter/core/exports/exports.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 import 'package:my_family_flutter/core/widgets/button_with_background_widget.dart';
@@ -23,6 +26,9 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   dynamic selectedCity;
+
+  final genders = ["Мальчик", "Девочка"];
+  final gendersDB = ["MALE", "FEMALE"];
 
   void _showErrorDialog(BuildContext context) {
     showDialog(
@@ -106,6 +112,7 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
                   "Заполните поля:",
@@ -149,6 +156,50 @@ class _ChildInfoScreenState extends State<ChildInfoScreen> {
                       context.read<RegisterBabyBloc>().add(ParamsChanged(
                             state.params.copyWith(middleName: nextValue),
                           )),
+                ),
+                const SizedBox(height: 15),
+                CustomDropDownWidget(
+                  listOfItem: genders,
+                  hintText: "Пол",
+                  isStringList: true,
+                  validator: (dynamic value) => value == null ? "Пол" : null,
+                  callback: ((item) {
+                    context.read<RegisterBabyBloc>().add(
+                          ParamsChanged(state.params.copyWith(
+                            gender: gendersDB[item == genders[0] ? 0 : 1],
+                          )),
+                        );
+                  }),
+                ),
+                const SizedBox(height: 15),
+                DateTimeFormField(
+                  decoration: InputDecoration(
+                    hintStyle: TextStyleHelper.f14w600,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    suffixIcon: const Icon(Icons.event_note),
+                    labelText: 'Дата рождения',
+                    labelStyle: TextStyleHelper.f14w600,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                  ),
+                  use24hFormat: true,
+                  dateFormat: DateFormat("dd.MM.yyyy"),
+                  mode: DateTimeFieldPickerMode.date,
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (e) =>
+                      (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
+                  lastDate: DateTime.now(),
+                  onDateSelected: (DateTime nextValue) {
+                    context.read<RegisterBabyBloc>().add(
+                          ParamsChanged(state.params.copyWith(
+                            birthDate: nextValue,
+                          )),
+                        );
+                  },
                 ),
                 const SizedBox(height: 30),
                 _selectCityAndOffice(state),
