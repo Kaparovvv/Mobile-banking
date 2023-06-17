@@ -8,6 +8,18 @@ class TextStyleHelper {
     color: ThemeHelper.color414141,
   );
 
+  static const TextStyle f23w700 = TextStyle(
+    fontSize: 23,
+    fontWeight: FontWeight.w700,
+    color: ThemeHelper.color414141,
+  );
+
+  static const TextStyle f14w700 = TextStyle(
+    fontSize: 14,
+    color: ThemeHelper.color414141,
+    fontWeight: FontWeight.w700,
+  );
+
   static const TextStyle f14w600 = TextStyle(
     fontSize: 14,
     color: ThemeHelper.color414141,

@@ -16,8 +16,8 @@ class WhoPayTheFeeWidget extends StatefulWidget {
 }
 
 class _WhoPayTheFeeWidgetState extends State<WhoPayTheFeeWidget> {
-  var firstButton = true;
-  var secondButton = false;
+  var firstButton = false;
+  var secondButton = true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _WhoPayTheFeeWidgetState extends State<WhoPayTheFeeWidget> {
             selectedButton(
               title: TextHelper.you,
               onPressed: () => setState(() {
-                firstButton = !firstButton;
+                firstButton = true;
                 if (firstButton == true) {
                   secondButton = false;
                   widget.whoIsPay(true);
@@ -49,7 +49,7 @@ class _WhoPayTheFeeWidgetState extends State<WhoPayTheFeeWidget> {
             selectedButton(
               title: TextHelper.partner,
               onPressed: () => setState(() {
-                secondButton = !secondButton;
+                secondButton = true;
                 if (secondButton == true) {
                   firstButton = false;
                   widget.whoIsPay(false);

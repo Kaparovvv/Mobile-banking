@@ -1,29 +1,16 @@
 import '../../domain/entity/user_auth_entity.dart';
 
-class UserDataModel extends UserAuthEntity {
-  const UserDataModel({
+class UserAuthModel extends UserAuthEntity {
+  const UserAuthModel({
+    required id,
     required token,
-    required phoneNumber,
-    required fullName,
-    required roles,
   }) : super(
+          id: id,
           token: token,
-          phoneNumber: phoneNumber,
-          fullName: fullName,
-          roles: roles,
         );
 
-  factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
+  factory UserAuthModel.fromJson(Map<String, dynamic> json) => UserAuthModel(
+        id: json['id'],
         token: json["token"],
-        phoneNumber: json["phoneNumber"],
-        fullName: json["fullName"],
-        roles: json["roles"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "token": token,
-        "phoneNumber": phoneNumber,
-        "fullName": fullName,
-        "roles": roles,
-      };
 }

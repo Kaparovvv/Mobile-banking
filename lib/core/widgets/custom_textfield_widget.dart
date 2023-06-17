@@ -3,46 +3,72 @@ import 'package:flutter/services.dart';
 
 import '../exports/exports.dart';
 
-class CustomTextFieldWidget extends StatelessWidget {
+class CustomTextFieldWidget extends StatefulWidget {
   const CustomTextFieldWidget({
     Key? key,
-    required this.controller,
+    this.controller,
     this.keyboardType,
     this.maxLines,
     this.radius,
-    required this.label,
+    this.label,
+    this.hintText,
     this.onChanged,
     this.validate,
     this.constraints,
     this.inputFormatters = const [],
-    this.isReadOnly = false,
+    this.enabled = true,
+    this.value = '',
+    this.autoFocus = false,
+    this.textInputAction = TextInputAction.next,
+    this.autovalidateMode = AutovalidateMode.disabled,
   }) : super(key: key);
 
   final FormFieldValidator<String>? validate;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType? keyboardType;
   final int? maxLines;
   final double? radius;
-  final String label;
+  final String? label;
+  final String? hintText;
   final ValueChanged<String>? onChanged;
   final BoxConstraints? constraints;
   final List<TextInputFormatter>? inputFormatters;
-  final bool isReadOnly;
+  final bool enabled;
+  final String value;
+  final bool autoFocus;
+  final TextInputAction textInputAction;
+  final AutovalidateMode autovalidateMode;
+
+  @override
+  State<CustomTextFieldWidget> createState() => _CustomTextFieldWidgetState();
+}
+
+class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
+  @override
+  void initState() {
+    widget.controller?.text = widget.value;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      maxLines: maxLines ?? 1,
-      keyboardType: keyboardType ?? TextInputType.text,
-      textInputAction: TextInputAction.next,
-      readOnly: isReadOnly,
+      controller: widget.controller,
+      maxLines: widget.maxLines ?? 1,
+      enabled: widget.enabled,
+      autofocus: widget.autoFocus,
+      autocorrect: false,
+      keyboardType: widget.keyboardType ?? TextInputType.text,
+      textInputAction: widget.textInputAction,
       style: TextStyleHelper.f14w500.copyWith(decorationThickness: 0),
-      inputFormatters: inputFormatters,
+      inputFormatters: widget.inputFormatters,
+      autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyleHelper.f14w600,
-        constraints: constraints ?? const BoxConstraints(),
+        hintText: widget.hintText ?? '',
+        hintStyle: TextStyleHelper.f13w400,
+        labelText: widget.label ?? '',
+        labelStyle: TextStyleHelper.f13w600,
+        constraints: widget.constraints ?? const BoxConstraints(),
         contentPadding: const EdgeInsets.only(top: 0.5, left: 18),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -65,8 +91,8 @@ class CustomTextFieldWidget extends StatelessWidget {
           borderSide: const BorderSide(color: ThemeHelper.blueAccent),
         ),
       ),
-      onChanged: onChanged,
-      validator: validate,
+      onChanged: widget.onChanged,
+      validator: widget.validate,
     );
   }
 }

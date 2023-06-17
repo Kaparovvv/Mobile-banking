@@ -20,9 +20,11 @@ class TabBarButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 1, color: Colors.black38),
-          color: selected ? ThemeHelper.color001645 : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          border: selected
+              ? Border.all(width: 0.3, color: ThemeHelper.color08B89D)
+              : Border.all(width: 0.3),
+          color: selected ? ThemeHelper.color08B89D : Colors.transparent,
         ),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
         child: Text(

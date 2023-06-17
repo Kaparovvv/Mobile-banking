@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/exports/exports.dart';
 
-typedef ItemCallback = void Function(Object? item);
+typedef ItemCallback = void Function(dynamic item);
 
 class CustomDropDownWidget extends StatefulWidget {
   final List<dynamic> listOfItem;
   final String hintText;
   final ItemCallback callback;
-  final String? Function(Object?)? validator;
+  final String? Function(dynamic)? validator;
+
   const CustomDropDownWidget({
     super.key,
     required this.listOfItem,
@@ -25,38 +26,46 @@ class _CustomDropDownWidgetState extends State<CustomDropDownWidget> {
   dynamic _selectedValue;
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-      value: _selectedValue,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: ThemeHelper.color414141),
-          borderRadius: BorderRadius.circular(10),
+    return DropdownButtonHideUnderline(
+      child: DropdownButtonFormField(
+        key: UniqueKey(),
+        hint: Text(
+          widget.hintText,
+          style: TextStyleHelper.f14w600,
         ),
-      ),
-      hint: Text(
-        widget.hintText,
-        style: TextStyleHelper.f14w600,
-      ),
-      icon: const Icon(Icons.expand_more_outlined),
-      isExpanded: true,
-      borderRadius: BorderRadius.circular(10),
-      style: TextStyleHelper.f14w600,
-      validator: (dynamic value) => widget.validator!(value),
-      onChanged: (value) {
-        setState(() {
-          _selectedValue = value;
-          widget.callback(value);
-        });
-      },
-      items: widget.listOfItem.map((value) {
-        return DropdownMenuItem(
-          value: value,
-          child: Text(
-            value.toString(),
-            style: TextStyleHelper.f14w600,
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
           ),
-        );
-      }).toList(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        validator: (value) => widget.validator!(value),
+        items: widget.listOfItem.map((value) {
+          return DropdownMenuItem<dynamic>(
+            value: value,
+            child: Text(
+              value.toString(),
+              style: TextStyleHelper.f14w600,
+            ),
+          );
+        }).toList(),
+        value: _selectedValue,
+        onChanged: (value) {
+          setState(() {
+            _selectedValue = value;
+            widget.callback(value);
+          });
+        },
+        isExpanded: true,
+        borderRadius: BorderRadius.circular(10),
+        icon: const Icon(Icons.expand_more_outlined),
+        iconSize: 25,
+        iconEnabledColor: ThemeHelper.color414141,
+      ),
     );
   }
 }

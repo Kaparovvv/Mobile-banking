@@ -44,10 +44,11 @@ class DioConnectionError extends DioError {
     DioErrorType type = DioErrorType.other,
     dynamic error,
   }) : super(
-            requestOptions: requestOptions,
-            response: response,
-            type: type,
-            error: error);
+          requestOptions: requestOptions,
+          response: response,
+          type: type,
+          error: error,
+        );
 }
 
 class NoConnectionFailure extends Failure {

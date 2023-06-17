@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_family_flutter/core/router/app_router.gr.dart';
 
 import '../../../../core/exports/exports.dart';
-import '../../../../core/widgets/app_bar_title.dart';
 import '../../../../core/widgets/custom_elevated_button_widget.dart';
 
 class PublicServicesScreen extends StatelessWidget {
@@ -28,14 +27,6 @@ class PublicServicesScreen extends StatelessWidget {
                 const ServicesForMyFamilyScreenRoute(),
               ),
             ),
-            // const SizedBox(height: 20),
-            // CustomElevatedButtonWidget(
-            //   textButton: TextHelper.myDocuments,
-            //   iconUrl: IconHelper.myDocument,
-            //   onPressed: () => context.router.push(
-            //     const DocumentsScreenRoute(),
-            //   ),
-            // ),
           ],
         ),
       ),

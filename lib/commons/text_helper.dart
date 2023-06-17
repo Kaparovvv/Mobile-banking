@@ -1,5 +1,7 @@
 class TextHelper {
   static const String you = 'вы';
+  static const String ok = 'ок';
+  static const String check = 'Чек';
   static const String well = 'хорошо';
   static const String profile = 'Профиль';
   static const String history = 'История';
@@ -23,9 +25,36 @@ class TextHelper {
   static const String whoPaysTheFee = 'Кто оплачивает пошлину: 3 063 тенге';
   static const String applicationSuccess = 'Ваша заявка успешно отправлено';
   static const String applicationUnsuccess = 'Не удалось отправить заявку';
-  static const String idCard = 'Удостоверение личности';
+  static const String noDataFetching = 'Не удалось получить данные';
+  static const String passport = 'Удостоверение личности';
   static const String driverCard = 'Водительские права';
+  static const String babyCertificate = 'Свидетельство о рождении';
+  static const String marriageCertificate = 'Свидетельство о заключении брака';
+  static const String close = 'Закрыть';
   static const String back = 'назад';
   static const String exit = 'выйти';
+  static const String payments = 'Платежи';
+  static const String request = 'Заявки';
+  static const String active = 'Активные';
+  static const String archive = 'Архивные';
   static const String logoutQuetions = 'Вы уверены что хотите выйти?';
+  static const String nothingHereYet = 'Здесь пока ничего нет';
+  static const String recipient = 'Получатель';
+  static const String enterThePaymentSum = 'Введите сумму платежа';
+  static const String sum = 'сумма';
+  static const String toPay = 'Оплатить';
+  static const String paidFor = 'Оплачено';
+  static const String userBalance = 'Ваш баланс:';
+  static const String dontEnoughFundsance = 'У вас недостаточно средств';
+  static const String notification = 'Уведомления';
+  static const String returnToMainScreen = 'на главную';
+  static const String returnToHistoryScreen = 'на историю';
+  static const String firstName = 'Имя';
+  static const String lastName = 'Фамилия';
+  static const String middleName = 'Отчество';
+  static const String iin = 'ИИН';
+  static const String successRegisterBaby =
+      "Заявление успешно подано. Можете отследить статус заявки в странице “Истории гос. услуг”";
+  static const String errorRegisterBaby =
+      "Произошла какая-то ошибка. Повторите операцию позже";
 }
